@@ -1,4 +1,5 @@
 @import './base.css';
+@import './variables.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -16,8 +17,8 @@ body {
   font-family: futura-pt, sans-serif;
   font-size: 1rem;
   overflow-x: hidden;
-  @apply: bg-darkBG;
-  @apply: text-lightText;
+  background-color: #181818;
+  color: #f4f4f4;
   scrollbar-width: none;
   scroll-behavior: smooth;
 }

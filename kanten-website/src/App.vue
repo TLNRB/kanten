@@ -10,6 +10,11 @@ const sections = ref([
   { id: 'studio', title: 'Studio', active: false },
   { id: 'community', title: 'Community', active: false }
 ])
+
+const dropdownState = ref(false)
+const dropdownStateChange = () => {
+  dropdownState.value = !dropdownState.value
+}
 </script>
 
 <template>
@@ -21,16 +26,28 @@ const sections = ref([
         </a>
       </div>
       <div
-        class="h-[24px] flex flex-col ml-auto mr-[1rem] text-[1.5rem] translate-y-[3px] group cursor-pointer uppercase leading-none overflow-hidden"
+        class="flex gap-[6px] ml-auto mr-[1rem] text-[1.5rem] translate-y-[2px] group cursor-pointer uppercase leading-none"
+        @click="dropdownStateChange"
       >
-        <span class="group-hover:translate-y-[-20px] ease-in duration-[.15s]">Menu</span>
-        <span
-          class="rotate-6 group-hover:translate-y-[-24px] group-hover:rotate-0 group-hover:text-baseColor ease-in duration-[.15s]"
-          >Close</span
-        >
+        <div
+          class="h-[9px] w-[9px] my-auto rounded-full bg-baseColor ease-in duration-[-2s]"
+          :class="{ 'dropdown-activeState': dropdownState }"
+        ></div>
+        <div class="h-[24px] flex flex-col overflow-hidden">
+          <span
+            class="tetx-lightText ease-in duration-[.2s]"
+            :class="{ 'translate-y-[-20px]': dropdownState }"
+            >Menu</span
+          >
+          <span
+            class="rotate-6 ease-in duration-[.2s]"
+            :class="{ 'dropdown-close-active': dropdownState }"
+            >Close</span
+          >
+        </div>
       </div>
 
-      <div class="flex flex-col ml-auto hidden">
+      <div class="flex-col ml-auto hidden" :class="{ 'dropdown-nav-active': dropdownState }">
         <div v-for="section in sections" :key="section.id">
           <a href="">
             <span>{{ section.title }}</span>
@@ -38,9 +55,9 @@ const sections = ref([
           </a>
         </div>
       </div>
-      <button class="w-[2.25rem] h-[2.25rem] rounded-full bg-baseColor">
+      <button class="w-[2rem] h-[2rem] rounded-full bg-baseColor">
         <font-awesome-icon
-          class="h-[1.25rem] text-darkText translate-y-[1px]"
+          class="h-[1.125rem] text-darkText translate-y-[2px]"
           :icon="['fas', 'user']"
         />
       </button>
@@ -48,4 +65,16 @@ const sections = ref([
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.dropdown-nav-active {
+  display: flex;
+}
+.dropdown-activeState {
+  background-color: #666666;
+  transition: background-color ease-in 0.2s;
+}
+.dropdown-close-active {
+  transform: rotate(0);
+  transform: translateY(-24px);
+}
+</style>
