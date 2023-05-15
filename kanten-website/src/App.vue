@@ -1,7 +1,14 @@
-<script setup></script>
+<script setup>
+import { ref } from 'vue'
+import allSections from './data/navbarDB'
+// ---------- NavBar ----------
+const sections = ref(allSections)
+</script>
 
 <template>
-  <div>hello</div>
+  <nav>
+    <div></div>
+  </nav>
 </template>
 
 <style scoped></style>
