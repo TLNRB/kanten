@@ -16,8 +16,8 @@ body {
   font-family: futura-pt, sans-serif;
   font-size: 1rem;
   overflow-x: hidden;
-  background-color: var(--bgBlack);
-  color: var(--textWhite);
+  @apply: bg-darkBG;
+  @apply: text-lightText;
   scrollbar-width: none;
   scroll-behavior: smooth;
 }

@@ -7,7 +7,20 @@ const sections = ref(allSections)
 
 <template>
   <nav>
-    <div></div>
+    <div>
+      <a href=""></a>
+    </div>
+    <div class="hidden">
+      <span>Menu</span>
+      <span>Close</span>
+    </div>
+    <div v-for="section in sections" :key="section.id">
+      <a href="">
+        <span>{{ section.title }}</span>
+        <span class="hidden">{{ section.title }}</span>
+      </a>
+    </div>
+    <button></button>
   </nav>
 </template>
 
