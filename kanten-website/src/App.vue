@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import logoLong from './images/logoLong.png'
 import logo from './images/logo.png'
 
 // ---------- NavBar ----------
@@ -42,7 +43,7 @@ onUnmounted(() => {
       <!------- Logo Image ------->
       <div>
         <a href="#">
-          <img class="h-[3.25rem]" :src="logo" alt="Kanten logo" />
+          <img class="h-[3.25rem]" :src="screenWidth < 560 ? logo : logoLong" alt="Kanten logo" />
         </a>
       </div>
 
@@ -71,20 +72,20 @@ onUnmounted(() => {
 
       <!------- Nav Links ------->
       <div
-        class="flex flex-col items-center w-[100%] ml-auto h-fit absolute top-[10rem] translate-x-[110%] text-[2.5rem] uppercase leading-[60px] ease-in duration-[.3s] xs:leading-[70px] sm:leading-[80px] md:translate-x-0 md:w-auto md:right-[4rem] md:top-[-.5rem] md:items-start md:leading-[45px] xl:right-[5rem]"
+        class="flex flex-col items-center w-[100%] ml-auto h-fit absolute top-[8rem] translate-x-[110%] text-[2.5rem] uppercase leading-[60px] ease-in duration-[.3s] xs:leading-[70px] sm:leading-[90px] md:translate-x-0 md:w-auto md:right-[4rem] md:top-[-.5rem] md:items-start md:leading-[45px] xl:right-[5rem]"
         :class="{ 'dropdown-nav-active': dropdownState }"
       >
         <div v-for="section in sections" :key="section.id" class="overflow-hidden">
           <p
-            class="h-[50px] flex flex-col cursor-pointer group xs:h-[60px] sm:h-[70px] md:h-[35px]"
+            class="h-[50px] flex flex-col cursor-pointer group xs:h-[60px] sm:h-[80px] md:h-[35px]"
           >
             <span
-              class="group-hover:translate-y-[-45px] ease-in duration-[.2s] xs:text-[3rem] xs:group-hover:translate-y-[-55px] sm:text-[4rem] sm:group-hover:translate-y-[-65px] md:text-[1.5rem] md:font-[500] md:group-hover:translate-y-[-35px]"
+              class="group-hover:translate-y-[-45px] ease-in duration-[.2s] xs:text-[3rem] xs:group-hover:translate-y-[-55px] sm:text-[4rem] sm:group-hover:translate-y-[-75px] md:text-[1.5rem] md:font-[500] md:group-hover:translate-y-[-35px]"
               :class="{ 'text-darkerText': section.active }"
               >{{ section.title }}</span
             >
             <span
-              class="font-[500] text-baseColor rotate-6 translate-y-[-15px] group-hover:translate-y-[-60px] group-hover:rotate-0 ease-in duration-[.2s] xs:text-[3rem] xs:group-hover:translate-y-[-70px] sm:text-[4rem] sm:group-hover:translate-y-[-80px] sm:translate-y-[-10px] md:text-[1.5rem] md:group-hover:translate-y-[-45px]"
+              class="font-[500] text-baseColor rotate-6 translate-y-[-15px] group-hover:translate-y-[-60px] group-hover:rotate-0 ease-in duration-[.2s] xs:text-[3rem] xs:group-hover:translate-y-[-70px] sm:text-[4rem] sm:group-hover:translate-y-[-90px] sm:translate-y-[-10px] md:text-[1.5rem] md:group-hover:translate-y-[-45px]"
               >{{ section.title }}</span
             >
           </p>
