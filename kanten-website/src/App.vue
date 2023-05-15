@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import logo from './images/logo.png'
 
 // ---------- NavBar ----------
@@ -11,15 +11,34 @@ const sections = ref([
   { id: 'community', title: 'Community', active: false }
 ])
 
+/* ---------- Nav and dropdown click event ---------- */
+const screenWidth = ref(window.innerWidth)
 const dropdownState = ref(false)
+
 const dropdownStateChange = () => {
   dropdownState.value = !dropdownState.value
 }
+
+/* ---------- Resize handling ---------- */
+function handleResize() {
+  screenWidth.value = window.innerWidth
+}
+
+/*---------- Add resize event listener when component is mounted ---------- */
+onMounted(() => {
+  window.addEventListener('resize', handleResize)
+})
+/*---------- Remove resize event listener when component is mounted ---------- */
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
 </script>
 
 <template>
-  <div class="py-[1.5rem] px-[1rem]">
-    <nav class="flex justify-between items-center z-10">
+  <div class="py-[1.5rem] px-[1rem] md:py-[2.5rem] md:px-[2rem] xl:p-[3rem]">
+    <nav
+      class="flex justify-between items-center z-10 fixed top-[1.5rem] right-[1rem] left-[1rem] md:top-[2.5rem] md:right-[2rem] md:left-[2rem] xl:top-[3rem] xl:right-[3rem] xl:left-[3rem]"
+    >
       <!------- Logo Image ------->
       <div>
         <a href="#">
@@ -29,7 +48,7 @@ const dropdownStateChange = () => {
 
       <!------- Dropdown Text ------->
       <div
-        class="flex gap-[6px] ml-auto mr-[1rem] text-[1.5rem] translate-y-[2px] group cursor-pointer uppercase leading-none"
+        class="flex gap-[6px] ml-auto mr-[1rem] text-[1.5rem] translate-y-[2px] group cursor-pointer uppercase leading-none md:hidden"
         @click="dropdownStateChange"
       >
         <div
@@ -52,18 +71,20 @@ const dropdownStateChange = () => {
 
       <!------- Nav Links ------->
       <div
-        class="flex flex-col items-end ml-auto absolute bottom-[2rem] right-[-15rem] text-[2.5rem] uppercase leading-[60px] ease-in duration-[.3s]"
+        class="flex flex-col items-center w-[100%] ml-auto h-fit absolute top-[10rem] translate-x-[110%] text-[2.5rem] uppercase leading-[60px] ease-in duration-[.3s] xs:leading-[70px] sm:leading-[80px] md:translate-x-0 md:w-auto md:right-[4rem] md:top-[-.5rem] md:items-start md:leading-[45px] xl:right-[5rem]"
         :class="{ 'dropdown-nav-active': dropdownState }"
       >
         <div v-for="section in sections" :key="section.id" class="overflow-hidden">
-          <p class="h-[50px] flex flex-col cursor-pointer group">
+          <p
+            class="h-[50px] flex flex-col cursor-pointer group xs:h-[60px] sm:h-[70px] md:h-[35px]"
+          >
             <span
-              class="group-hover:translate-y-[-45px] ease-in duration-[.2s]"
+              class="group-hover:translate-y-[-45px] ease-in duration-[.2s] xs:text-[3rem] xs:group-hover:translate-y-[-55px] sm:text-[4rem] sm:group-hover:translate-y-[-65px] md:text-[1.5rem] md:font-[500] md:group-hover:translate-y-[-35px]"
               :class="{ 'text-darkerText': section.active }"
               >{{ section.title }}</span
             >
             <span
-              class="font-[500] text-baseColor rotate-6 translate-y-[-15px] group-hover:translate-y-[-60px] group-hover:rotate-0 ease-in duration-[.2s]"
+              class="font-[500] text-baseColor rotate-6 translate-y-[-15px] group-hover:translate-y-[-60px] group-hover:rotate-0 ease-in duration-[.2s] xs:text-[3rem] xs:group-hover:translate-y-[-70px] sm:text-[4rem] sm:group-hover:translate-y-[-80px] sm:translate-y-[-10px] md:text-[1.5rem] md:group-hover:translate-y-[-45px]"
               >{{ section.title }}</span
             >
           </p>
@@ -71,23 +92,24 @@ const dropdownStateChange = () => {
       </div>
 
       <!------- Profile ------->
-      <button class="w-[2rem] h-[2rem] rounded-full border-2 border-baseColor">
+      <button class="w-[2rem] h-[2rem] rounded-full border-2 border-baseColor md:mt-[-20px]">
         <font-awesome-icon
           class="h-[1.125rem] text-baseColor translate-y-[2px]"
           :icon="['fas', 'user']"
         />
       </button>
     </nav>
-    <div
+    <!-- Overflow problems -->
+    <!-- <div
       class="absolute top-0 right-0 left-0 bottom-0 opacity-0 translate-x-[100%] ease-in duration-[.3s] z-[-1]"
-      :class="{ 'bg-darkBG dropdown-background-active': dropdownState }"
-    ></div>
+      :class="{ 'bg-baseColor dropdown-background-active': dropdownState }"
+    ></div> -->
   </div>
 </template>
 
 <style scoped>
 .dropdown-nav-active {
-  right: 1rem;
+  transform: translateX(0);
   transition-delay: all ease-in 1s;
 }
 
