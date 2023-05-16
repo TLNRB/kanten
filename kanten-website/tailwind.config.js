@@ -18,9 +18,10 @@ module.exports = {
       colors: {
         darkBG: '#181818',
         lightText: '#F4F4F4',
+        normalText: '#dddddd',
         darkerText: '#606060',
         darkText: '#282828',
-        baseColor: '#20E062',
+        baseColor: '#EA3397',
         hipHopColor: '#81F4D1',
         raveColor: '#A809E5',
         houseColor: '#FF0000',
