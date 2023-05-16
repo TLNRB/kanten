@@ -59,7 +59,7 @@ onUnmounted(() => {
         <div class="h-[24px] flex flex-col overflow-hidden">
           <span
             class="tetx-lightText ease-in duration-[.2s]"
-            :class="{ 'translate-y-[-20px]': dropdownState }"
+            :class="{ 'translate-y-[-24px]': dropdownState }"
             >Menu</span
           >
           <span
@@ -100,11 +100,12 @@ onUnmounted(() => {
         />
       </button>
     </nav>
-    <!-- Overflow problems -->
-    <!-- <div
-      class="absolute top-0 right-0 left-0 bottom-0 opacity-0 translate-x-[100%] ease-in duration-[.3s] z-[-1]"
-      :class="{ 'bg-baseColor dropdown-background-active': dropdownState }"
-    ></div> -->
+
+    <!-- Dark Background for nav dropdown -->
+    <div
+      class="absolute top-0 right-0 bottom-0 opacity-0 w-0 ease-in duration-[.3s] z-[-1]"
+      :class="{ 'bg-darkBG dropdown-background-active': dropdownState }"
+    ></div>
   </div>
 </template>
 
@@ -116,8 +117,8 @@ onUnmounted(() => {
 
 .dropdown-background-active {
   opacity: 1;
-  transform: translateX(0);
-  transition-delay: transform 0.15s ease-in 0.3s;
+  width: 100%;
+  transition-delay: all 0.15s ease-in 0.3s;
 }
 .dropdown-activeState {
   background-color: #666666;

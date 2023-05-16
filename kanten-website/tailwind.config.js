@@ -20,7 +20,7 @@ module.exports = {
         lightText: '#F4F4F4',
         darkerText: '#606060',
         darkText: '#282828',
-        baseColor: '#ADFF00',
+        baseColor: '#20E062',
         hipHopColor: '#81F4D1',
         raveColor: '#A809E5',
         houseColor: '#FF0000',
