@@ -12,6 +12,13 @@ const sections = ref([
   { id: 'community', title: 'Community', active: false }
 ])
 
+/* ---------- Pofile dropdown click event ---------- */
+const profileDropdownState = ref(false)
+
+const profileDropdownStateChange = () => {
+  profileDropdownState.value = !profileDropdownState.value
+}
+
 /* ---------- Nav and dropdown click event ---------- */
 const screenWidth = ref(window.innerWidth)
 const dropdownState = ref(false)
@@ -53,7 +60,7 @@ onUnmounted(() => {
         @click="dropdownStateChange"
       >
         <div
-          class="h-[9px] w-[9px] my-auto rounded-full bg-baseColor ease-in duration-[-2s]"
+          class="h-[9px] w-[9px] my-auto rounded-full bg-baseColor ease-in duration-[.2s]"
           :class="{ 'dropdown-activeState': dropdownState }"
         ></div>
         <div class="h-[24px] flex flex-col overflow-hidden">
@@ -93,12 +100,45 @@ onUnmounted(() => {
       </div>
 
       <!------- Profile ------->
-      <button class="w-[2rem] h-[2rem] rounded-full border-2 border-baseColor">
+      <button
+        class="w-[2rem] h-[2rem] rounded-full border-[2px] border-baseColor ease-in duration-[.2s]"
+        @click="profileDropdownStateChange"
+        :class="{ 'border-darkerText': profileDropdownState }"
+      >
         <font-awesome-icon
           class="h-[1.125rem] text-baseColor translate-y-[2px]"
           :icon="['fas', 'user']"
         />
       </button>
+
+      <!-- Profile Dropdown -->
+      <div
+        class="translate-x-[150%] ease-in duration-[.3s] absolute bottom-[-6rem] right-0 border-[1px] border-baseColor bg-darkBG z-[1]"
+        :class="{ 'profile-dropdown-active': profileDropdownState }"
+      >
+        <div class="hidden">
+          <button><font-awesome-icon :icon="['fas', 'right-to-bracket']" />Login</button>
+        </div>
+        <div class="flex flex-col items-start gap-[.5rem] py-[1rem] px-[1.5rem] text-[1.125rem]">
+          <button class="flex gap-[.75rem] group">
+            <font-awesome-icon
+              class="w-[1rem] my-auto text-baseColor group-hover:scale-125 ease-in duration-[.2s]"
+              :icon="['fas', 'user']"
+            />Profile
+          </button>
+          <button class="flex gap-[.75rem] items-center group">
+            <font-awesome-icon
+              class="w-[1rem] my-auto text-baseColor group-hover:scale-125 ease-in duration-[.2s]"
+              :icon="['fas', 'right-from-bracket']"
+            />
+            Log out
+          </button>
+        </div>
+      </div>
+      <div
+        class="w-[127px] h-[94px] border-[1px] border-textLight absolute bottom-[-6.5rem] right-[-.5rem] bg-darkBG z-[0] translate-x-[150%] ease-in duration-[.3s]"
+        :class="{ 'profile-dropdown-active': profileDropdownState }"
+      ></div>
     </nav>
 
     <!-- Dark Background for nav dropdown -->
@@ -127,5 +167,10 @@ onUnmounted(() => {
 .dropdown-close-active {
   transform: rotate(0);
   transform: translateY(-24px);
+}
+
+.profile-dropdown-active {
+  transform: translateX(0);
+  transition: transform ease-in 0.3s;
 }
 </style>
