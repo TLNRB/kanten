@@ -72,7 +72,7 @@ onUnmounted(() => {
 
       <!------- Nav Links ------->
       <div
-        class="flex flex-col items-center w-[100%] ml-auto h-fit absolute top-[8rem] translate-x-[110%] text-[2.5rem] uppercase leading-[60px] ease-in duration-[.3s] xs:leading-[70px] sm:leading-[90px] md:pl-[70px] md:bg-darkBG md:translate-x-0 md:w-auto md:right-[4rem] md:top-[-.5rem] md:items-start md:leading-[45px] xl:right-[5rem]"
+        class="flex flex-col items-center w-[100%] ml-auto h-fit absolute top-[8rem] translate-x-[110%] text-[2.5rem] uppercase leading-[60px] ease-in duration-[.3s] xs:leading-[70px] sm:leading-[90px] md:pl-[60px] md:bg-darkBG md:translate-x-0 md:w-auto md:right-[4rem] md:top-[1.125rem] md:items-start md:leading-[45px] xl:right-[5rem]"
         :class="{ 'dropdown-nav-active': dropdownState }"
       >
         <div v-for="section in sections" :key="section.id" class="overflow-hidden">
