@@ -38,7 +38,7 @@ onUnmounted(() => {
 <template>
   <div class="py-[1.5rem] px-[1rem] md:py-[2.5rem] md:px-[2rem] xl:p-[3rem]">
     <nav
-      class="flex justify-between items-center z-10 fixed top-[1.5rem] right-[1rem] left-[1rem] md:top-[2.5rem] md:right-[2rem] md:left-[2rem] xl:top-[3rem] xl:right-[3rem] xl:left-[3rem]"
+      class="flex justify-between items-center z-10 border-t-[1px] border-b-[1px] border-darkerText py-[1rem] fixed top-[1.5rem] right-[1rem] left-[1rem] md:top-[2.5rem] md:right-[2rem] md:left-[2rem] xl:top-[3rem] xl:right-[3rem] xl:left-[3rem]"
     >
       <!------- Logo Image ------->
       <div>
@@ -72,7 +72,7 @@ onUnmounted(() => {
 
       <!------- Nav Links ------->
       <div
-        class="flex flex-col items-center w-[100%] ml-auto h-fit absolute top-[8rem] translate-x-[110%] text-[2.5rem] uppercase leading-[60px] ease-in duration-[.3s] xs:leading-[70px] sm:leading-[90px] md:translate-x-0 md:w-auto md:right-[4rem] md:top-[-.5rem] md:items-start md:leading-[45px] xl:right-[5rem]"
+        class="flex flex-col items-center w-[100%] ml-auto h-fit absolute top-[8rem] translate-x-[110%] text-[2.5rem] uppercase leading-[60px] ease-in duration-[.3s] xs:leading-[70px] sm:leading-[90px] md:pl-[70px] md:bg-darkBG md:translate-x-0 md:w-auto md:right-[4rem] md:top-[-.5rem] md:items-start md:leading-[45px] xl:right-[5rem]"
         :class="{ 'dropdown-nav-active': dropdownState }"
       >
         <div v-for="section in sections" :key="section.id" class="overflow-hidden">
@@ -93,7 +93,7 @@ onUnmounted(() => {
       </div>
 
       <!------- Profile ------->
-      <button class="w-[2rem] h-[2rem] rounded-full border-2 border-baseColor md:mt-[-20px]">
+      <button class="w-[2rem] h-[2rem] rounded-full border-2 border-baseColor">
         <font-awesome-icon
           class="h-[1.125rem] text-baseColor translate-y-[2px]"
           :icon="['fas', 'user']"
