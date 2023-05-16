@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import { RouterView } from 'vue-router'
 import Navbar from './components/Navbar.vue'
 
 // ---------- NavBar ----------
@@ -15,6 +16,7 @@ const sections = ref([
 <template>
   <div class="py-[1.5rem] px-[1rem] md:py-[2.5rem] md:px-[2rem] xl:p-[3rem]">
     <Navbar :sections="sections" />
+    <RouterView />
   </div>
 </template>
 
