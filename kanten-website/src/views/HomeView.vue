@@ -5,7 +5,7 @@ import statue from '../images/statueK.svg'
 </script>
 
 <template>
-  <main class="mt-[4.75rem] mb-[6.25rem] overflow-x-hidden">
+  <main class="mt-[2rem] mb-[4rem] pt-[2.75rem] pb-[2.25rem] overflow-x-hidden">
     <div>
       <img
         class="h-[20rem] mx-auto xs:h-[25rem] sm:h-[30rem]"
@@ -34,8 +34,15 @@ import statue from '../images/statueK.svg'
           <img class="h-[22px] xs:h-[24px] xs:translate-y-[4px]" :src="mouse" alt="Mouse" />
         </div>
       </div>
-      <button class="flex flex-col text-[1.25rem]">
-        <span class="btn border-[1px]">Join The Commuinty</span> <span>Join The Commuinty</span>
+      <button class="flex flex-col mx-auto text-[1.25rem] relative group">
+        <span
+          class="btn border-[1px] bg-darkBG border-baseColor z-[1] group-hover:text-baseColor group-hover:border-lightText ease-in duration-[.15s] delay-[.05s]"
+          >Join The Commuinty</span
+        >
+        <span
+          class="btn border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s]"
+          >Join The Commuinty</span
+        >
       </button>
     </div>
   </main>
@@ -56,6 +63,6 @@ import statue from '../images/statueK.svg'
 
 .btn {
   font-weight: 600;
-  padding: 0.5rem 1.125rem;
+  padding: 0.375rem 1.125rem;
 }
 </style>
