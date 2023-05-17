@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
-import logoLong from '../images/logoLong.png'
-import logo from '../images/logo.png'
+import logoLong from '../images/logoRect.svg'
+import logo from '../images/logoSquare.svg'
 
 const { sections } = defineProps(['sections'])
 

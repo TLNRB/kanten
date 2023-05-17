@@ -5,7 +5,7 @@ import statue from '../images/statueK.svg'
 </script>
 
 <template>
-  <main class="mt-[2rem] mb-[4rem] pt-[2.75rem] pb-[2.25rem] overflow-x-hidden">
+  <main class="mt-[2rem] mb-[4rem] pt-[2.75rem] pb-[2.25rem] overflow-x-hidden md:mt-0">
     <div>
       <img
         class="h-[20rem] mx-auto xs:h-[25rem] sm:h-[30rem]"
@@ -13,7 +13,7 @@ import statue from '../images/statueK.svg'
         alt="Statue blowing a bubble gum between Kanten's K letters"
       />
       <div
-        class="mb-[2.5rem] mx-auto text-center text-[2.5rem] uppercase leading-[45px] xs:text-[3rem] sm:leading-[55px] sm:text-[4rem]"
+        class="mb-[3rem] mx-auto text-center text-[2.5rem] uppercase leading-[45px] xs:text-[3rem] sm:leading-[55px] sm:text-[4rem]"
       >
         <p class="flex flex-col relative mx-auto w-fit xs:translate-x-[-30px]">
           <span class="font-bold text-baseColor z-[1]">Experience</span>
