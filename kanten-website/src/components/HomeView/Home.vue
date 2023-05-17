@@ -3,7 +3,9 @@ const { mouse, statue } = defineProps(['mouse', 'statue'])
 </script>
 
 <template>
-  <main class="mt-[2rem] mb-[4rem] pt-[2.75rem] pb-[2.25rem] overflow-x-hidden md:mt-0">
+  <main
+    class="mt-[6.875rem] pt-[2.25rem] pb-[4rem] px-[1rem] overflow-x-hidden md:mt-[7.875rem] md:px-[2rem] xl:mt-[8.375rem] xl:px-[3rem]"
+  >
     <div>
       <img
         class="h-[20rem] mx-auto xs:h-[25rem] sm:h-[30rem]"
@@ -34,11 +36,11 @@ const { mouse, statue } = defineProps(['mouse', 'statue'])
       </div>
       <button class="flex flex-col mx-auto text-[1.25rem] relative group">
         <span
-          class="btn border-[1px] bg-darkBG border-baseColor z-[1] group-hover:text-baseColor group-hover:border-lightText ease-in duration-[.15s] delay-[.05s]"
+          class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] bg-darkBG border-baseColor z-[1] group-hover:text-baseColor group-hover:border-lightText ease-in duration-[.15s] delay-[.05s]"
           >Join The Commuinty</span
         >
         <span
-          class="btn border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s]"
+          class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s]"
           >Join The Commuinty</span
         >
       </button>
@@ -57,10 +59,5 @@ const { mouse, statue } = defineProps(['mouse', 'statue'])
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke-color: #f4f4f4;
   -webkit-text-stroke-width: 0.5px;
-}
-
-.btn {
-  font-weight: 600;
-  padding: 0.375rem 1.125rem;
 }
 </style>

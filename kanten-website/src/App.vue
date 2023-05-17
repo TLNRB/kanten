@@ -14,7 +14,7 @@ const sections = ref([
 </script>
 
 <template>
-  <div class="py-[1.5rem] px-[1rem] md:py-[2.5rem] md:px-[2rem] xl:p-[3rem]">
+  <div class="">
     <Navbar :sections="sections" />
     <RouterView />
   </div>
