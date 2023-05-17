@@ -17,6 +17,7 @@ module.exports = {
     extend: {
       colors: {
         darkBG: '#181818',
+        taintedBG: '#111111',
         lightText: '#F4F4F4',
         normalText: '#dddddd',
         darkerText: '#606060',
