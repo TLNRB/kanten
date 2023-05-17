@@ -10,6 +10,7 @@ import statue from '../images/statueK.svg'
 import statueWithGlass from '../images/statueWIthGlasses.svg'
 import wavyLines from '../images/wavyLines.svg'
 import boldLines from '../images/boldIndentedLines.svg'
+import zigzag from '../images/zigzag.svg'
 /* ---------- Importing Collabs ---------- */
 import allCollabs from '../data/collaborations.js'
 
@@ -19,6 +20,7 @@ const collabs = ref(allCollabs)
 <template>
   <Home :mouse="mouse" :statue="statue" />
   <About :statueWithGlass="statueWithGlass" :wavyLines="wavyLines" :boldLines="boldLines" />
+  <!-- <img :src="zigzag" alt="Zig zag line" /> -->
   <Collaborators :collabs="collabs" />
 </template>
 
