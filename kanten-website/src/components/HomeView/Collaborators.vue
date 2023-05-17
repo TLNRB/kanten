@@ -42,8 +42,6 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <Home :mouse="mouse" :statue="statue" />
-  <About :statueWithGlass="statueWithGlass" :wavyLines="wavyLines" :boldLines="boldLines" />
   <section class="py-[6.5rem] relative overflow-x-hidden xl:py-[8.125rem]">
     <div
       ref="slider"
