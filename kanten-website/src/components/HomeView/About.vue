@@ -36,7 +36,6 @@ onMounted(() => {
 </script>
 
 <template>
-  <Home :mouse="mouse" :statue="statue" />
   <section
     class="bg-[url('../images/squareGrid.svg')] py-[4rem] px-[1rem] md:px-[2rem] xl:px-[3rem]"
   >
