@@ -1,5 +1,4 @@
 @import './base.css';
-@import './variables.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -21,4 +20,15 @@ body {
   color: #f4f4f4;
   scrollbar-width: none;
   scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  background-color: #181818;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 60em;
+  background-color: #ea3397;
+  cursor: pointer;
 }
