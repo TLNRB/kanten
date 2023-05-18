@@ -2,10 +2,10 @@
 import { ref, onMounted } from 'vue'
 
 //Defining image props
-const { statueWithGlass, wavyLines, boldLines } = defineProps([
-  'statueWithGlass',
-  'wavyLines',
-  'boldLines'
+const { statue, wavyLinesBlue, boldLinesWhite } = defineProps([
+  'statue',
+  'wavyLinesBlue',
+  'boldLinesWhite'
 ])
 
 let initialWord = ref('rhythm')
@@ -54,11 +54,11 @@ onMounted(() => {
           >
           We?
         </h2>
-        <img :src="wavyLines" alt="Wavy lines" />
+        <img :src="wavyLinesBlue" alt="Wavy lines" />
       </div>
       <img
         class="h-[200px] sm:h-[260px] md:h-[360px]"
-        :src="statueWithGlass"
+        :src="statue"
         alt="Illustrated statue with a glass"
       />
     </div>
@@ -69,7 +69,7 @@ onMounted(() => {
       </p>
       <img
         class="hidden translate-y-[2px] sm:block sm:w-[142px]"
-        :src="boldLines"
+        :src="boldLinesWhite"
         alt="Bold indented lines"
       />
     </div>

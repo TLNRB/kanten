@@ -1,5 +1,5 @@
 <script setup>
-const { statue } = defineProps(['statue'])
+const { statueK } = defineProps(['statueK'])
 </script>
 
 <template>
@@ -9,7 +9,7 @@ const { statue } = defineProps(['statue'])
     <div class="lg:flex lg:flex-row-reverse lg:items-center lg:justify-center gap-[0rem]">
       <img
         class="h-[20rem] mx-auto xs:h-[25rem] sm:h-[30rem] xl:h-[36rem]"
-        :src="statue"
+        :src="statueK"
         alt="Statue blowing a bubble gum between Kanten's K letters"
       />
       <div

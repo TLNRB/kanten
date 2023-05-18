@@ -5,13 +5,14 @@ import Home from '../components/HomeView/Home.vue'
 import About from '../components/HomeView/About.vue'
 import Collaborators from '../components/HomeView/Collaborators.vue'
 /* ---------- Importing Images ---------- */
-import statue from '../images/statueK.svg'
-import statueWithGlass from '../images/statueWIthGlasses.svg'
-import wavyLines from '../images/wavyLines.svg'
-import boldLines from '../images/boldIndentedLines.svg'
+import statueK from '../images/statueK.svg'
+import statue from '../images/statue.svg'
+import boldLinesWhite from '../images/boldIndentedLinesWhite.svg'
+import boldLinesBlack from '../images/boldIndentedLinesBlack.svg'
+import wavyLinesBlue from '../images/wavyLinesBlue.svg'
+import wavyLinesBlack from '../images/wavyLinesBlack.svg'
 import sculpture from '../images/sculpture.svg'
 import loop from '../images/loop.svg'
-import zigzag from '../images/zigzag.svg'
 /* ---------- Importing Collabs ---------- */
 import allCollabs from '../data/collaborations.js'
 
@@ -19,9 +20,8 @@ const collabs = ref(allCollabs)
 </script>
 
 <template>
-  <Home :statue="statue" />
-  <About :statueWithGlass="statueWithGlass" :wavyLines="wavyLines" :boldLines="boldLines" />
-  <!-- <img :src="zigzag" alt="Zig zag line" /> -->
+  <Home :statueK="statueK" />
+  <About :statue="statue" :wavyLinesBlue="wavyLinesBlue" :boldLinesWhite="boldLinesWhite" />
   <section class="flex justify-center items-center py-[4rem] px-[1rem] md:px-[2rem] xl:px-[3rem]">
     <div></div>
     <div class="flex flex-col items-center justify-center md:flex-row">
