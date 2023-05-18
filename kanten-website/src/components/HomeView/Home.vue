@@ -16,7 +16,7 @@ const { statueK } = defineProps(['statueK'])
         class="mx-auto text-center text-[2.5rem] xs:text-[3rem] sm:text-[4rem] xl:text-[5rem] xxxl:text-[6rem]"
       >
         <div class="flex flex-col items-center w-fit mx-auto sm:flex-row sm:gap-[1rem]">
-          <p class="flex flex-col relative uppdercase leading-snug sm:leading-none">
+          <p class="flex flex-col relative uppercase leading-none sm:leading-none">
             <span class="font-bold text-baseColor z-[1]">Experience</span>
             <span class="textStroke">Experience</span>
           </p>
@@ -33,7 +33,7 @@ const { statueK } = defineProps(['statueK'])
             of Culture at
           </p>
           <p
-            class="flex flex-col relative w-fit mx-auto leading-snug translate-y-[-12px] uppdercase sm:leading-none sm:translate-y-0"
+            class="flex flex-col relative w-fit mx-auto leading-snug translate-y-[-12px] uppercase sm:leading-none sm:translate-y-0"
           >
             <span class="font-bold text-baseColor z-[1]">Kanten</span>
             <span class="textStroke">Kanten</span>
@@ -70,8 +70,6 @@ const { statueK } = defineProps(['statueK'])
   left: 2px;
   width: max-content;
   font-weight: bold;
-  -webkit-text-fill-color: transparent;
-  -webkit-text-stroke-color: #f4f4f4;
-  -webkit-text-stroke-width: 0.5px;
+  color: #f4f4f4;
 }
 </style>

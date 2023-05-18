@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const { collabs } = defineProps(['collabs'])
+const { collabs, sculpture, loop } = defineProps(['collabs', 'sculpture', 'loop'])
 
 const slider = ref(null)
 let styleSheet
@@ -42,8 +42,42 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section class="py-[6.5rem] relative overflow-x-hidden xl:py-[8.125rem]">
-    <div
+  <section
+    class="pt-[4rem] pb-[6rem] relative overflow-x-hidden sm:pt-[8rem] xl:py-[8.125rem] bg-baseColor"
+  >
+    <div class="flex justify-center items-center px-[1rem] md:px-[4rem] md:hidden">
+      <img class="absolute" :src="loop" alt="Loop graphic element" />
+      <div class="flex flex-col items-center justify-center sm:flex-row sm:gap-[2rem]">
+        <img class="sm:translate-y-[-4rem] md:w-[164px]" :src="sculpture" alt="Sculpture" />
+        <div class="mx-auto text-center text-[1.25rem] font-semibold md:text-[1.5rem]">
+          <div class="flex items-center gap-[.5rem] w-fit mx-auto">
+            <p class="text-[1.25rem] font-semibold text-darkText">Powered by</p>
+            <p class="flex flex-col relative uppercase leading-none">
+              <span class="text-[2.5rem] font-bold text-darkText z-[1]">Our</span>
+              <span
+                class="absolute top-[2px] left-[2px] text-[2.5rem] font-bold text-lightText z-[0]"
+                >Our</span
+              >
+            </p>
+          </div>
+          <p
+            class="text-[2.5rem] font-bold text-darkText leading-none uppercase translate-x-[-1.5rem] translate-y-[-.25rem] xs:translate-x-[-2.5rem]"
+          >
+            Amazing
+          </p>
+          <p
+            class="flex flex-col relative leading-none w-fit translate-x-[4.5rem] translate-y-[-.25rem]"
+          >
+            <span class="text-[1.25rem] font-bold text-darkText z-[1]">Collaborators</span>
+            <span
+              class="absolute top-[1px] left-[1px] text-[1.25rem] font-bold text-lightText z-[0]"
+              >Collaborators</span
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- <div
       ref="slider"
       class="slider flex items-center justify-start gap-[2rem] top-[4rem] w-fit opacity-50 absolute sm:gap-[4rem] md:gap-[5rem] lg:gap-[6rem] xl:gap-[10rem] xl:top-[5.625rem]"
     >
@@ -54,7 +88,7 @@ onUnmounted(() => {
       >
         <img class="h-[50px] xl:h-[70px]" :src="collab.img" :alt="collab.desc" />
       </div>
-    </div>
+    </div> -->
   </section>
 </template>
 
