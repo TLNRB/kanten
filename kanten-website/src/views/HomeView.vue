@@ -21,7 +21,7 @@ const collabs = ref(allCollabs)
 
 <template>
   <Home :statueK="statueK" />
-  <About :statue="statue" :wavyLinesBlue="wavyLinesBlue" :boldLinesWhite="boldLinesWhite" />
+  <About :statue="statue" :wavyLines="wavyLinesBlack" :boldLines="boldLinesBlack" />
   <section class="flex justify-center items-center py-[4rem] px-[1rem] md:px-[2rem] xl:px-[3rem]">
     <div></div>
     <div class="flex flex-col items-center justify-center md:flex-row">

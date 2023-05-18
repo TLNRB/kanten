@@ -39,9 +39,7 @@ const { statueK } = defineProps(['statueK'])
             <span class="textStroke">Kanten</span>
           </p>
         </div>
-        <p
-          class="text-[1.25rem] font-semibold mb-[1.25rem] mt-[-.5rem] sm:text-[2rem] sm:mt-[1.25rem]"
-        >
+        <p class="text-[1.25rem] font-semibold mb-[1.25rem] sm:text-[2rem] sm:mt-[1.25rem]">
           – where music meets community.
         </p>
         <hr
