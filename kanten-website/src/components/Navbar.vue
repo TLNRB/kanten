@@ -6,7 +6,7 @@ import logo from '../images/logoSquare.svg'
 const { sections } = defineProps(['sections'])
 
 /* ---------- Pofile & Dropdown click event ---------- */
-const loggedIn = ref(true)
+/* const loggedIn = ref(true)
 const profileDropdownState = ref(false)
 
 const profileDropdownStateChange = () => {
@@ -22,7 +22,7 @@ const isLoggedBox = computed(() => {
 })
 const profileDropdown = computed(() => {
   return profileDropdownState.value ? 'profile-dropdown-active' : ''
-})
+}) */
 
 /* ---------- Nav and dropdown click event ---------- */
 const screenWidth = ref(window.innerWidth)
@@ -84,7 +84,7 @@ onUnmounted(() => {
 
       <!------- Nav Links ------->
       <div
-        class="flex flex-col items-center w-[100%] ml-auto h-fit absolute top-[8rem] translate-x-[110%] text-[2.5rem] uppercase leading-[60px] ease-in duration-[.3s] xs:leading-[70px] sm:leading-[90px] md:pl-[60px] md:translate-x-0 md:w-auto md:right-[4rem] md:top-[1.625rem] md:items-start md:leading-[45px] xl:right-[5rem]"
+        class="flex flex-col items-center w-[100%] ml-auto h-fit absolute top-[8rem] translate-x-[110%] text-[2.5rem] uppercase leading-[60px] ease-in duration-[.3s] xs:leading-[70px] sm:leading-[90px] md:items-end md:translate-x-0 md:w-auto md:right-0 md:top-[1.625rem] md:items-start md:leading-[45px]"
         :class="{ 'dropdown-nav-active': dropdownState }"
       >
         <div v-for="section in sections" :key="section.id" class="overflow-hidden">
@@ -104,8 +104,8 @@ onUnmounted(() => {
         </div>
       </div>
 
-      <!------- Profile ------->
-      <button
+      <!-- Profile -->
+      <!-- <button
         class="w-[2rem] h-[2rem] rounded-full border-[2px] border-baseColor ease-in duration-[.2s]"
         @click="profileDropdownStateChange"
         :class="{ 'border-darkerText': profileDropdownState }"
@@ -116,7 +116,7 @@ onUnmounted(() => {
         />
       </button>
 
-      <!-- Profile Dropdown -->
+      
       <div
         class="translate-x-[150%] ease-in duration-[.3s] absolute border-[1px] border-baseColor bg-darkBG z-[1]"
         :class="[profileDropdown, isLogged]"
@@ -151,7 +151,7 @@ onUnmounted(() => {
       <div
         class="border-[1px] border-textLight absolute bg-darkBG z-[0] translate-x-[150%] ease-in duration-[.3s]"
         :class="[profileDropdown, isLoggedBox]"
-      ></div>
+      ></div> -->
     </nav>
 
     <!-- Dark Background for nav dropdown -->
@@ -182,7 +182,7 @@ onUnmounted(() => {
   transform: translateY(-24px);
 }
 
-.profile-dropdown-loggedIn {
+/* .profile-dropdown-loggedIn {
   bottom: -6rem;
   right: 0;
 }
@@ -209,5 +209,5 @@ onUnmounted(() => {
 .profile-dropdown-active {
   transform: translateX(0);
   transition: transform ease-in 0.3s;
-}
+} */
 </style>

@@ -26,7 +26,7 @@ const wordRotate = () => {
 function startInterval() {
   setInterval(() => {
     wordRotate()
-  }, 2000) // Refresh every 3 seconds
+  }, 1000) // Refresh every 3 seconds
 }
 
 // Start word rotation
