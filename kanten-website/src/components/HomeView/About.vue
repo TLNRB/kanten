@@ -37,7 +37,7 @@ onMounted(() => {
 
 <template>
   <section
-    class="bg-[url('../images/squareGrid.svg')] py-[4rem] px-[1rem] md:px-[2rem] xl:px-[3rem]"
+    class="bg-[url('../images/squareGrid.svg')] py-[4rem] px-[1rem] md:px-[4rem] lg:py-[6.25rem] xl:px-[12.5rem]"
   >
     <div
       class="mb-[4rem] flex items-center justify-center gap-[.5rem] md:gap-[2rem] xl:gap-[2.5rem]"

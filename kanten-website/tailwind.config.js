@@ -6,9 +6,10 @@ module.exports = {
       xs: '360px',
       sm: '560px',
       md: '768px',
-      lg: '992px',
+      lg: '1060px',
       xl: '1200px',
-      xxl: '1440px'
+      xxl: '1440px',
+      xxxl: '1600px'
     },
     fontFamily: {
       'sans-serif': 'futura-pt',
@@ -22,7 +23,7 @@ module.exports = {
         normalText: '#dddddd',
         darkerText: '#606060',
         darkText: '#282828',
-        baseColor: '#EA3397',
+        baseColor: '#1ECECE',
         hipHopColor: '#81F4D1',
         raveColor: '#A809E5',
         houseColor: '#FF0000',

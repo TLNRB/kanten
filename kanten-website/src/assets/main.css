@@ -29,6 +29,6 @@ body {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 60em;
-  background-color: #ea3397;
+  background-color: #1ecece;
   cursor: pointer;
 }

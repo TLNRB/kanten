@@ -5,7 +5,6 @@ import Home from '../components/HomeView/Home.vue'
 import About from '../components/HomeView/About.vue'
 import Collaborators from '../components/HomeView/Collaborators.vue'
 /* ---------- Importing Images ---------- */
-import mouse from '../images/mouse.svg'
 import statue from '../images/statueK.svg'
 import statueWithGlass from '../images/statueWIthGlasses.svg'
 import wavyLines from '../images/wavyLines.svg'
@@ -20,10 +19,11 @@ const collabs = ref(allCollabs)
 </script>
 
 <template>
-  <Home :mouse="mouse" :statue="statue" />
+  <Home :statue="statue" />
   <About :statueWithGlass="statueWithGlass" :wavyLines="wavyLines" :boldLines="boldLines" />
   <!-- <img :src="zigzag" alt="Zig zag line" /> -->
-  <section class="py-[4rem]">
+  <section class="flex justify-center items-center py-[4rem] px-[1rem] md:px-[2rem] xl:px-[3rem]">
+    <div></div>
     <div class="flex flex-col items-center justify-center md:flex-row">
       <img class="md:w-[164px]" :src="sculpture" alt="Sculpture" />
       <p class="text-[1.25rem] font-semibold text-center md:text-[1.5rem]">
