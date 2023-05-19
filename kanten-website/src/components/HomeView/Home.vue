@@ -4,7 +4,7 @@ const { statueK } = defineProps(['statueK'])
 
 <template>
   <main
-    class="mt-[6.875rem] pt-[2rem] pb-[4rem] px-[1rem] overflow-x-hidden md:mt-[7.875rem] md:px-[4rem] lg:pt-[8rem] lg:pb-[6.25rem] xl:mt-[8.375rem] xxl:px-[12.5rem]"
+    class="mt-[6.875rem] pt-[2rem] pb-[4rem] px-[1rem] overflow-x-hidden md:mt-[7.875rem] md:px-[4rem] lg:pt-[8rem] lg:pb-[18rem] xl:mt-[8.375rem] xxl:px-[12.5rem]"
   >
     <div class="lg:flex lg:flex-row-reverse lg:items-center lg:justify-center gap-[0rem]">
       <img

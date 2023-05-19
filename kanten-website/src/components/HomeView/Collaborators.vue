@@ -43,52 +43,67 @@ onUnmounted(() => {
 
 <template>
   <section
-    class="pt-[4rem] pb-[6rem] relative overflow-x-hidden sm:pt-[8rem] xl:py-[8.125rem] bg-baseColor"
+    class="py-[4rem] pb-[11.5rem] relative overflow-x-hidden overflow-y-visible sm:pt-[7rem] sm:pb-[8rem] md:pt-0 md:pb-[0] bg-baseColor"
   >
-    <div class="flex justify-center items-center px-[1rem] md:px-[4rem] md:hidden">
-      <img class="absolute" :src="loop" alt="Loop graphic element" />
+    <div class="md:h-[200px] bg-darkBG"></div>
+    <div class="flex justify-center items-center px-[1rem] md:px-[4rem] md:py-[6rem]">
+      <img class="absolute md:w-[600px]" :src="loop" alt="Loop graphic element" />
       <div class="flex flex-col items-center justify-center sm:flex-row sm:gap-[2rem]">
-        <img class="sm:translate-y-[-4rem] md:w-[164px]" :src="sculpture" alt="Sculpture" />
-        <div class="mx-auto text-center text-[1.25rem] font-semibold md:text-[1.5rem]">
+        <img
+          class="sm:translate-y-[-4rem] md:w-[225px] md:translate-y-[-13rem]"
+          :src="sculpture"
+          alt="Sculpture"
+        />
+        <div class="mx-auto text-center text-[1.25rem] font-semibold md:translate-y-[-8rem]">
           <div class="flex items-center gap-[.5rem] w-fit mx-auto">
-            <p class="text-[1.25rem] font-semibold text-darkText">Powered by</p>
+            <p
+              class="text-[1.25rem] font-semibold text-darkText md:text-[2.5rem] md:tracking-tight lg:text-[3rem]"
+            >
+              Powered by
+            </p>
             <p class="flex flex-col relative uppercase leading-none">
-              <span class="text-[2.5rem] font-bold text-darkText z-[1]">Our</span>
               <span
-                class="absolute top-[2px] left-[2px] text-[2.5rem] font-bold text-lightText z-[0]"
+                class="text-[2.5rem] font-bold text-darkText z-[1] md:text-[5rem] md:tracking-tighter"
+                >Our</span
+              >
+              <span
+                class="absolute top-[2px] left-[2px] text-[2.5rem] font-bold text-lightText z-[0] md:text-[5rem] md:tracking-tighter"
                 >Our</span
               >
             </p>
           </div>
           <p
-            class="text-[2.5rem] font-bold text-darkText leading-none uppercase translate-x-[-1.5rem] translate-y-[-.25rem] xs:translate-x-[-2.5rem]"
+            class="text-[2.5rem] font-bold text-darkText leading-none uppercase translate-x-[-1.5rem] translate-y-[-.25rem] xs:translate-x-[-2.5rem] md:text-[5rem] md:tracking-tighter"
           >
             Amazing
           </p>
           <p
-            class="flex flex-col relative leading-none w-fit translate-x-[4.5rem] translate-y-[-.25rem]"
+            class="flex flex-col relative leading-none w-fit translate-x-[4.5rem] translate-y-[-.25rem] md:translate-x-[8rem]"
           >
-            <span class="text-[1.25rem] font-bold text-darkText z-[1]">Collaborators</span>
             <span
-              class="absolute top-[1px] left-[1px] text-[1.25rem] font-bold text-lightText z-[0]"
+              class="text-[1.25rem] font-bold text-darkText z-[1] md:text-[2.5rem] md:tracking-tight lg:text-[3rem]"
+              >Collaborators</span
+            >
+            <span
+              class="absolute top-[1px] left-[1px] text-[1.25rem] font-bold text-lightText z-[0] md:text-[2.5rem] md:tracking-tight lg:text-[3rem]"
               >Collaborators</span
             >
           </p>
         </div>
       </div>
     </div>
-    <!-- <div
+    <div
       ref="slider"
-      class="slider flex items-center justify-start gap-[2rem] top-[4rem] w-fit opacity-50 absolute sm:gap-[4rem] md:gap-[5rem] lg:gap-[6rem] xl:gap-[10rem] xl:top-[5.625rem]"
+      class="slider flex items-center justify-start gap-[2rem] bottom-[3rem] w-fit absolute sm:gap-[4rem] md:bottom-[6rem] md:gap-[6rem] xl:gap-[10rem]"
     >
       <div
         v-for="collab in collabs"
         :key="collab.id"
-        class="w-[80px] h-[80px] flex items-center justify-center xl:w-[100px] xl:h-[100px]"
+        class="w-[80px] h-[80px] flex items-center justify-center md:w-[100px] md:h-[100px]"
       >
-        <img class="h-[50px] xl:h-[70px]" :src="collab.img" :alt="collab.desc" />
+        <img class="h-[50px] md:h-[70px]" :src="collab.img" :alt="collab.desc" />
       </div>
-    </div> -->
+    </div>
   </section>
 </template>
 

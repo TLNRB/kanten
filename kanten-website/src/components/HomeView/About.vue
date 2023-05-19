@@ -34,29 +34,40 @@ onMounted(() => {
 <template>
   <section class="bg-colorBG">
     <div
-      class="bg-[url('../images/squareGrid.svg')] text-darkText py-[4rem] px-[1rem] md:px-[4rem] lg:flex lg:justify-between lg:items-center lg:gap-[2rem] lg:py-[6.25rem] xxl:px-[12.5rem] xxxl:gap-[9rem] xxxl:justify-center"
+      class="bg-[url('../images/squareGrid.svg')] text-darkText py-[4rem] px-[1rem] md:px-[4rem] lg:flex lg:items-center lg:gap-[2rem] lg:py-[2rem] lg:justify-center xxl:px-[12.5rem] xxl:gap-[9rem]"
     >
       <div
-        class="mb-[3rem] flex items-center justify-center gap-[.5rem] md:gap-[2rem] lg:gap-0 lg:my-auto xl:gap-[1rem]"
+        class="mb-[3rem] flex items-center justify-center gap-[.5rem] md:gap-[2rem] lg:flex-col lg:gap-0 lg:my-auto xl:gap-[1rem]"
       >
-        <div class="flex flex-col items-center gap-[1rem] xxxl:h-[330px] xxxl:justify-between">
-          <h2
-            class="flex flex-col items-center leading-none text-[2.5rem] text-darkText font-bold uppercase sm:text-[3rem] md:text-[4rem]"
-          >
-            Who
-            <span class="relative font-bold z-0"
-              >Are<span class="absolute top-[2px] left-[2px] font-bold text-lightText z-[-1]"
-                >Are</span
-              ></span
+        <div class="flex items-end justify-center lg:translate-y-[-8rem]">
+          <div class="flex flex-col items-center gap-[1rem] lg:lg:translate-y-[-1rem]">
+            <h2
+              class="flex flex-col items-center leading-none text-[2.5rem] text-darkText font-bold uppercase sm:text-[3rem] md:text-[4rem]"
             >
-            We?
-          </h2>
-          <img class="xs:w-[180px] sm:w-[260px] md:w-[280px]" :src="wavyLines" alt="Wavy lines" />
+              Who
+              <span class="relative font-bold z-0"
+                >Are<span class="absolute top-[2px] left-[2px] font-bold text-lightText z-[-1]"
+                  >Are</span
+                ></span
+              >
+              We?
+            </h2>
+            <img
+              class="xs:w-[180px] sm:w-[260px] md:w-[280px] lg:hidden"
+              :src="wavyLines"
+              alt="Wavy lines"
+            />
+          </div>
+          <img
+            class="h-[200px] sm:h-[260px] md:h-[360px] lg:h-[400px] xxxl:h-[435px]"
+            :src="statue"
+            alt="Illustrated statue with a glass"
+          />
         </div>
         <img
-          class="h-[200px] sm:h-[260px] md:h-[360px] xxxl:h-[435px]"
-          :src="statue"
-          alt="Illustrated statue with a glass"
+          class="hidden lg:block lg:w-[405px] lg:translate-y-[-4rem]"
+          :src="wavyLines"
+          alt="Wavy lines"
         />
       </div>
       <div>
