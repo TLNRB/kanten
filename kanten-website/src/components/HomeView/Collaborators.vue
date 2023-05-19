@@ -45,7 +45,7 @@ onUnmounted(() => {
   <section
     class="py-[4rem] pb-[11.5rem] relative overflow-x-hidden overflow-y-visible sm:pt-[7rem] sm:pb-[8rem] md:pt-0 md:pb-[0] bg-baseColor"
   >
-    <div class="md:h-[200px] bg-darkBG"></div>
+    <div class="md:h-[200px] bg-darkBG translate-y-[-5px]"></div>
     <div class="flex justify-center items-center px-[1rem] md:px-[4rem] md:py-[6rem]">
       <img class="absolute md:w-[600px]" :src="loop" alt="Loop graphic element" />
       <div class="flex flex-col items-center justify-center sm:flex-row sm:gap-[2rem]">

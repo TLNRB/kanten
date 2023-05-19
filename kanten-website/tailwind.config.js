@@ -21,7 +21,7 @@ module.exports = {
         colorBG: '#1ECECE',
         taintedBG: '#111111',
         lightText: '#F4F4F4',
-        normalText: '#dddddd',
+        normalText: '#afafaf',
         darkerText: '#606060',
         darkText: '#242424',
         baseColor: '#1ECECE',
