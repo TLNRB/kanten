@@ -6,6 +6,7 @@ import About from '../components/HomeView/About.vue'
 import Events from '../components/HomeView/Events.vue'
 import Collaborators from '../components/HomeView/Collaborators.vue'
 import Newsletter from '../components/HomeView/Newsletter.vue'
+import Contact from '../components/HomeView/Contact.vue'
 /* ---------- Importing Images ---------- */
 import statueK from '../images/statueK.svg'
 import statue from '../images/statue.svg'
@@ -27,6 +28,7 @@ const collabs = ref(allCollabs)
   <Events />
   <Collaborators :collabs="collabs" :sculpture="sculpture" :loop="loop" />
   <Newsletter />
+  <Contact />
 </template>
 
 <style scoped></style>
