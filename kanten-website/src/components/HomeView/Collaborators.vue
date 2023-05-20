@@ -73,7 +73,7 @@ onUnmounted(() => {
             </p>
           </div>
           <p
-            class="text-[2.5rem] font-bold text-darkText leading-none uppercase translate-x-[-1.5rem] translate-y-[-.25rem] xs:translate-x-[-2.5rem] md:text-[5rem] md:tracking-tighter"
+            class="text-[2.5rem] font-bold text-darkText leading-none uppercase translate-x-[-1.5rem] translate-y-[-.25rem] xs:translate-x-[-2.5rem] md:text-[5rem] md:tracking-tight"
           >
             Amazing
           </p>
