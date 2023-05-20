@@ -10,7 +10,7 @@ const { statueK } = defineProps(['statueK'])
       <img
         class="h-[20rem] mx-auto xs:h-[25rem] sm:h-[30rem] xl:h-[36rem]"
         :src="statueK"
-        alt="Statue blowing a bubble gum between Kanten's K letters"
+        alt="Statue blowing a bubble gum between Kanten's K letter"
       />
       <div
         class="mx-auto text-center text-[2.5rem] xs:text-[3rem] sm:text-[4rem] xl:text-[5rem] xxxl:text-[6rem]"
