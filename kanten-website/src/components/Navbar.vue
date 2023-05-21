@@ -1,5 +1,6 @@
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { RouterLink } from 'vue-router'
 import logoLong from '../images/logoRect.svg'
 import logo from '../images/logoSquare.svg'
 
@@ -88,7 +89,8 @@ onUnmounted(() => {
         :class="{ 'dropdown-nav-active': dropdownState }"
       >
         <div v-for="section in sections" :key="section.id" class="overflow-hidden">
-          <p
+          <RouterLink
+            :to="section.route"
             class="h-[50px] flex flex-col cursor-pointer group xs:h-[60px] sm:h-[80px] md:h-[35px]"
           >
             <span
@@ -100,7 +102,7 @@ onUnmounted(() => {
               class="font-[500] text-baseColor rotate-6 translate-y-[-15px] group-hover:translate-y-[-60px] group-hover:rotate-0 ease-in duration-[.2s] xs:text-[3rem] xs:group-hover:translate-y-[-70px] sm:text-[4rem] sm:group-hover:translate-y-[-90px] sm:translate-y-[-10px] md:text-[1.5rem] md:group-hover:translate-y-[-45px]"
               >{{ section.title }}</span
             >
-          </p>
+          </RouterLink>
         </div>
       </div>
 

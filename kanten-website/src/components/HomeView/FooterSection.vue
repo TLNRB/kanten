@@ -1,5 +1,21 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+/* ---------- Footer Nav---------- */
+const sections = ref([
+  { id: 'home', title: 'Home', route: '/', active: true },
+  { id: 'events', title: 'Events', route: 'events', active: false },
+  { id: 'genres', title: 'Genres', route: 'genres', active: false },
+  { id: 'studio', title: 'Studio', route: 'studio', active: false },
+  { id: 'community', title: 'Community', route: 'community', active: false }
+])
+
+/* ---------- Routing---------- */
+const router = useRouter()
+const navigateTo = (route) => {
+  router.push(route)
+}
 
 /* ---------- Define Props---------- */
 const { logoRect, logo } = defineProps(['logoRect', 'logo'])
@@ -36,6 +52,18 @@ onUnmounted(() => {
       <div
         class="flex flex-col items-center w-[80px] md:gap-[.25rem] md:text-[1.125rem] md:w-[100px]"
       >
+        <p
+          class="cursor-pointer font-semibold hover:text-lightText ease-in duration-[.15s]"
+          v-for="section in sections"
+          :key="section.id"
+          @click="navigateTo(section.route)"
+        >
+          {{ section.title }}
+        </p>
+      </div>
+      <!-- <div
+        class="flex flex-col items-center w-[80px] md:gap-[.25rem] md:text-[1.125rem] md:w-[100px]"
+      >
         <p class="cursor-pointer font-semibold hover:text-lightText ease-in duration-[.15s]">
           Home
         </p>
@@ -51,7 +79,7 @@ onUnmounted(() => {
         <p class="cursor-pointer font-semibold hover:text-lightText ease-in duration-[.15s]">
           Community
         </p>
-      </div>
+      </div> -->
       <div
         class="flex flex-col items-center gap-[1.6rem] w-[80px] text-[1.25rem] md:w-[100px] md:gap-[2.25rem] md:text-[1.5rem]"
       >
