@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { RouterView } from 'vue-router'
 import Navbar from './components/Navbar.vue'
+import FooterSection from './components/FooterSection.vue'
 
 // ---------- NavBar ----------
 const sections = ref([
@@ -17,6 +18,7 @@ const sections = ref([
   <div class="">
     <Navbar :sections="sections" />
     <RouterView />
+    <FooterSection :sections="sections" />
   </div>
 </template>
 

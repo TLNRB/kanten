@@ -1,29 +1,13 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import logoLong from '../images/logoRect.svg'
 import logo from '../images/logoSquare.svg'
 
 const { sections } = defineProps(['sections'])
 
-/* ---------- Pofile & Dropdown click event ---------- */
-/* const loggedIn = ref(true)
-const profileDropdownState = ref(false)
-
-const profileDropdownStateChange = () => {
-  profileDropdownState.value = !profileDropdownState.value
-}
-
-// Checking Class Conditions
-const isLogged = computed(() => {
-  return loggedIn.value ? 'profile-dropdown-loggedIn' : 'profile-dropdown-loggedOut'
-})
-const isLoggedBox = computed(() => {
-  return loggedIn.value ? 'profile-dropdownBox-loggedIn' : 'profile-dropdownBox-loggedOut'
-})
-const profileDropdown = computed(() => {
-  return profileDropdownState.value ? 'profile-dropdown-active' : ''
-}) */
+/* ---------- Routing---------- */
+const router = useRouter()
 
 /* ---------- Nav and dropdown click event ---------- */
 const screenWidth = ref(window.innerWidth)
@@ -56,7 +40,12 @@ onUnmounted(() => {
       <!------- Logo Image ------->
       <div>
         <a href="#">
-          <img class="h-[3.25rem]" :src="screenWidth < 560 ? logo : logoLong" alt="Kanten logo" />
+          <img
+            class="h-[3.25rem]"
+            :src="screenWidth < 560 ? logo : logoLong"
+            alt="Kanten logo"
+            @click="router.push('/')"
+          />
         </a>
       </div>
 

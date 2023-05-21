@@ -1,15 +1,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
-
-/* ---------- Footer Nav---------- */
-const sections = ref([
-  { id: 'home', title: 'Home', route: '/', active: true },
-  { id: 'events', title: 'Events', route: 'events', active: false },
-  { id: 'genres', title: 'Genres', route: 'genres', active: false },
-  { id: 'studio', title: 'Studio', route: 'studio', active: false },
-  { id: 'community', title: 'Community', route: 'community', active: false }
-])
+import logoRect from '../images/logoRectBlack.svg'
+import logo from '../images/logoSquare.svg'
 
 /* ---------- Routing---------- */
 const router = useRouter()
@@ -18,7 +11,7 @@ const navigateTo = (route) => {
 }
 
 /* ---------- Define Props---------- */
-const { logoRect, logo } = defineProps(['logoRect', 'logo'])
+const { sections } = defineProps(['sections'])
 
 /* ---------- Resize handling ---------- */
 const screenWidth = ref(window.innerWidth)
@@ -46,7 +39,8 @@ onUnmounted(() => {
         <img
           class="w-[50px] sm:w-[80px] md:w-[100px] cursor-pointer"
           :src="screenWidth < 560 ? logo : logoRect"
-          alt="Kanten rectangle logo"
+          @click="router.push('/')"
+          alt="Kanten logo"
         />
       </div>
       <div
