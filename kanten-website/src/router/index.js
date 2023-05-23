@@ -4,6 +4,7 @@ import AllEventsView from '../views/AllEventsView.vue'
 import GenreView from '../views/GenreView.vue'
 import StudioView from '../views/StudioView.vue'
 import CommunityView from '../views/CommunityView.vue'
+import MembershipView from '../views/MembershipView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +34,11 @@ const router = createRouter({
       path: '/community',
       name: 'community',
       component: CommunityView
+    },
+    {
+      path: '/membership',
+      name: 'membership',
+      component: MembershipView
     }
   ]
 })
