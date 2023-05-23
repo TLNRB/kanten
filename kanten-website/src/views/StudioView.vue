@@ -120,7 +120,7 @@ onUnmounted(() => {
           of Studio
         </p>
       </div>
-      <div class="flex flex-col justify-between md:flex-row">
+      <div v-if="gallery.length > 0" class="flex flex-col justify-between md:flex-row">
         <div class="flex flex-col w-[100%] md:w-[32.5%]">
           <img
             v-for="image in filteredImages(1)"
@@ -148,22 +148,10 @@ onUnmounted(() => {
             :alt="image.desc"
           />
         </div>
-        <!-- <div class="flex flex-col w-[100%] md:w-[32.5%]">
-          <img class="w-[100%] pb-[.625rem] sm:pb-[1rem]" :src="studio" alt="" />
-          <img class="w-[100%] pb-[.625rem] sm:pb-[1rem]" :src="westeros" alt="" />
-          <img class="w-[100%] pb-[.625rem] sm:pb-[1rem]" :src="twd" alt="" />
-        </div>
-        <div class="flex flex-col w-[100%] md:w-[32.5%]">
-          <img class="w-[100%] pb-[.625rem] sm:pb-[1rem]" :src="westeros" alt="" />
-          <img class="w-[100%] pb-[.625rem] sm:pb-[1rem]" :src="studio" alt="" />
-          <img class="w-[100%] pb-[.625rem] sm:pb-[1rem]" :src="studio" alt="" />
-        </div>
-        <div class="flex flex-col w-[100%] md:w-[32.5%]">
-          <img class="w-[100%] pb-[.625rem] sm:pb-[1rem]" :src="twd" alt="" />
-          <img class="w-[100%] pb-[.625rem] sm:pb-[1rem]" :src="studio" alt="" />
-          <img class="w-[100%] pb-[.625rem] sm:pb-[1rem]" :src="westeros" alt="" />
-        </div> -->
       </div>
+      <h3 v-else class="text-center text-normalText italic mt-[1rem] md:text-[1.25rem]">
+        No images found
+      </h3>
     </div>
     <hr class="my-[2rem] border-[1px] border-baseColor" />
   </section>
