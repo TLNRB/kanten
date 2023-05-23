@@ -1,9 +1,27 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 /* ---------- Importing Images ---------- */
 import sculpture from '../images/sculpture.svg'
 import wavyLinesLong from '../images/wavyLinesThreeLong.svg'
 import wavyLines from '../images/wavyLinesThree.svg'
+
+/* ---------- Importing Gallery Images ---------- */
+import allGallery from '../data/studioGalleryDB.js'
+
+const gallery = ref(allGallery)
+
+/* ---------- Assigning a column number between (1-3) to each image ---------- */
+/* const assignNumber = () => {
+  for (let i = 0; i < gallery.length; i++) {
+    gallery.value[i].cols = (i % 3) + 1
+    console.log(gallery.value)
+  }
+} */
+
+/* ---------- Filtering images based on column value ---------- */
+const filteredImages = (colNum) => {
+  return gallery.value.filter((image) => image.cols == colNum)
+}
 
 const screenWidth = ref(window.innerWidth)
 
@@ -15,6 +33,7 @@ function handleResize() {
 /*---------- Add resize event listener when component is mounted ---------- */
 onMounted(() => {
   window.addEventListener('resize', handleResize)
+  /* assignNumber() */
 })
 /*---------- Remove resize event listener when component is mounted ---------- */
 onUnmounted(() => {
@@ -71,9 +90,12 @@ onUnmounted(() => {
             recording, and here Kanten will provide the opportunity to use a sound studio and a
             high-quality rehearsal room. By virtue of Kanten's vision to help the musical growth
             layer to create music, a sound engineer will be offered who, according to agreement, can
-            teach sound studio technique - as needed. With Kraftværket's location in Østerbyen, we
-            want to raise interest in music, especially among local young people. The power plant
-            can be used by anyone who plays or wants to play music.
+            teach sound studio technique - as needed.
+            <span class="hidden xs:block"
+              >With Kraftværket's location in Østerbyen, we want to raise interest in music,
+              especially among local young people. The power plant can be used by anyone who plays
+              or wants to play music.</span
+            >
           </p>
           <img
             class="hidden h-[12rem] sm:h-[16rem] md:block md:absolute md:right-[-10rem] md:bottom-[-1rem] lg:h-[26rem] lg:right-[-14rem] xxl:right-[-16rem]"
@@ -85,7 +107,7 @@ onUnmounted(() => {
     </div>
     <hr class="my-[2rem] border-[1px] border-baseColor" />
     <div class="py-[1.5rem] px-[1rem] md:px-[4rem] xxl:px-[12.5rem]">
-      <div class="flex flex-col w-fit ml-auto sm:w-[340px] lg:w-[410px]">
+      <div class="flex flex-col w-fit ml-auto pb-[1.5rem] sm:w-[340px] md:pb-[2rem] lg:w-[410px]">
         <p
           class="flex flex-col leading-none text-[2.5rem] uppercase relative translate-x-[-3rem] sm:translate-x-[2.5rem] sm:text-[4rem] lg:text-[5rem]"
         >
@@ -98,7 +120,50 @@ onUnmounted(() => {
           of Studio
         </p>
       </div>
-      <div></div>
+      <div class="flex flex-col justify-between md:flex-row">
+        <div class="flex flex-col w-[100%] md:w-[32.5%]">
+          <img
+            v-for="image in filteredImages(1)"
+            :key="image.id"
+            class="w-[100%] pb-[.625rem] sm:pb-[1rem]"
+            :src="image.src"
+            :alt="image.desc"
+          />
+        </div>
+        <div class="flex flex-col w-[100%] md:w-[32.5%]">
+          <img
+            v-for="image in filteredImages(2)"
+            :key="image.id"
+            class="w-[100%] pb-[.625rem] sm:pb-[1rem]"
+            :src="image.src"
+            :alt="image.desc"
+          />
+        </div>
+        <div class="flex flex-col w-[100%] md:w-[32.5%]">
+          <img
+            v-for="image in filteredImages(3)"
+            :key="image.id"
+            class="w-[100%] pb-[.625rem] sm:pb-[1rem]"
+            :src="image.src"
+            :alt="image.desc"
+          />
+        </div>
+        <!-- <div class="flex flex-col w-[100%] md:w-[32.5%]">
+          <img class="w-[100%] pb-[.625rem] sm:pb-[1rem]" :src="studio" alt="" />
+          <img class="w-[100%] pb-[.625rem] sm:pb-[1rem]" :src="westeros" alt="" />
+          <img class="w-[100%] pb-[.625rem] sm:pb-[1rem]" :src="twd" alt="" />
+        </div>
+        <div class="flex flex-col w-[100%] md:w-[32.5%]">
+          <img class="w-[100%] pb-[.625rem] sm:pb-[1rem]" :src="westeros" alt="" />
+          <img class="w-[100%] pb-[.625rem] sm:pb-[1rem]" :src="studio" alt="" />
+          <img class="w-[100%] pb-[.625rem] sm:pb-[1rem]" :src="studio" alt="" />
+        </div>
+        <div class="flex flex-col w-[100%] md:w-[32.5%]">
+          <img class="w-[100%] pb-[.625rem] sm:pb-[1rem]" :src="twd" alt="" />
+          <img class="w-[100%] pb-[.625rem] sm:pb-[1rem]" :src="studio" alt="" />
+          <img class="w-[100%] pb-[.625rem] sm:pb-[1rem]" :src="westeros" alt="" />
+        </div> -->
+      </div>
     </div>
     <hr class="my-[2rem] border-[1px] border-baseColor" />
   </section>
