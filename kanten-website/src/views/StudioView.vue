@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 /* ---------- Importing Images ---------- */
 import sculpture from '../images/sculpture.svg'
 import wavyLinesLong from '../images/wavyLinesThreeLong.svg'
