@@ -1,6 +1,11 @@
 <script setup>
-import { reactive } from 'vue'
-import AdminEvents from '../components/Admin/AdminEvents.vue'
+import { ref, reactive } from 'vue'
+import AddEvents from '../components/Admin/AddEvents.vue'
+import ExistingEvent from '../components/Admin/ExistingEvent.vue'
+
+import allEvents from '../data/eventsDB.js'
+
+const events = ref(allEvents)
 
 const options = reactive([
   { id: 0, name: 'Events', active: true },
@@ -41,7 +46,17 @@ const options = reactive([
       </button>
     </div>
     <!-- Sections goes here -->
-    <AdminEvents />
+    <div>
+      <AddEvents />
+      <h2
+        class="flex items-center justify-center mx-auto text-[2rem] font-bold mt-[8rem] uppercase xs:text-[2.5rem] md:text-[5rem] md:mt-[10rem]"
+      >
+        Existing Events
+      </h2>
+      <div class="my-[3rem] md:mt-[4rem] flex justify-center gap-[4rem] flex-wrap">
+        <ExistingEvent v-for="event in events" :key="event.id" :event="event" />
+      </div>
+    </div>
   </main>
 </template>
 
