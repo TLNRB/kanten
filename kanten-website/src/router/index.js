@@ -6,6 +6,7 @@ import StudioView from '../views/StudioView.vue'
 import CommunityView from '../views/CommunityView.vue'
 import MembershipView from '../views/MembershipView.vue'
 import LoginView from '../views/LoginView.vue'
+import AdminView from '../views/AdminView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,6 +46,11 @@ const router = createRouter({
       path: '/login-admin',
       name: 'login',
       component: LoginView
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: AdminView
     }
   ]
 })
