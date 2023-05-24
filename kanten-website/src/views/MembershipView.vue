@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+/* import zebraPattern from '../images/zebraPattern.svg' */
+</script>
 
 <template>
   <section
@@ -130,6 +132,7 @@
         >
       </button>
     </form>
+    <img class="absolute left-0 right-0 bottom-0" :src="zebraPattern" alt="" />
   </section>
 </template>
 
