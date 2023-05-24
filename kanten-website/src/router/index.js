@@ -5,6 +5,7 @@ import GenreView from '../views/GenreView.vue'
 import StudioView from '../views/StudioView.vue'
 import CommunityView from '../views/CommunityView.vue'
 import MembershipView from '../views/MembershipView.vue'
+import LoginView from '../views/LoginView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,6 +40,11 @@ const router = createRouter({
       path: '/membership',
       name: 'membership',
       component: MembershipView
+    },
+    {
+      path: '/login-admin',
+      name: 'login',
+      component: LoginView
     }
   ]
 })

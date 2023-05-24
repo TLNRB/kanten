@@ -15,7 +15,7 @@ const sections = ref([
 </script>
 
 <template>
-  <div class="">
+  <div>
     <Navbar :sections="sections" />
     <RouterView />
     <FooterSection :sections="sections" />
