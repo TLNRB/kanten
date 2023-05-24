@@ -2,16 +2,30 @@
 import { ref, reactive } from 'vue'
 import AddEvents from '../components/Admin/AddEvents.vue'
 import ExistingEvent from '../components/Admin/ExistingEvent.vue'
+import AddPictures from '../components/Admin/AddPictures.vue'
+import CurrentGallery from '../components/Admin/CurrentGallery.vue'
 
 import allEvents from '../data/eventsDB.js'
+import allGallery from '../data/studioGalleryDB.js'
 
 const events = ref(allEvents)
+const gallery = ref(allGallery)
 
 const options = reactive([
-  { id: 0, name: 'Events', active: true },
-  { id: 1, name: 'Genres Gallery', active: false },
-  { id: 2, name: 'Studio Gallery', active: false }
+  { id: 0, name: 'Events', filter: 'event', active: true },
+  { id: 1, name: 'Genres Gallery', filter: 'genre', active: false },
+  { id: 2, name: 'Studio Gallery', filter: 'studio', active: false }
 ])
+
+const handleState = (id) => {
+  options.forEach((option) => {
+    if (option.id == id) {
+      option.active = true
+    } else {
+      option.active = false
+    }
+  })
+}
 </script>
 
 <template>
@@ -33,6 +47,7 @@ const options = reactive([
         v-for="option in options"
         :key="option.id"
         class="flex flex-col text-center text-[1.25rem] relative group"
+        @click="handleState(option.id)"
       >
         <span
           class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] bg-darkBG border-baseColor z-[1] group-hover:text-baseColor group-hover:border-lightText ease-in duration-[.15s] delay-[.05s] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem]"
@@ -46,7 +61,8 @@ const options = reactive([
       </button>
     </div>
     <!-- Sections goes here -->
-    <div>
+    <!-- Events -->
+    <div v-if="options[0].active">
       <AddEvents />
       <h2
         class="flex items-center justify-center mx-auto text-[2rem] font-bold mt-[8rem] uppercase xs:text-[2.5rem] md:text-[5rem] md:mt-[10rem]"
@@ -55,6 +71,31 @@ const options = reactive([
       </h2>
       <div class="my-[3rem] md:mt-[4rem] flex justify-center gap-[4rem] flex-wrap">
         <ExistingEvent v-for="event in events" :key="event.id" :event="event" />
+      </div>
+    </div>
+    <!-- Genres -->
+    <div v-else-if="options[1].active">
+      <AddPictures />
+      <h2
+        class="flex items-center justify-center mx-auto text-[2rem] font-bold mt-[8rem] uppercase xs:text-[2.5rem] md:text-[5rem] md:mt-[10rem]"
+      >
+        Genre Gallery
+      </h2>
+      <div class="my-[3rem] md:mt-[4rem] flex justify-center gap-[4rem] flex-wrap">
+        <CurrentGallery v-for="image in gallery" :key="image.id" :image="image" />
+      </div>
+    </div>
+
+    <!-- Studio -->
+    <div v-else-if="options[2].active">
+      <AddPictures />
+      <h2
+        class="flex items-center justify-center mx-auto text-[2rem] font-bold mt-[8rem] uppercase xs:text-[2.5rem] md:text-[5rem] md:mt-[10rem]"
+      >
+        Studio Gallery
+      </h2>
+      <div class="my-[3rem] md:mt-[4rem] flex justify-center gap-[4rem] flex-wrap">
+        <CurrentGallery v-for="image in gallery" :key="image.id" :image="image" />
       </div>
     </div>
   </main>

@@ -61,7 +61,7 @@ const handleFileChange = (event) => {
         <label class="font-[500]">Cover Image</label>
         <div class="relative">
           <label
-            class="absolute bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
+            class="absolute bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none w-[100%] md:py-[.75rem] md:px-[1.25rem]"
           >
             <span>{{ selectedFile ? selectedFile.name : 'Choose File' }}</span>
             <input type="file" @change="handleFileChange" />

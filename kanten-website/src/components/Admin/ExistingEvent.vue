@@ -64,6 +64,30 @@ const { event } = defineProps(['event'])
         <p class="font-[500] text-baseColor">Ticket URL:</p>
         <a class="font-[500]" :href="event.ticketURL" target="_blank">{{ event.ticketURL }}</a>
       </div>
+      <div class="flex gap-[1rem] mr-auto text-[1.25rem] px-[.5rem] mb-[1rem]">
+        <!-- Edit -->
+        <button class="flex flex-col mt-[1.5rem] w-fit mx-auto text-[1rem] relative group">
+          <span
+            class="font-[500] py-[.25rem] px-[1rem] border-[1px] bg-baseColor border-baseColor z-[1] group-hover:border-lightText ease-in duration-[.15s] delay-[.05s]"
+            >Edit</span
+          >
+          <span
+            class="font-[500] py-[.25rem] px-[1rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s]"
+            >Edit</span
+          >
+        </button>
+        <!-- Delete -->
+        <button class="flex flex-col mt-[1.5rem] w-fit mx-auto text-[1rem] relative group">
+          <span
+            class="font-[500] py-[.25rem] px-[1rem] border-[1px] bg-red-700 border-red-700 z-[1] group-hover:border-lightText ease-in duration-[.15s] delay-[.05s]"
+            >Delete</span
+          >
+          <span
+            class="font-[500] py-[.25rem] px-[1rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s]"
+            >Delete</span
+          >
+        </button>
+      </div>
     </div>
   </div>
 </template>
