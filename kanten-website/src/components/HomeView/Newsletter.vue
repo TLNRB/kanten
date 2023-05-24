@@ -62,4 +62,20 @@
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #606060;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #606060;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #606060;
+}
+</style>
