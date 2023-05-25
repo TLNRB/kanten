@@ -4,7 +4,7 @@ import AllEventsView from '../views/AllEventsView.vue'
 import GenreView from '../views/GenreView.vue'
 import StudioView from '../views/StudioView.vue'
 import CommunityView from '../views/CommunityView.vue'
-
+import SingleEventView from '../views/SingleEventView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -33,6 +33,12 @@ const router = createRouter({
       path: '/community',
       name: 'community',
       component: CommunityView
+    },
+    {
+      path: '/singleeventview/:id',
+      name: 'singleeventview',
+      component: SingleEventView,
+      props: true 
     }
   ]
 })
