@@ -1,5 +1,9 @@
 <script setup>
 const { event } = defineProps(['event'])
+const emit = defineEmits(['modalOpen'])
+const showModal = () => {
+  emit('modalOpen')
+}
 </script>
 
 <template>
@@ -77,7 +81,10 @@ const { event } = defineProps(['event'])
           >
         </button>
         <!-- Delete -->
-        <button class="flex flex-col mt-[1.5rem] w-fit mx-auto text-[1rem] relative group">
+        <button
+          class="flex flex-col mt-[1.5rem] w-fit mx-auto text-[1rem] relative group"
+          @click="showModal"
+        >
           <span
             class="font-[500] py-[.25rem] px-[1rem] border-[1px] bg-red-700 border-red-700 z-[1] group-hover:border-lightText ease-in duration-[.15s] delay-[.05s]"
             >Delete</span

@@ -1,5 +1,6 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
+/* ---------- Import Components ---------- */
 import AddEvents from '../components/Admin/AddEvents.vue'
 import ExistingEvent from '../components/Admin/ExistingEvent.vue'
 import AddPicturesStudio from '../components/Admin/AddPicturesStudio.vue'
@@ -7,6 +8,7 @@ import StudioGallery from '../components/Admin/StudioGallery.vue'
 import AddPicturesEvents from '../components/Admin/AddPicturesEvents.vue'
 import EventsGallery from '../components/Admin/EventsGallery.vue'
 
+/* ---------- Import Databases ---------- */
 import allEvents from '../data/eventsDB.js'
 import allGallery from '../data/studioGalleryDB.js'
 import allGenresGallery from '../data/genresGalleryDB.js'
@@ -16,6 +18,34 @@ const gallery = ref(allGallery)
 const genresGallery = ref(allGenresGallery)
 const filteredGallery = ref('')
 
+/* ---------- Modal ---------- */
+const showModal = ref(false)
+
+const confirmDelete = () => {
+  console.log('deleted')
+  showModal.value = false
+  closeModal()
+}
+
+const openModal = () => {
+  showModal.value = true
+  disableScroll()
+}
+
+const closeModal = () => {
+  showModal.value = false
+  enableScroll()
+}
+
+const disableScroll = () => {
+  document.body.classList.add('overflow-hidden')
+}
+
+const enableScroll = () => {
+  document.body.classList.remove('overflow-hidden')
+}
+
+/* ---------- Options with filter ---------- */
 const options = reactive([
   { id: 0, name: 'Events', filter: 'event', active: true },
   { id: 1, name: 'Genres Gallery', filter: 'genre', active: false },
@@ -32,6 +62,7 @@ const handleOptionState = (id) => {
   })
 }
 
+/* ---------- Genres with filter ---------- */
 const genres = reactive([
   { id: 0, name: 'Mana Club', filter: 'manaClub', active: true },
   { id: 1, name: 'DUB', filter: 'dub', active: false },
@@ -56,8 +87,50 @@ onMounted(() => {
 </script>
 
 <template>
+  <div
+    v-show="showModal"
+    @click.self="closeModal"
+    class="modal h-[100%] w-[100%] z-[15] fixed top-0 left-0 right-0 bottom-0"
+  >
+    <div
+      class="flex flex-col justify-center items-center py-[2rem] px-[1rem] absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] mx-auto bg-darkBG border-[1px] border-baseColor w-[250px] sm:w-[350px] sm:py-[3rem] sm:gap-[.5rem]"
+    >
+      <p class="font-[500] sm:text-[1.25rem]">Are you sure you want to delete?</p>
+      <div class="flex gap-[1rem] mx-auto text-[1.25rem] px-[.5rem] sm:gap-[1.5rem]">
+        <!-- Edit -->
+        <button
+          class="flex flex-col mt-[1.5rem] w-fit mx-auto text-[1rem] relative group"
+          @click="confirmDelete"
+        >
+          <span
+            class="font-[500] py-[.25rem] px-[1rem] border-[1px] bg-green-700 border-green-700 z-[1] group-hover:border-lightText ease-in duration-[.15s] delay-[.05s]"
+            >Yes</span
+          >
+          <span
+            class="font-[500] py-[.25rem] px-[1rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s]"
+            >Yes</span
+          >
+        </button>
+        <!-- Delete -->
+        <button
+          class="flex flex-col mt-[1.5rem] w-fit mx-auto text-[1rem] relative group"
+          @click="closeModal()"
+        >
+          <span
+            class="font-[500] py-[.25rem] px-[1rem] border-[1px] bg-red-700 border-red-700 z-[1] group-hover:border-lightText ease-in duration-[.15s] delay-[.05s]"
+            >No</span
+          >
+          <span
+            class="font-[500] py-[.25rem] px-[1rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s]"
+            >No</span
+          >
+        </button>
+      </div>
+    </div>
+  </div>
   <main
     class="bg-[url('../images/gridGray.svg')] overflow-x-hidden flex flex-col mt-[6.875rem] py-[4rem] px-[1rem] md:px-[4rem] md:mt-[7.875rem] xl:mt-[8.375rem] xxl:px-[12.5rem]"
+    :class="{ 'overflow-y-hidden': showModal }"
   >
     <h1
       class="flex items-center justify-center relative mx-auto text-[2rem] uppercase xs:text-[2.5rem] md:text-[5rem] leading-none"
@@ -100,7 +173,12 @@ onMounted(() => {
         v-if="events.length"
         class="my-[3rem] md:mt-[4rem] flex justify-center gap-[4rem] flex-wrap"
       >
-        <ExistingEvent v-for="event in events" :key="event.id" :event="event" />
+        <ExistingEvent
+          v-for="event in events"
+          :key="event.id"
+          :event="event"
+          @modal-open="openModal"
+        />
       </div>
       <div
         v-else
@@ -176,6 +254,10 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.modal {
+  background-color: #181818aa;
+  backdrop-filter: blur(3px);
+}
 .active {
   background-color: #1ecece;
   transition: ease-in 0.2s;
