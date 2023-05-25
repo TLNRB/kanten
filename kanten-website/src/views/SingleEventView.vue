@@ -4,6 +4,7 @@ import { toRefs, computed } from 'vue';
 import singleevent from '../data/singleevent'
 import { useRouter } from 'vue-router';
 import  circle  from '../images/circle.png'
+import back from '../images/back.svg'
 const router = useRouter()
 const goBack = () => {
     router.go(-1)
@@ -18,24 +19,47 @@ const event = computed( () => {
     return state.value.find(item => item.id == id.value)
 })
 
+
 </script>
 
 <template>
-   <button @click="goBack()">Go back</button>
-  test::{{ id }}
+  <div class="filters">
+    <!-- FILTER BUTTONS -->
+    <button
+      class="filter-button"
+      v-for="(category, index) in categories"
+      :key="index"
+      @click="filterArticle(category)"
+    >
+      {{ category }}
+    </button>
+    <!-- SHOW ALL BUTTON -->
+    <button class="filter-button show-all-button" @click="showAll(category)">
+      Show All
+    </button>
+  </div>
   <main 
     v-if="event"
     class="mt-[5rem] pt-[2rem] overflow-x-hidden md:mt-[7.875rem]  lg:pt-[2rem] xl:mt-[8rem]"
     >
+    <div class="flex relative justify-between top-[5rem]  mx-[1.3rem] md:mx-[4.5rem] xxl:mx-[12.6rem]">
+    <button class="" @click="goBack()">
+      <img 
+        class="w-[3rem]" 
+        :src="back" alt="">
+      </button>
+      <div>
     <div class="h-[0]">
     <img 
-      class="w-[4rem] relative md:w-[4.3rem] xxl:w-[5rem] top-[2rem]  ml-[1.3rem] md:ml-[4.5rem] xxl:ml-[12.6rem]"
+      class="w-[4rem] relative md:w-[4.3rem] xxl:w-[5rem]  "
       :src="circle" alt="">
     </div>
     <h1 
-      class="relative top-[2rem] h-[0] text-[2.8rem] xxl:text-[3.6rem] ml-[1.6rem]  md:ml-[5rem] xxl:ml-[13rem]">
+      class="relative h-[0] text-[2.8rem] text-white xxl:text-[3.6rem] ml-[0.4rem]  md:ml-[0.5rem] xxl:ml-[0.5rem]">
        {{ event.age }}
       </h1>
+    </div>
+    </div>
     <img 
     class=" w-[100%] object-cover h-[23rem] sm:h-[30rem]"
         :src="event.image"

@@ -15,6 +15,13 @@ const {state} = singleevent()
 
   <section 
      class="pb-[0.5rem] px-[1rem] md:px-[4rem] xxl:px-[12.5rem]">
+     <div class="filters">
+			<button class="filter" v-bind:class="{ active: currentFilter === 'OTHER' }" v-on:click="setFilter('OTHER')">OTHER</button>
+			<button class="filter" v-bind:class="{ active: currentFilter === 'DEFT' }" v-on:click="setFilter('DEFT')">DEFT</button>
+			<button class="filter" v-bind:class="{ active: currentFilter === 'MANA CLUB' }" v-on:click="setFilter('MANA CLUB')">MANA CLUB</button>
+			<button class="filter" v-bind:class="{ active: currentFilter === 'DUB' }" v-on:click="setFilter('DUB')">DUB</button>
+		</div>
+	
        <div 
          class="flex flex-col flex-wrap	 sm:flex-row  justify-between">
           <div

@@ -6,6 +6,7 @@ import event4 from '../images/event4.png'
 
 
 const getSingleevent = () => {
+    
     const state = ref([
         {
             id: 1,
@@ -67,9 +68,14 @@ const getSingleevent = () => {
             price: '50',
             age: '18'
         },
-    ])
+        
+    ]
+    )
+    
     return {
         state
     }
+    
 }
+
 export default getSingleevent
