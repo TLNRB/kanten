@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import logoLong from '../images/logoRect.svg'
 import logo from '../images/logoSquare.svg'
@@ -8,6 +8,29 @@ const { sections } = defineProps(['sections'])
 
 /* ---------- Routing---------- */
 const router = useRouter()
+
+/* ---------- Pofile & Dropdown click event ---------- */
+const loggedIn = ref(true)
+const profileDropdownState = ref(false)
+const profileDropdownStateChange = () => {
+  profileDropdownState.value = !profileDropdownState.value
+}
+// Checking Class Conditions
+const isLogged = computed(() => {
+  return loggedIn.value ? 'profile-dropdown-loggedIn' : 'profile-dropdown-loggedOut'
+})
+const isLoggedBox = computed(() => {
+  return loggedIn.value ? 'profile-dropdownBox-loggedIn' : 'profile-dropdownBox-loggedOut'
+})
+const isLoggedButton = computed(() => {
+  return loggedIn.value ? 'profile-button-loggedIn' : 'profile-button-loggedOut'
+})
+const profileDropdown = computed(() => {
+  return profileDropdownState.value ? 'profile-dropdown-active' : ''
+})
+const profileButton = computed(() => {
+  return profileDropdownState.value ? 'border-darkerText' : 'border-baseColor'
+})
 
 /* ---------- Nav and dropdown click event ---------- */
 const screenWidth = ref(window.innerWidth)
@@ -48,6 +71,46 @@ onUnmounted(() => {
           />
         </a>
       </div>
+
+      <!-- Profile -->
+      <button
+        class="w-[2rem] h-[2rem] ml-[1.5rem] rounded-full border-[2px] ease-in duration-[.2s] md:mr-auto"
+        @click="profileDropdownStateChange"
+        :class="[profileButton, isLoggedButton]"
+      >
+        <font-awesome-icon
+          class="h-[1.125rem] text-baseColor translate-y-[2px]"
+          :icon="['fas', 'user']"
+        />
+      </button>
+
+      <div
+        class="translate-x-[-150%] ease-in duration-[.3s] absolute border-[1px] border-baseColor bg-darkBG z-[1]"
+        :class="[profileDropdown, isLogged]"
+      >
+        <div
+          class="flex-col items-start gap-[.5rem] py-[1rem] px-[1.5rem] text-[1.125rem]"
+          :class="[loggedIn ? 'flex' : 'hidden']"
+        >
+          <button class="flex gap-[.75rem] group text-normalText">
+            <font-awesome-icon
+              class="w-[1rem] my-auto text-lightText group-hover:scale-125 ease-in duration-[.2s]"
+              :icon="['fas', 'user']"
+            />Admin
+          </button>
+          <button class="flex gap-[.75rem] items-center group text-normalText">
+            <font-awesome-icon
+              class="w-[1rem] my-auto text-lightText group-hover:scale-125 ease-in duration-[.2s]"
+              :icon="['fas', 'right-from-bracket']"
+            />
+            Log out
+          </button>
+        </div>
+      </div>
+      <div
+        class="border-[1px] border-textLight absolute bg-darkBG z-[0] translate-x-[-150%] ease-in duration-[.3s]"
+        :class="[profileDropdown, isLoggedBox]"
+      ></div>
 
       <!------- Dropdown Text ------->
       <div
@@ -94,55 +157,6 @@ onUnmounted(() => {
           </RouterLink>
         </div>
       </div>
-
-      <!-- Profile -->
-      <!-- <button
-        class="w-[2rem] h-[2rem] rounded-full border-[2px] border-baseColor ease-in duration-[.2s]"
-        @click="profileDropdownStateChange"
-        :class="{ 'border-darkerText': profileDropdownState }"
-      >
-        <font-awesome-icon
-          class="h-[1.125rem] text-baseColor translate-y-[2px]"
-          :icon="['fas', 'user']"
-        />
-      </button>
-
-      
-      <div
-        class="translate-x-[150%] ease-in duration-[.3s] absolute border-[1px] border-baseColor bg-darkBG z-[1]"
-        :class="[profileDropdown, isLogged]"
-      >
-        <div class="py-[1rem] px-[1.5rem] text-[1.125rem]" :class="[loggedIn ? 'hidden' : 'flex']">
-          <button class="flex gap-[.75rem] group text-normalText">
-            <font-awesome-icon
-              class="w-[1rem] my-auto text-lightText group-hover:scale-125 ease-in duration-[.2s]"
-              :icon="['fas', 'right-to-bracket']"
-            />Login
-          </button>
-        </div>
-        <div
-          class="flex-col items-start gap-[.5rem] py-[1rem] px-[1.5rem] text-[1.125rem]"
-          :class="[loggedIn ? 'flex' : 'hidden']"
-        >
-          <button class="flex gap-[.75rem] group text-normalText">
-            <font-awesome-icon
-              class="w-[1rem] my-auto text-lightText group-hover:scale-125 ease-in duration-[.2s]"
-              :icon="['fas', 'user']"
-            />Profile
-          </button>
-          <button class="flex gap-[.75rem] items-center group text-normalText">
-            <font-awesome-icon
-              class="w-[1rem] my-auto text-lightText group-hover:scale-125 ease-in duration-[.2s]"
-              :icon="['fas', 'right-from-bracket']"
-            />
-            Log out
-          </button>
-        </div>
-      </div>
-      <div
-        class="border-[1px] border-textLight absolute bg-darkBG z-[0] translate-x-[150%] ease-in duration-[.3s]"
-        :class="[profileDropdown, isLoggedBox]"
-      ></div> -->
     </nav>
 
     <!-- Dark Background for nav dropdown -->
@@ -173,32 +187,36 @@ onUnmounted(() => {
   transform: translateY(-24px);
 }
 
-/* .profile-dropdown-loggedIn {
+.profile-dropdown-loggedIn {
   bottom: -6rem;
-  right: 0;
+  left: 0;
 }
 
 .profile-dropdownBox-loggedIn {
   width: 127px;
   height: 94px;
   bottom: -6.5rem;
-  right: -0.5rem;
+  left: -0.5rem;
+}
+
+.profile-button-loggedIn {
+  display: block;
 }
 
 .profile-dropdown-loggedOut {
-  bottom: -3.8rem;
-  right: 0rem;
+  display: none;
 }
 
 .profile-dropdownBox-loggedOut {
-  width: 113px;
-  height: 59px;
-  bottom: -4.3rem;
-  right: -0.5rem;
+  display: none;
+}
+
+.profile-button-loggedOut {
+  display: none;
 }
 
 .profile-dropdown-active {
   transform: translateX(0);
   transition: transform ease-in 0.3s;
-} */
+}
 </style>
