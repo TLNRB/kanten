@@ -19,7 +19,8 @@ const getSingleevent = () => {
             description3: 'Derfor inviteres i alle til min kandidatkoncert på spillestedet Kanten (v/ Huset Esbjerg). Til koncerten vil jeg fremføre mit album Baglæns. Det vil desuden også være muligt at købe albummet på vinyl. 🙂',
             description4: 'Da min sidste eksamen først er ugen efter, så kan jeg med denne koncert desværre ikke kalde mig helt færdig endnu. Jeg vil dog gerne fejre det med de fremmødte, men jeg forventer ikke flag og blomster. 🌺',
             performer: 'Timur Allistone',
-            price: '50'
+            price: '50',
+            age: '18'
         },
         {
             id: 2,
@@ -33,7 +34,8 @@ const getSingleevent = () => {
             description3: 'Vi er efterfølgende i fællesskab med bandet blevet enige om, at afholde en ny koncert på Kanten i stedet. Det er en stor ting for os på Kanten at huse et band som FABRÄK, og vi er derfor nødsaget til at tage entré til denne koncert.',
             description4: 'Entré bliver på 140,- eksklusiv gebyr, og der er kun et begrænset antal billetter - se billetlink! Stor tak til Spar Nord Fonden der har hjulpet os med at gøre dette muligt! 💥',
             performer: 'FabrÄk',
-            price: '140'
+            price: '140',
+            age: '18'
         },
         {
             id: 3,
@@ -47,7 +49,8 @@ const getSingleevent = () => {
             description3: 'Det har ikke fået ham til at hvile på laurbærrene. Tværtimod. 2023 blev sparket i gang af den guitardrevne single ‘Datter Af Dæmoner’, som indkapsler den energi, man kan opleve til USSELs koncerter, hvor der er plads til både rocket attitude og poppet charme.',
             description4: '‘Datter Af Dæmoner’ blev Ugens Uundgåelige på P3 i foråret 2023, og sommeren byder på både ny musik og store live-oplevelser, som SPOT-festival, Syd For Solen og Roskilde Festival.',
             performer: 'USSEL',
-            price: '50'
+            price: '50',
+            age: '16'
         },
         {
             id: 4,
@@ -61,7 +64,8 @@ const getSingleevent = () => {
             description3: 'As always the residents Dj’s will be playing flaming tracks to help you get into the vibes on the floor. ',
             description4: 'After the residents’ set, we have two of the greatest Dj’s we know, with one TBA. 💜',
             performer: 'AK75, Rafael santi, tba',
-            price: '50'
+            price: '50',
+            age: '18'
         },
     ])
     return {

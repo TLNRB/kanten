@@ -32,18 +32,18 @@ const {state} = singleevent()
                class=" ml-[0.25rem] relative top-[-3rem] text-[1.75rem] xs:text-[2.25rem] sm:text-[1.5rem] md:text-[1.75rem] xl:text-[2rem]">
                {{ item.date }}
               </h3>
-              <div class="ml-[0.25rem] h-[0.9rem] xs:h-[1.8rem] sm:h-[0.5rem] md:h-[1rem] xl:h-[1.3rem]">
+              <div class="ml-[0.25rem] group h-[0.9rem] xs:h-[1.8rem] sm:h-[0.5rem] md:h-[1rem] xl:h-[1.3rem]">
                  <div 
-                 class="bg-darkBG relative z-[1] top-[-2rem] w-fit px-[1rem] py-[0.1rem] border-solid border-[1px] border-baseColor">
+                 class="bg-darkBG relative z-[1] top-[-2rem] w-fit px-[1rem] py-[0.1rem] border-solid border-[1px] border-baseColor group-hover:text-baseColor group-hover:border-lightText ease-in duration-[.15s]">
                     <RouterLink :to="{ name:'singleeventview', params:  { id:item.id}}" >
                        <h3 
-                       class=" bg-darkBG text-[1.25rem] xs:text-[1.75rem] sm:text-[1rem] md:text-[1.25rem] xl:text-[1.5rem]">
+                       class=" bg-darkBG text-[1.25rem] xs:text-[1.75rem] sm:text-[1rem] md:text-[1.25rem] xl:text-[1.5rem] ">
                        Read more
                       </h3>  
                    </RouterLink>          
                  </div>
                 <div
-                 class="borderStroke">
+                 class="borderStroke group-hover:mt-[0] sm:group-hover:mt-[-1px] md:group-hover:mt-[-2.5px] xl:group-hover:mt-[-1.9px] group-hover:ml-[0] duration-[.2s]">
                  <h3 
                  class=" text-[1.25rem] xs:text-[1.75rem] sm:text-[1rem] md:text-[1.25rem] xl:text-[1.5rem]">
                  Read more
@@ -76,12 +76,12 @@ const {state} = singleevent()
 }
 @media screen and (max-width: 360px) {
     .borderStroke{
-        top: -4rem;
+        top: -4.15rem;
     }
 }
 @media screen and (min-width: 360px) {
     .borderStroke{
-        top: -4.7rem;
+        top: -4.9rem;
     }
 }
 @media screen and (min-width: 560px) {

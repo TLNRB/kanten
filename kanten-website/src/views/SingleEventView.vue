@@ -3,7 +3,7 @@
 import { toRefs, computed } from 'vue';
 import singleevent from '../data/singleevent'
 import { useRouter } from 'vue-router';
-
+import  circle  from '../images/circle.png'
 const router = useRouter()
 const goBack = () => {
     router.go(-1)
@@ -25,9 +25,19 @@ const event = computed( () => {
   test::{{ id }}
   <main 
     v-if="event"
-    class="mt-[5rem] pt-[2rem]   overflow-x-hidden md:mt-[7.875rem]  lg:pt-[2rem] xl:mt-[8rem]"
+    class="mt-[5rem] pt-[2rem] overflow-x-hidden md:mt-[7.875rem]  lg:pt-[2rem] xl:mt-[8rem]"
     >
-    <img class=" w-[100%] object-cover h-[20rem] sm:h-[30rem]"
+    <div class="h-[0]">
+    <img 
+      class="w-[4rem] relative md:w-[4.3rem] xxl:w-[5rem] top-[2rem]  ml-[1.3rem] md:ml-[4.5rem] xxl:ml-[12.6rem]"
+      :src="circle" alt="">
+    </div>
+    <h1 
+      class="relative top-[2rem] h-[0] text-[2.8rem] xxl:text-[3.6rem] ml-[1.6rem]  md:ml-[5rem] xxl:ml-[13rem]">
+       {{ event.age }}
+      </h1>
+    <img 
+    class=" w-[100%] object-cover h-[23rem] sm:h-[30rem]"
         :src="event.image"
     /> 
     <div 
@@ -46,18 +56,18 @@ const event = computed( () => {
              An event for party lovers and everyone else. If you like rave music this event is for you!
          </p>
          <div
-             class="xl:h-[1.3rem]">
+             class="xl:h-[1.3rem] group">
                  <div 
-                 class=" relative z-[1] w-fit px-[1rem] py-[0.1rem] " :class="event.category">
+                 class=" relative z-[1] w-fit px-[1rem] py-[0.1rem]  group-hover:border-[1px]  ease-in duration-[.15s] " :class="event.category">
                     <a href="">
                        <h2 
-                       class="category text-darkBG text-[1.25rem]  sm:text-[1rem] md:text-[1.25rem] xl:text-[1.5rem] ">
+                       class="category text-darkBG text-[1.25rem] group-hover:text-lightText sm:text-[1rem] md:text-[1.25rem] xl:text-[1.5rem] " :class="event.category">
                        Buy tickets
                       </h2>  
                     </a>     
                  </div>
                 <div
-                 class="borderStroke">
+                 class="borderStroke  group-hover:mt-[-2.5px] md:group-hover:mt-[-2.5px] sm:group-hover:mt-[-1px] lg:group-hover:mt-[-2.8px] xl:group-hover:mt-[-2px] group-hover:ml-[0] duration-[.2s]">
                  <h3 
                  class=" text-[1.25rem]  sm:text-[1rem] md:text-[1.25rem] xl:text-[1.5rem]">
                  Buy tickets
@@ -118,30 +128,35 @@ const event = computed( () => {
 h3.OTHER{
   color: #1ECECE;
 }
+
 div.OTHER{
   background-color: #1ECECE;
 }
 h3.DEFT{
   color: #20E062;
 }
+
 div.DEFT{
   background-color: #20E062;
 }
 h3.MANA.CLUB{
   color: #A809E5;
 }
+
 div.MANA.CLUB{
   background-color: #A809E5;
 }
 h3.VERTEX{
   color: #EA3397;
 }
+
 div.VERTEX{
   background-color: #EA3397;
 }
 h3.DUB{
   color: #FFD930;
 }
+
 div.DUB{
   background-color: #FFD930;
 }
