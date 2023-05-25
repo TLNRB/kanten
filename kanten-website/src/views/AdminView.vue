@@ -2,6 +2,7 @@
 import { ref, reactive, onMounted } from 'vue'
 /* ---------- Import Components ---------- */
 import AddEvents from '../components/Admin/AddEvents.vue'
+import EditEvent from '../components/Admin/EditEvent.vue'
 import ExistingEvent from '../components/Admin/ExistingEvent.vue'
 import AddPicturesStudio from '../components/Admin/AddPicturesStudio.vue'
 import StudioGallery from '../components/Admin/StudioGallery.vue'
@@ -19,22 +20,41 @@ const genresGallery = ref(allGenresGallery)
 const filteredGallery = ref('')
 
 /* ---------- Modal ---------- */
-const showModal = ref(false)
+const showDeleteModal = ref(false)
+const showEditModal = ref(false)
 
-const confirmDelete = () => {
-  console.log('deleted')
-  showModal.value = false
-  closeModal()
-}
-
-const openModal = () => {
-  showModal.value = true
+/* Edit Modal */
+const openEditModal = () => {
+  showEditModal.value = true
   disableScroll()
 }
 
-const closeModal = () => {
-  showModal.value = false
+const closeEditModal = () => {
+  showEditModal.value = false
   enableScroll()
+}
+
+const confirmEdit = () => {
+  console.log('edited')
+  showEditModal.value = false
+  closeEditModal()
+}
+
+/* Delete Modal */
+const openDeleteModal = () => {
+  showDeleteModal.value = true
+  disableScroll()
+}
+
+const closeDeleteModal = () => {
+  showDeleteModal.value = false
+  enableScroll()
+}
+
+const confirmDelete = () => {
+  console.log('deleted')
+  showDeleteModal.value = false
+  closeDeleteModal()
 }
 
 const disableScroll = () => {
@@ -81,15 +101,30 @@ const handleGenreState = (id) => {
   })
 }
 
+/* ---------- Handle File Select ---------- */
+const selectedFile = ref('')
+const handleFileChange = (event) => {
+  const file = event.target.files[0]
+  selectedFile.value = file
+}
+
 onMounted(() => {
   handleGenreState(genres[0].id)
 })
 </script>
 
 <template>
+  <!------- Edit Modal ------->
   <div
-    v-show="showModal"
-    @click.self="closeModal"
+    v-show="showEditModal"
+    class="modal h-[100%] w-[100%] z-[15] fixed top-0 left-0 right-0 overflow-auto"
+  >
+    <EditEvent @saved="confirmEdit" @canceled="closeEditModal" />
+  </div>
+  <!------- Delete Modal ------->
+  <div
+    v-show="showDeleteModal"
+    @click.self="closeDeleteModal"
     class="modal h-[100%] w-[100%] z-[15] fixed top-0 left-0 right-0 bottom-0"
   >
     <div
@@ -97,7 +132,6 @@ onMounted(() => {
     >
       <p class="font-[500] sm:text-[1.25rem]">Are you sure you want to delete?</p>
       <div class="flex gap-[1rem] mx-auto text-[1.25rem] px-[.5rem] sm:gap-[1.5rem]">
-        <!-- Edit -->
         <button
           class="flex flex-col mt-[1.5rem] w-fit mx-auto text-[1rem] relative group"
           @click="confirmDelete"
@@ -111,10 +145,9 @@ onMounted(() => {
             >Yes</span
           >
         </button>
-        <!-- Delete -->
         <button
           class="flex flex-col mt-[1.5rem] w-fit mx-auto text-[1rem] relative group"
-          @click="closeModal()"
+          @click="closeDeleteModal"
         >
           <span
             class="font-[500] py-[.25rem] px-[1rem] border-[1px] bg-red-700 border-red-700 z-[1] group-hover:border-lightText ease-in duration-[.15s] delay-[.05s]"
@@ -128,6 +161,7 @@ onMounted(() => {
       </div>
     </div>
   </div>
+  <!------- Content ------->
   <main
     class="bg-[url('../images/gridGray.svg')] overflow-x-hidden flex flex-col mt-[6.875rem] py-[4rem] px-[1rem] md:px-[4rem] md:mt-[7.875rem] xl:mt-[8.375rem] xxl:px-[12.5rem]"
     :class="{ 'overflow-y-hidden': showModal }"
@@ -177,7 +211,8 @@ onMounted(() => {
           v-for="event in events"
           :key="event.id"
           :event="event"
-          @modal-open="openModal"
+          @modal-delete-open="openDeleteModal"
+          @modal-edit-open="openEditModal"
         />
       </div>
       <div
@@ -255,8 +290,8 @@ onMounted(() => {
 
 <style scoped>
 .modal {
-  background-color: #181818aa;
-  backdrop-filter: blur(3px);
+  background-color: #181818bb;
+  backdrop-filter: blur(4px);
 }
 .active {
   background-color: #1ecece;

@@ -1,8 +1,12 @@
 <script setup>
 const { event } = defineProps(['event'])
-const emit = defineEmits(['modalOpen'])
-const showModal = () => {
-  emit('modalOpen')
+const emit = defineEmits(['modal-delete-open', 'modal-edit-open'])
+const deleteModal = () => {
+  emit('modal-delete-open')
+}
+
+const editModal = () => {
+  emit('modal-edit-open')
 }
 </script>
 
@@ -70,7 +74,10 @@ const showModal = () => {
       </div>
       <div class="flex gap-[1rem] mr-auto text-[1.25rem] px-[.5rem] mb-[1rem]">
         <!-- Edit -->
-        <button class="flex flex-col mt-[1.5rem] w-fit mx-auto text-[1rem] relative group">
+        <button
+          class="flex flex-col mt-[1.5rem] w-fit mx-auto text-[1rem] relative group"
+          @click="editModal"
+        >
           <span
             class="font-[500] py-[.25rem] px-[1rem] border-[1px] bg-baseColor border-baseColor z-[1] group-hover:border-lightText ease-in duration-[.15s] delay-[.05s]"
             >Edit</span
@@ -83,7 +90,7 @@ const showModal = () => {
         <!-- Delete -->
         <button
           class="flex flex-col mt-[1.5rem] w-fit mx-auto text-[1rem] relative group"
-          @click="showModal"
+          @click="deleteModal"
         >
           <span
             class="font-[500] py-[.25rem] px-[1rem] border-[1px] bg-red-700 border-red-700 z-[1] group-hover:border-lightText ease-in duration-[.15s] delay-[.05s]"
