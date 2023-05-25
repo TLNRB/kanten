@@ -1,6 +1,6 @@
 import './assets/main.css'
 
-import { createApp } from 'vue'
+import { createApp, markRaw } from 'vue'
 import { createPinia } from 'pinia'
 
 import App from './App.vue'
@@ -18,10 +18,15 @@ import { faFacebookF, faLinkedinIn, faInstagram } from '@fortawesome/free-brands
 /* add icons to the library */
 library.add(faUser, faRightFromBracket, faFacebookF, faLinkedinIn, faInstagram)
 
+const pinia = createPinia()
+pinia.use(({ store }) => {
+  store.router = markRaw(router)
+})
+
 const app = createApp(App)
 
 app.component('font-awesome-icon', FontAwesomeIcon)
-app.use(createPinia())
+app.use(pinia)
 app.use(router)
 
 app.mount('#app')

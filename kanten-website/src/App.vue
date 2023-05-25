@@ -1,8 +1,17 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { RouterView } from 'vue-router'
 import Navbar from './components/Navbar.vue'
 import FooterSection from './components/FooterSection.vue'
+
+import { useStoreAuth } from './stores/storeAuth.js'
+
+/*----- Store -----*/
+const storeAuth = useStoreAuth()
+
+onMounted(() => {
+  storeAuth.init()
+})
 
 // ---------- NavBar ----------
 const sections = ref([

@@ -1,29 +1,38 @@
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import logoLong from '../images/logoRect.svg'
 import logo from '../images/logoSquare.svg'
 
+import { useStoreAuth } from '../stores/storeAuth.js'
+
+/*----- Store -----*/
+const storeAuth = useStoreAuth()
+
 const { sections } = defineProps(['sections'])
+const logOut = () => {
+  storeAuth.logOutUser()
+  profileDropdownState.value = false
+}
 
 /* ---------- Routing---------- */
 const router = useRouter()
 
 /* ---------- Pofile & Dropdown click event ---------- */
-const loggedIn = ref(true)
 const profileDropdownState = ref(false)
 const profileDropdownStateChange = () => {
   profileDropdownState.value = !profileDropdownState.value
 }
+
 // Checking Class Conditions
 const isLogged = computed(() => {
-  return loggedIn.value ? 'profile-dropdown-loggedIn' : 'profile-dropdown-loggedOut'
+  return storeAuth.user.id ? 'profile-dropdown-loggedIn' : 'profile-dropdown-loggedOut'
 })
 const isLoggedBox = computed(() => {
-  return loggedIn.value ? 'profile-dropdownBox-loggedIn' : 'profile-dropdownBox-loggedOut'
+  return storeAuth.user.id ? 'profile-dropdownBox-loggedIn' : 'profile-dropdownBox-loggedOut'
 })
 const isLoggedButton = computed(() => {
-  return loggedIn.value ? 'profile-button-loggedIn' : 'profile-button-loggedOut'
+  return storeAuth.user.id ? 'profile-button-loggedIn' : 'profile-button-loggedOut'
 })
 const profileDropdown = computed(() => {
   return profileDropdownState.value ? 'profile-dropdown-active' : ''
@@ -90,7 +99,7 @@ onUnmounted(() => {
       >
         <div
           class="flex-col items-start gap-[.5rem] py-[1rem] px-[1.5rem] text-[1.125rem]"
-          :class="[loggedIn ? 'flex' : 'hidden']"
+          :class="[storeAuth.user.id ? 'flex' : 'hidden']"
         >
           <button class="flex gap-[.75rem] group text-normalText">
             <font-awesome-icon
@@ -98,7 +107,7 @@ onUnmounted(() => {
               :icon="['fas', 'user']"
             />Admin
           </button>
-          <button class="flex gap-[.75rem] items-center group text-normalText">
+          <button class="flex gap-[.75rem] items-center group text-normalText" @click="logOut">
             <font-awesome-icon
               class="w-[1rem] my-auto text-lightText group-hover:scale-125 ease-in duration-[.2s]"
               :icon="['fas', 'right-from-bracket']"

@@ -1,4 +1,26 @@
-<script setup></script>
+<script setup>
+import { reactive } from 'vue'
+import { useStoreAuth } from '../stores/storeAuth.js'
+
+/*----- Store -----*/
+const storeAuth = useStoreAuth()
+
+const credentials = reactive({
+  email: '',
+  password: '',
+  error: ''
+})
+
+const onLogin = () => {
+  if (!credentials.email || !credentials.password) {
+    credentials.error = 'enter and email or password'
+  } else {
+    storeAuth.loginUser(credentials.email, credentials.password)
+  }
+  credentials.email = ''
+  credentials.password = ''
+}
+</script>
 
 <template>
   <section
@@ -13,7 +35,7 @@
       >
     </h1>
 
-    <form class="sm:w-[500px] sm:mx-auto md:w-[645px] md:text-[1.5rem]">
+    <form class="sm:w-[500px] sm:mx-auto md:w-[645px] md:text-[1.5rem]" @submit.prevent="onLogin">
       <!-- Email input -->
       <div class="flex flex-col mb-[1rem] md:mb-[1.25rem]">
         <label class="font-[500]">Email</label>
@@ -21,6 +43,7 @@
           <input
             class="w-[99%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
             type="email"
+            v-model="credentials.email"
           />
           <div
             class="w-[99%] h-[42px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] sm:w-[100%] md:h-[62px]"
@@ -34,6 +57,7 @@
           <input
             class="w-[99%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
             type="password"
+            v-model="credentials.password"
           />
           <div
             class="w-[99%] h-[42px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] sm:w-[100%] md:h-[62px]"
@@ -41,7 +65,10 @@
         </div>
       </div>
       <!-- Submit Button -->
-      <button class="flex flex-col mt-[2.5rem] mx-auto text-[1rem] relative group sm:mt-[3rem]">
+      <button
+        class="flex flex-col mt-[2.5rem] mx-auto text-[1rem] relative group sm:mt-[3rem]"
+        type="submit"
+      >
         <span
           class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] bg-darkBG border-baseColor z-[1] group-hover:text-baseColor group-hover:border-lightText ease-in duration-[.15s] delay-[.05s] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem]"
           >Login</span
