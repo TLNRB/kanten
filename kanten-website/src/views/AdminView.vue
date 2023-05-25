@@ -1,15 +1,20 @@
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import AddEvents from '../components/Admin/AddEvents.vue'
 import ExistingEvent from '../components/Admin/ExistingEvent.vue'
-import AddPictures from '../components/Admin/AddPictures.vue'
-import CurrentGallery from '../components/Admin/CurrentGallery.vue'
+import AddPicturesStudio from '../components/Admin/AddPicturesStudio.vue'
+import StudioGallery from '../components/Admin/StudioGallery.vue'
+import AddPicturesEvents from '../components/Admin/AddPicturesEvents.vue'
+import EventsGallery from '../components/Admin/EventsGallery.vue'
 
 import allEvents from '../data/eventsDB.js'
 import allGallery from '../data/studioGalleryDB.js'
+import allGenresGallery from '../data/genresGalleryDB.js'
 
 const events = ref(allEvents)
 const gallery = ref(allGallery)
+const genresGallery = ref(allGenresGallery)
+const filteredGallery = ref('')
 
 const options = reactive([
   { id: 0, name: 'Events', filter: 'event', active: true },
@@ -17,7 +22,7 @@ const options = reactive([
   { id: 2, name: 'Studio Gallery', filter: 'studio', active: false }
 ])
 
-const handleState = (id) => {
+const handleOptionState = (id) => {
   options.forEach((option) => {
     if (option.id == id) {
       option.active = true
@@ -26,6 +31,28 @@ const handleState = (id) => {
     }
   })
 }
+
+const genres = reactive([
+  { id: 0, name: 'Mana Club', filter: 'manaClub', active: true },
+  { id: 1, name: 'DUB', filter: 'dub', active: false },
+  { id: 2, name: 'Vertex', filter: 'vertex', active: false },
+  { id: 3, name: 'Deft', filter: 'deft', active: false }
+])
+
+const handleGenreState = (id) => {
+  genres.forEach((genre) => {
+    if (genre.id == id) {
+      genre.active = true
+      filteredGallery.value = genresGallery.value.filter((image) => image.genre == genre.filter)
+    } else {
+      genre.active = false
+    }
+  })
+}
+
+onMounted(() => {
+  handleGenreState(genres[0].id)
+})
 </script>
 
 <template>
@@ -47,7 +74,7 @@ const handleState = (id) => {
         v-for="option in options"
         :key="option.id"
         class="flex flex-col text-center text-[1.25rem] relative group"
-        @click="handleState(option.id)"
+        @click="handleOptionState(option.id)"
       >
         <span
           class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] bg-darkBG border-baseColor z-[1] group-hover:text-baseColor group-hover:border-lightText ease-in duration-[.15s] delay-[.05s] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem]"
@@ -69,33 +96,80 @@ const handleState = (id) => {
       >
         Existing Events
       </h2>
-      <div class="my-[3rem] md:mt-[4rem] flex justify-center gap-[4rem] flex-wrap">
+      <div
+        v-if="events.length"
+        class="my-[3rem] md:mt-[4rem] flex justify-center gap-[4rem] flex-wrap"
+      >
         <ExistingEvent v-for="event in events" :key="event.id" :event="event" />
+      </div>
+      <div
+        v-else
+        class="mt-[2rem] text-[1rem] flex justify-center text-normalText italic md:text-[1.25rem]"
+      >
+        No events found
       </div>
     </div>
     <!-- Genres -->
     <div v-else-if="options[1].active">
-      <AddPictures />
+      <AddPicturesEvents />
       <h2
         class="flex items-center justify-center mx-auto text-[2rem] font-bold mt-[8rem] uppercase xs:text-[2.5rem] md:text-[5rem] md:mt-[10rem]"
       >
         Genre Gallery
       </h2>
-      <div class="my-[3rem] md:mt-[4rem] flex justify-center gap-[4rem] flex-wrap">
-        <CurrentGallery v-for="image in gallery" :key="image.id" :image="image" />
+      <div
+        class="mt-[3rem] md:mt-[4rem] flex flex-wrap items-center justify-center gap-[1.25rem] md:gap-[2rem]"
+      >
+        <button
+          v-for="genre in genres"
+          :key="genre.id"
+          class="flex flex-col text-center text-[1.25rem] relative group"
+          @click="handleGenreState(genre.id)"
+        >
+          <span
+            class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] bg-darkBG border-baseColor z-[1] group-hover:text-baseColor group-hover:border-lightText ease-in duration-[.15s] delay-[.05s] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem]"
+            :class="[genre.active ? 'active' : '']"
+            >{{ genre.name }}</span
+          >
+          <span
+            class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem]"
+            >{{ genre.name }}</span
+          >
+        </button>
+      </div>
+      <div
+        v-if="filteredGallery.length"
+        class="my-[3rem] md:mt-[4rem] flex justify-center gap-[4rem] flex-wrap"
+      >
+        <EventsGallery v-for="image in filteredGallery" :key="image.id" :image="image" />
+      </div>
+      <div
+        v-else
+        class="mt-[3rem] text-[1rem] flex justify-center text-normalText italic md:text-[1.25rem]"
+      >
+        No images found
       </div>
     </div>
 
     <!-- Studio -->
     <div v-else-if="options[2].active">
-      <AddPictures />
+      <AddPicturesStudio />
       <h2
         class="flex items-center justify-center mx-auto text-[2rem] font-bold mt-[8rem] uppercase xs:text-[2.5rem] md:text-[5rem] md:mt-[10rem]"
       >
         Studio Gallery
       </h2>
-      <div class="my-[3rem] md:mt-[4rem] flex justify-center gap-[4rem] flex-wrap">
-        <CurrentGallery v-for="image in gallery" :key="image.id" :image="image" />
+      <div
+        v-if="gallery.length"
+        class="my-[3rem] md:mt-[4rem] flex justify-center gap-[4rem] flex-wrap"
+      >
+        <StudioGallery v-for="image in gallery" :key="image.id" :image="image" />
+      </div>
+      <div
+        v-else
+        class="mt-[2rem] text-[1rem] flex justify-center text-normalText italic md:text-[1.25rem]"
+      >
+        No images found
       </div>
     </div>
   </main>
