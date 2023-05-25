@@ -23,21 +23,7 @@ const event = computed( () => {
 </script>
 
 <template>
-  <div class="filters">
-    <!-- FILTER BUTTONS -->
-    <button
-      class="filter-button"
-      v-for="(category, index) in categories"
-      :key="index"
-      @click="filterArticle(category)"
-    >
-      {{ category }}
-    </button>
-    <!-- SHOW ALL BUTTON -->
-    <button class="filter-button show-all-button" @click="showAll(category)">
-      Show All
-    </button>
-  </div>
+  
   <main 
     v-if="event"
     class="mt-[5rem] pt-[2rem] overflow-x-hidden md:mt-[7.875rem]  lg:pt-[2rem] xl:mt-[8rem]"

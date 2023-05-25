@@ -6,7 +6,6 @@ import event4 from '../images/event4.png'
 
 
 const getSingleevent = () => {
-    
     const state = ref([
         {
             id: 1,
