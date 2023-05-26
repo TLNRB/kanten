@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useStoreAuth } from '../stores/storeAuth.js'
 import HomeView from '../views/HomeView.vue'
 import AllEventsView from '../views/AllEventsView.vue'
 import GenreView from '../views/GenreView.vue'
@@ -50,9 +51,25 @@ const router = createRouter({
     {
       path: '/admin',
       name: 'admin',
-      component: AdminView
+      component: AdminView,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
+})
+
+router.beforeEach(async (to, from) => {
+  const storeAuth = useStoreAuth()
+  if (!storeAuth.user.id && to.name === 'admin') {
+    return { name: 'home' }
+  }
+  if (storeAuth.user.id && to.name === 'login') {
+    return false
+  }
+  if (storeAuth.user.id && to.name === 'admin' && storeAuth.user.email !== 'admin@admin.com') {
+    return false
+  }
 })
 
 export default router

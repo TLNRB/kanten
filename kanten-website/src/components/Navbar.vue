@@ -101,12 +101,12 @@ onUnmounted(() => {
           class="flex-col items-start gap-[.5rem] py-[1rem] px-[1.5rem] text-[1.125rem]"
           :class="[storeAuth.user.id ? 'flex' : 'hidden']"
         >
-          <button class="flex gap-[.75rem] group text-normalText">
+          <RouterLink to="admin" class="flex gap-[.75rem] group text-normalText">
             <font-awesome-icon
               class="w-[1rem] my-auto text-lightText group-hover:scale-125 ease-in duration-[.2s]"
               :icon="['fas', 'user']"
             />Admin
-          </button>
+          </RouterLink>
           <button class="flex gap-[.75rem] items-center group text-normalText" @click="logOut">
             <font-awesome-icon
               class="w-[1rem] my-auto text-lightText group-hover:scale-125 ease-in duration-[.2s]"
