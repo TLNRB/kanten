@@ -16,7 +16,6 @@ const {state} = singleevent()
 
   <section 
      class="pb-[0.5rem] px-[1rem] md:px-[4rem] xxl:px-[12.5rem]">
-
        <div 
          class="flex flex-col flex-wrap	 sm:flex-row  justify-between">
           <div
