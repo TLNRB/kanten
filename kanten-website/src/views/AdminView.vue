@@ -6,13 +6,61 @@ import EditEvent from '../components/Admin/EditEvent.vue'
 import ExistingEvent from '../components/Admin/ExistingEvent.vue'
 import AddPicturesStudio from '../components/Admin/AddPicturesStudio.vue'
 import StudioGallery from '../components/Admin/StudioGallery.vue'
-import AddPicturesEvents from '../components/Admin/AddPicturesEvents.vue'
-import EventsGallery from '../components/Admin/EventsGallery.vue'
+import AddPicturesGenres from '../components/Admin/AddPicturesGenres.vue'
+import GenresGallery from '../components/Admin/GenresGallery.vue'
 
 /* ---------- Import Databases ---------- */
 import allEvents from '../data/eventsDB.js'
 import allGallery from '../data/studioGalleryDB.js'
 import allGenresGallery from '../data/genresGalleryDB.js'
+/* ---------- Import Store ---------- */
+import { useStoreEvents } from '../stores/storeEvents'
+
+/* ---------- Evnts store ---------- */
+const storeEvents = useStoreEvents()
+
+//Uploading events
+const newEvent = reactive({
+  title: '',
+  shortDesc: '',
+  longDesc: '',
+  date: '',
+  time: '',
+  price: '',
+  genre: '',
+  age: '',
+  performer: '',
+  address: '',
+  ticket: ''
+})
+const image = ref(null)
+
+const valueClear = () => {
+  newEvent.title = ''
+  newEvent.shortDesc = ''
+  newEvent.longDesc = ''
+  newEvent.date = ''
+  newEvent.time = ''
+  newEvent.price = ''
+  newEvent.genre = ''
+  newEvent.age = ''
+  newEvent.performer = ''
+  newEvent.address = ''
+  newEvent.ticket = ''
+  image.value = null
+}
+
+//Add Event
+const addNewEvent = () => {
+  storeEvents.addEvent(newEvent)
+  valueClear()
+}
+
+//Image upload
+const handleImageUpload = (file) => {
+  image.value = file
+  storeEvents.getImageUrl(file.value.name, file.value)
+}
 
 const events = ref(allEvents)
 const gallery = ref(allGallery)
@@ -102,14 +150,15 @@ const handleGenreState = (id) => {
 }
 
 /* ---------- Handle File Select ---------- */
-const selectedFile = ref('')
+/* const selectedFile = ref('')
 const handleFileChange = (event) => {
   const file = event.target.files[0]
   selectedFile.value = file
-}
+} */
 
 onMounted(() => {
   handleGenreState(genres[0].id)
+  storeEvents.getEvents()
 })
 </script>
 
@@ -197,7 +246,7 @@ onMounted(() => {
     <!-- Sections goes here -->
     <!-- Events -->
     <div v-if="options[0].active">
-      <AddEvents />
+      <AddEvents :newEvent="newEvent" @imageSelected="handleImageUpload" @addEvent="addNewEvent" />
       <h2
         class="flex items-center justify-center mx-auto text-[2rem] font-bold mt-[8rem] uppercase xs:text-[2.5rem] md:text-[5rem] md:mt-[10rem]"
       >
@@ -208,7 +257,7 @@ onMounted(() => {
         class="my-[3rem] md:mt-[4rem] flex justify-center gap-[4rem] flex-wrap"
       >
         <ExistingEvent
-          v-for="event in events"
+          v-for="event in storeEvents.events"
           :key="event.id"
           :event="event"
           @modal-delete-open="openDeleteModal"
@@ -224,7 +273,7 @@ onMounted(() => {
     </div>
     <!-- Genres -->
     <div v-else-if="options[1].active">
-      <AddPicturesEvents />
+      <AddPicturesGenres />
       <h2
         class="flex items-center justify-center mx-auto text-[2rem] font-bold mt-[8rem] uppercase xs:text-[2.5rem] md:text-[5rem] md:mt-[10rem]"
       >
@@ -254,7 +303,7 @@ onMounted(() => {
         v-if="filteredGallery.length"
         class="my-[3rem] md:mt-[4rem] flex justify-center gap-[4rem] flex-wrap"
       >
-        <EventsGallery v-for="image in filteredGallery" :key="image.id" :image="image" />
+        <GenresGallery v-for="image in filteredGallery" :key="image.id" :image="image" />
       </div>
       <div
         v-else

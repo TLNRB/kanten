@@ -6,7 +6,7 @@ import FooterSection from './components/FooterSection.vue'
 
 import { useStoreAuth } from './stores/storeAuth.js'
 
-/*----- Store -----*/
+/*----- Stores -----*/
 const storeAuth = useStoreAuth()
 
 onMounted(() => {

@@ -1,17 +1,26 @@
 <script setup>
 import { ref } from 'vue'
 
-const selectedFile = ref('')
-const handleFileChange = (event) => {
-  const file = event.target.files[0]
-  selectedFile.value = file
+const { newEvent } = defineProps(['newEvent'])
+
+const emit = defineEmits(['imageSelected', 'addEvent'])
+
+const image = ref('')
+const handleChange = (e) => {
+  const file = e.target.files[0]
+  image.value = file
+  emit('imageSelected', image)
+}
+
+const addEvent = () => {
+  emit('addEvent')
 }
 </script>
 
 <template>
   <!-- Events -->
   <div class="my-[3rem] md:mt-[4rem]">
-    <form class="sm:w-[500px] sm:mx-auto md:w-[645px] md:text-[1.5rem]">
+    <form class="sm:w-[500px] sm:mx-auto md:w-[645px] md:text-[1.5rem]" @submit.prevent="addEvent">
       <!-- Title input -->
       <div class="flex flex-col mb-[1rem] md:mb-[1.25rem]">
         <label class="font-[500]">Title</label>
@@ -19,6 +28,7 @@ const handleFileChange = (event) => {
           <input
             class="w-[99%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
             type="text"
+            v-model="newEvent.title"
           />
           <div
             class="w-[99%] h-[42px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] sm:w-[100%] md:h-[62px]"
@@ -36,6 +46,7 @@ const handleFileChange = (event) => {
             class="w-[99%] h-[100px] bg-darkBG border-[1px] py-[.5rem] px-[1rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
             name="message"
             placeholder="Short description.."
+            v-model="newEvent.shortDesc"
           />
           <div
             class="w-[99%] h-[100px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] sm:w-[100%]"
@@ -50,6 +61,7 @@ const handleFileChange = (event) => {
             class="w-[99%] h-[400px] bg-darkBG border-[1px] py-[.5rem] px-[1rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
             name="message"
             placeholder="Detailed description.."
+            v-model="newEvent.longDesc"
           />
           <div
             class="w-[99%] h-[400px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] sm:w-[100%]"
@@ -63,8 +75,8 @@ const handleFileChange = (event) => {
           <label
             class="absolute bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none w-[100%] md:py-[.75rem] md:px-[1.25rem]"
           >
-            <span>{{ selectedFile ? selectedFile.name : 'Choose File' }}</span>
-            <input type="file" @change="handleFileChange" />
+            <span>{{ image ? image.name : 'Choose File' }}</span>
+            <input type="file" @change="handleChange" />
           </label>
 
           <div
@@ -79,6 +91,7 @@ const handleFileChange = (event) => {
           <input
             class="w-[99%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none select-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
             type="date"
+            v-model="newEvent.date"
           />
           <div
             class="w-[99%] h-[44px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] sm:w-[100%] md:h-[64px]"
@@ -95,6 +108,7 @@ const handleFileChange = (event) => {
               class="w-[100%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none md:py-[.75rem] md:px-[1.25rem]"
               type="text"
               placeholder="e.g. 20:00"
+              v-model="newEvent.time"
             />
             <div
               class="w-[100%] h-[42px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] md:h-[62px]"
@@ -109,6 +123,7 @@ const handleFileChange = (event) => {
               class="w-[98%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
               type="text"
               placeholder="e.g. 50,-"
+              v-model="newEvent.price"
             />
             <div
               class="w-[98%] h-[42px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] sm:w-[100%] md:h-[62px]"
@@ -124,12 +139,14 @@ const handleFileChange = (event) => {
           <div class="relative">
             <select
               class="w-[100%] h-[42px] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none md:h-[62px] md:py-[.75rem] md:px-[1.25rem]"
+              v-model="newEvent.genre"
             >
-              <option value="other">Other</option>
+              <option disabled>Genres..</option>
               <option value="manaclub">Mana Club</option>
               <option value="deft">Deft</option>
               <option value="dub">DUB</option>
               <option value="vertex">Vertex</option>
+              <option value="other">Other</option>
             </select>
 
             <div
@@ -145,6 +162,7 @@ const handleFileChange = (event) => {
               class="w-[98%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
               type="text"
               placeholder="e.g. 16+"
+              v-model="newEvent.age"
             />
             <div
               class="w-[98%] h-[42px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] sm:w-[100%] md:h-[62px]"
@@ -159,6 +177,7 @@ const handleFileChange = (event) => {
           <input
             class="w-[99%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
             type="text"
+            v-model="newEvent.performer"
           />
           <div
             class="w-[99%] h-[42px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] sm:w-[100%] md:h-[62px]"
@@ -172,6 +191,7 @@ const handleFileChange = (event) => {
           <input
             class="w-[99%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
             type="text"
+            v-model="newEvent.address"
           />
           <div
             class="w-[99%] h-[42px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] sm:w-[100%] md:h-[62px]"
@@ -185,6 +205,7 @@ const handleFileChange = (event) => {
           <input
             class="w-[99%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
             type="url"
+            v-model="newEvent.ticket"
           />
           <div
             class="w-[99%] h-[42px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] sm:w-[100%] md:h-[62px]"
@@ -192,7 +213,10 @@ const handleFileChange = (event) => {
         </div>
       </div>
       <!-- Submit Button -->
-      <button class="flex flex-col mt-[2.5rem] mx-auto text-[1rem] relative group sm:mt-[3rem]">
+      <button
+        class="flex flex-col mt-[2.5rem] mx-auto text-[1rem] relative group sm:mt-[3rem]"
+        type="submit"
+      >
         <span
           class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] bg-darkBG border-baseColor z-[1] group-hover:text-baseColor group-hover:border-lightText ease-in duration-[.15s] delay-[.05s] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem]"
           >Add Event</span
