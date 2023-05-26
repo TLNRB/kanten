@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive, watch } from 'vue'
 import { useStoreAuth } from '../stores/storeAuth.js'
 
 /*----- Store -----*/
@@ -42,6 +42,7 @@ const onLogin = () => {
         <div class="relative">
           <input
             class="w-[99%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
+            :class="{ 'border-red-600': storeAuth.error }"
             type="email"
             v-model="credentials.email"
           />
@@ -56,6 +57,7 @@ const onLogin = () => {
         <div class="relative">
           <input
             class="w-[99%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
+            :class="{ 'border-red-600': storeAuth.error }"
             type="password"
             v-model="credentials.password"
           />
@@ -64,6 +66,12 @@ const onLogin = () => {
           ></div>
         </div>
       </div>
+      <p
+        class="flex justify-center items-center"
+        :class="{ 'mt-[2rem] md:mt-[1rem]': storeAuth.error }"
+      >
+        {{ storeAuth.error }}
+      </p>
       <!-- Submit Button -->
       <button
         class="flex flex-col mt-[2.5rem] mx-auto text-[1rem] relative group sm:mt-[3rem]"

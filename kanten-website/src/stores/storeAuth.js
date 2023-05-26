@@ -4,7 +4,8 @@ import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebas
 
 export const useStoreAuth = defineStore('storeAuth', {
   state: () => ({
-    user: {}
+    user: {},
+    error: ''
   }),
 
   actions: {
@@ -23,16 +24,21 @@ export const useStoreAuth = defineStore('storeAuth', {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredentials) => {
           const user = userCredentials.user
-          console.log('successfully logged in', user)
+          /* console.log('successfully logged in', user) */
+          this.error = ''
         })
         .catch((error) => {
+          this.error = error.message
           console.log('error message: ', error.message)
+          setInterval(() => {
+            this.error = ''
+          }, 5000)
         })
     },
     logOutUser() {
       signOut(auth)
         .then(() => {
-          console.log('user signed out')
+          /* console.log('user signed out') */
           this.router.replace('/')
         })
         .catch((error) => {
