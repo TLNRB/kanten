@@ -34,6 +34,7 @@ function handleResize() {
 /*---------- Add resize event listener when component is mounted ---------- */
 onMounted(() => {
   window.addEventListener('resize', handleResize)
+  storeStudio.getStudio()
 })
 /*---------- Remove resize event listener when component is mounted ---------- */
 onUnmounted(() => {
