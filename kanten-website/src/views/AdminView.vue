@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, onMounted, watch } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 /* ---------- Import Components ---------- */
 import AddEvents from '../components/Admin/AddEvents.vue'
 import ExistingEvent from '../components/Admin/ExistingEvent.vue'

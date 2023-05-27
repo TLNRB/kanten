@@ -31,6 +31,9 @@ const updateFooter = () => {
     case 'admin':
       footerData.display = 'none'
       break
+    case 'notfound':
+      footerData.display = 'none'
+      break
     default:
       footerData.backgroundColor = '#1ECECE'
       footerData.textColor = '#242424'
