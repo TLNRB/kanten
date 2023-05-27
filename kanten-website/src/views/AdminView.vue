@@ -6,6 +6,7 @@ import ExistingEvent from '../components/Admin/ExistingEvent.vue'
 import EditEvent from '../components/Admin/EditEvent.vue'
 import AddPicturesStudio from '../components/Admin/AddPicturesStudio.vue'
 import StudioGallery from '../components/Admin/StudioGallery.vue'
+import EditStudioGallery from '../components/Admin/EditStudioGallery.vue'
 import AddPicturesGenres from '../components/Admin/AddPicturesGenres.vue'
 import GenresGallery from '../components/Admin/GenresGallery.vue'
 import EditGenreGallery from '../components/Admin/EditGenreGallery.vue'
@@ -13,10 +14,12 @@ import EditGenreGallery from '../components/Admin/EditGenreGallery.vue'
 /* ---------- Import Stores ---------- */
 import { useStoreEvents } from '../stores/storeEvents'
 import { useStoreGenres } from '../stores/storeGenres'
+import { useStoreStudio } from '../stores/storeStudio'
 
 /* ---------- Stores ---------- */
 const storeEvents = useStoreEvents()
 const storeGenres = useStoreGenres()
+const storeStudio = useStoreStudio()
 
 /*------------------------- Events -------------------------*/
 //V-model events info storing
@@ -155,6 +158,115 @@ const confirmDelete = () => {
   storeEvents.deleteEvent(deleteID.value)
   showDeleteModal.value = false
   closeDeleteModal()
+}
+
+/*------------------------- Studio -------------------------*/
+//V-model studio info storing
+const newStudio = reactive({
+  title: '',
+
+  coverImg: '',
+  coverImgName: ''
+})
+
+//Temporary values studio
+const imageStudio = ref()
+const tempIdStudio = ref()
+const deleteIDStudio = ref()
+
+//Values clear studio
+const valueClearStudio = () => {
+  newStudio.title = ''
+
+  newStudio.coverImg = ''
+  newStudio.coverImgName = ''
+  imageStudio.value = null
+}
+
+//Add Image to Studio Gallery
+const addNewStudio = () => {
+  storeStudio.addStudio(newStudio)
+  valueClearStudio()
+}
+
+//Image upload studio
+const handleImageUploadStudio = (file) => {
+  imageStudio.value = file
+  storeStudio.getImageUrl(file.value.name, file.value)
+}
+
+//Edit Studio Gallery
+const editStudio = (id) => {
+  for (let i = 0; i < storeStudio.studios.length; i++) {
+    if (storeStudio.studios[i].id === id) {
+      newStudio.title = storeStudio.studios[i].title
+
+      newStudio.coverImg = storeStudio.studios[i].coverImg
+      newStudio.coverImgName = storeStudio.studios[i].coverImgName
+      tempIdStudio.value = storeStudio.studios[i].id
+    }
+  }
+}
+
+//Save Studio Gallery editing
+const saveEditStudio = async () => {
+  storeStudio.updateImage(tempIdStudio.value)
+  storeStudio.updateStudio(newStudio, tempIdStudio.value)
+  valueClearStudio()
+  tempIdStudio.value = ''
+}
+
+//Close Studio Gallery editing
+const closeEditStudio = () => {
+  storeStudio.closeEditing(tempIdStudio.value)
+  valueClearStudio()
+  tempIdStudio.value = ''
+}
+
+//Modal Studio Gallery
+const showDeleteModalStudio = ref(false)
+const showEditModalStudio = ref(false)
+
+//Open Edit Modal Studio Gallery
+const openEditModalStudio = (id) => {
+  editStudio(id)
+  showEditModalStudio.value = true
+  disableScroll()
+}
+
+//Close Edit Modal Studio Gallery
+const closeEditModalStudio = () => {
+  closeEditStudio()
+  showEditModalStudio.value = false
+  enableScroll()
+}
+
+//Confirm Edit Modal Studio Gallery
+const confirmEditStudio = () => {
+  saveEditStudio()
+  showEditModalStudio.value = false
+  enableScroll()
+}
+
+//Open Delete Modal Studio Gallery
+const openDeleteModalStudio = (id) => {
+  deleteIDStudio.value = id
+  showDeleteModalStudio.value = true
+  disableScroll()
+}
+
+//Close Delete Modal Studio Gallery
+const closeDeleteModalStudio = () => {
+  showDeleteModalStudio.value = false
+  enableScroll()
+  deleteIDStudio.value = ''
+}
+
+//Confirm Delete Modal Studio Gallery
+const confirmDeleteStudio = () => {
+  storeStudio.deleteStudio(deleteIDStudio.value)
+  showDeleteModalStudio.value = false
+  closeDeleteModalStudio()
 }
 
 /*------------------------- Genres -------------------------*/
@@ -320,6 +432,7 @@ const handleGenreState = (id) => {
 onMounted(() => {
   storeGenres.getGenres()
   storeEvents.getEvents()
+  storeStudio.getStudio()
 })
 </script>
 
@@ -433,6 +546,62 @@ onMounted(() => {
       </div>
     </div>
   </div>
+
+  <!-------------- Studio --------------->
+  <!-- Edit Modal Studio Gallery -->
+  <div
+    v-show="showEditModalStudio"
+    class="modal h-[100%] w-[100%] z-[15] fixed top-0 left-0 right-0 overflow-auto"
+  >
+    <EditStudioGallery
+      @saved="confirmEditStudio"
+      @canceled="closeEditModalStudio"
+      @imageSelected="handleImageUploadStudio"
+      :newStudio="newStudio"
+      :storeStudio="storeStudio"
+    />
+  </div>
+  <!-- Delete Modal Studio Gallery -->
+  <div
+    v-show="showDeleteModalStudio"
+    @click.self="closeDeleteModalStudio"
+    class="modal h-[100%] w-[100%] z-[15] fixed top-0 left-0 right-0 bottom-0"
+  >
+    <div
+      class="flex flex-col justify-center items-center py-[2rem] px-[1rem] absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] mx-auto bg-darkBG border-[1px] border-baseColor w-[250px] sm:w-[350px] sm:py-[3rem] sm:gap-[.5rem]"
+    >
+      <p class="font-[500] sm:text-[1.25rem]">Are you sure you want to delete?</p>
+      <div class="flex gap-[1rem] mx-auto text-[1.25rem] px-[.5rem] sm:gap-[1.5rem]">
+        <button
+          class="flex flex-col mt-[1.5rem] w-fit mx-auto text-[1rem] relative group"
+          @click="confirmDeleteStudio"
+        >
+          <span
+            class="font-[500] py-[.25rem] px-[1rem] border-[1px] bg-green-700 border-green-700 z-[1] group-hover:border-lightText ease-in duration-[.15s] delay-[.05s]"
+            >Yes</span
+          >
+          <span
+            class="font-[500] py-[.25rem] px-[1rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s]"
+            >Yes</span
+          >
+        </button>
+        <button
+          class="flex flex-col mt-[1.5rem] w-fit mx-auto text-[1rem] relative group"
+          @click="closeDeleteModalStudio"
+        >
+          <span
+            class="font-[500] py-[.25rem] px-[1rem] border-[1px] bg-red-700 border-red-700 z-[1] group-hover:border-lightText ease-in duration-[.15s] delay-[.05s]"
+            >No</span
+          >
+          <span
+            class="font-[500] py-[.25rem] px-[1rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s]"
+            >No</span
+          >
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!------- Content ------->
   <main
     class="bg-[url('../images/gridGray.svg')] overflow-x-hidden flex flex-col mt-[6.875rem] py-[4rem] px-[1rem] md:px-[4rem] md:mt-[7.875rem] xl:mt-[8.375rem] xxl:px-[12.5rem]"
@@ -566,17 +735,28 @@ onMounted(() => {
 
     <!-- Studio -->
     <div v-else-if="options[2].active">
-      <AddPicturesStudio />
+      <AddPicturesStudio
+        :newStudio="newStudio"
+        :storeStudio="storeStudio"
+        @imageSelected="handleImageUploadStudio"
+        @addStudio="addNewStudio"
+      />
       <h2
         class="flex items-center justify-center mx-auto text-[2rem] font-bold mt-[8rem] uppercase xs:text-[2.5rem] md:text-[5rem] md:mt-[10rem]"
       >
         Studio Gallery
       </h2>
       <div
-        v-if="gallery.length"
+        v-if="storeStudio.studios.length"
         class="my-[3rem] md:mt-[4rem] flex justify-center gap-[4rem] flex-wrap"
       >
-        <StudioGallery v-for="image in gallery" :key="image.id" :image="image" />
+        <StudioGallery
+          v-for="studio in storeStudio.studios"
+          :key="studio.id"
+          :studio="studio"
+          @modal-delete-open="openDeleteModalStudio"
+          @modal-edit-open="openEditModalStudio"
+        />
       </div>
       <div
         v-else

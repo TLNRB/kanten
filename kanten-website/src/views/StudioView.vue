@@ -5,10 +5,11 @@ import sculpture from '../images/sculpture.svg'
 import wavyLinesLong from '../images/wavyLinesThreeLong.svg'
 import wavyLines from '../images/wavyLinesThree.svg'
 
-/* ---------- Importing Gallery Images ---------- */
-import allGallery from '../data/studioGalleryDB.js'
+/* ---------- Import Stores ---------- */
+import { useStoreStudio } from '../stores/storeStudio'
 
-const gallery = ref(allGallery)
+/* ---------- Stores ---------- */
+const storeStudio = useStoreStudio()
 
 /* ---------- Assigning a column number between (1-3) to each image ---------- */
 /* const assignNumber = () => {
@@ -20,7 +21,7 @@ const gallery = ref(allGallery)
 
 /* ---------- Filtering images based on column value ---------- */
 const filteredImages = (colNum) => {
-  return gallery.value.filter((image) => image.cols == colNum)
+  return storeStudio.studios.filter((_, index) => index % 3 === colNum - 1)
 }
 
 const screenWidth = ref(window.innerWidth)
@@ -33,7 +34,6 @@ function handleResize() {
 /*---------- Add resize event listener when component is mounted ---------- */
 onMounted(() => {
   window.addEventListener('resize', handleResize)
-  /* assignNumber() */
 })
 /*---------- Remove resize event listener when component is mounted ---------- */
 onUnmounted(() => {
@@ -120,14 +120,14 @@ onUnmounted(() => {
           of Studio
         </p>
       </div>
-      <div v-if="gallery.length > 0" class="flex flex-col justify-between md:flex-row">
+      <div v-if="storeStudio.studios.length > 0" class="flex flex-col justify-between md:flex-row">
         <div class="flex flex-col w-[100%] md:w-[32.5%]">
           <img
             v-for="image in filteredImages(1)"
             :key="image.id"
             class="w-[100%] pb-[.625rem] sm:pb-[1rem]"
-            :src="image.src"
-            :alt="image.desc"
+            :src="image.coverImg"
+            :alt="image.title"
           />
         </div>
         <div class="flex flex-col w-[100%] md:w-[32.5%]">
@@ -135,8 +135,8 @@ onUnmounted(() => {
             v-for="image in filteredImages(2)"
             :key="image.id"
             class="w-[100%] pb-[.625rem] sm:pb-[1rem]"
-            :src="image.src"
-            :alt="image.desc"
+            :src="image.coverImg"
+            :alt="image.title"
           />
         </div>
         <div class="flex flex-col w-[100%] md:w-[32.5%]">
@@ -144,8 +144,8 @@ onUnmounted(() => {
             v-for="image in filteredImages(3)"
             :key="image.id"
             class="w-[100%] pb-[.625rem] sm:pb-[1rem]"
-            :src="image.src"
-            :alt="image.desc"
+            :src="image.coverImg"
+            :alt="image.title"
           />
         </div>
       </div>

@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 
 /* Props */
-const { newGenre, storeGenres } = defineProps(['newGenre', 'storeGenres'])
+const { newStudio, storeStudio } = defineProps(['newStudio', 'storeStudio'])
 
 /* Emits */
 const emit = defineEmits(['saved', 'canceled', 'imageSelected'])
@@ -17,10 +17,9 @@ const handleChange = (e) => {
 
 const saveChanges = () => {
   if (
-    !newGenre.title ||
-    !newGenre.genre ||
-    (!storeGenres.coverImgName && storeGenres.coverImg) ||
-    (storeGenres.coverImgName && !storeGenres.coverImg)
+    !newStudio.title ||
+    (!storeStudio.coverImgName && storeStudio.coverImg) ||
+    (storeStudio.coverImgName && !storeStudio.coverImg)
   ) {
     error.value = 'Fill in every information or wait for image upload (5s)'
   } else {
@@ -32,8 +31,8 @@ const saveChanges = () => {
 
 const cancelChanges = () => {
   if (
-    (storeGenres.coverImgName && storeGenres.coverImg) ||
-    (!storeGenres.coverImgName && !storeGenres.coverImg)
+    (storeStudio.coverImgName && storeStudio.coverImg) ||
+    (!storeStudio.coverImgName && !storeStudio.coverImg)
   ) {
     emit('canceled')
     error.value = ''
@@ -51,32 +50,12 @@ const cancelChanges = () => {
       <label class="font-[500]">Image</label>
       <div class="relative">
         <label class="absolute bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none w-[100%]">
-          <span>{{ image ? image.name : newGenre.coverImgName }}</span>
+          <span>{{ image ? image.name : newStudio.coverImgName }}</span>
           <input type="file" @change="handleChange" />
         </label>
 
         <div
           class="w-[99%] h-[42px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] sm:w-[100%]"
-        ></div>
-      </div>
-    </div>
-    <!-- Genre input -->
-    <div class="flex flex-col w-[100%] mb-[1rem]">
-      <label class="font-[500]">Genre</label>
-      <div class="relative">
-        <select
-          class="w-[100%] h-[42px] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none"
-          v-model="newGenre.genre"
-        >
-          <option value="manaClub">Mana Club</option>
-          <option value="vertex">Vertex</option>
-          <option value="deft">Deft</option>
-          <option value="dub">DUB</option>
-          <option value="other">Other</option>
-        </select>
-
-        <div
-          class="w-[100%] h-[42px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1]"
         ></div>
       </div>
     </div>
@@ -87,7 +66,7 @@ const cancelChanges = () => {
         <input
           class="w-[99%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%]"
           type="text"
-          v-model="newGenre.title"
+          v-model="newStudio.title"
         />
         <div
           class="w-[99%] h-[42px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] sm:w-[100%]"
