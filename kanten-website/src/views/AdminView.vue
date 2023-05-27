@@ -2,23 +2,24 @@
 import { ref, reactive, onMounted } from 'vue'
 /* ---------- Import Components ---------- */
 import AddEvents from '../components/Admin/AddEvents.vue'
-import EditEvent from '../components/Admin/EditEvent.vue'
 import ExistingEvent from '../components/Admin/ExistingEvent.vue'
+import EditEvent from '../components/Admin/EditEvent.vue'
 import AddPicturesStudio from '../components/Admin/AddPicturesStudio.vue'
 import StudioGallery from '../components/Admin/StudioGallery.vue'
 import AddPicturesGenres from '../components/Admin/AddPicturesGenres.vue'
 import GenresGallery from '../components/Admin/GenresGallery.vue'
+import EditGenreGallery from '../components/Admin/EditGenreGallery.vue'
 
-/* ---------- Import Databases ---------- */
-import allGallery from '../data/studioGalleryDB.js'
-import allGenresGallery from '../data/genresGalleryDB.js'
-/* ---------- Import Store ---------- */
+/* ---------- Import Stores ---------- */
 import { useStoreEvents } from '../stores/storeEvents'
+import { useStoreGenres } from '../stores/storeGenres'
 
-/* ---------- Evnts store ---------- */
+/* ---------- Stores ---------- */
 const storeEvents = useStoreEvents()
+const storeGenres = useStoreGenres()
 
-//Uploading events
+/*------------------------- Events -------------------------*/
+//V-model events info storing
 const newEvent = reactive({
   title: '',
   shortDesc: '',
@@ -35,10 +36,13 @@ const newEvent = reactive({
   coverImg: '',
   coverImgName: ''
 })
+
+//Temporary values events
 const image = ref(null)
 const tempId = ref()
 const deleteID = ref()
 
+//Clear values events
 const valueClear = () => {
   newEvent.title = ''
   newEvent.shortDesc = ''
@@ -57,19 +61,19 @@ const valueClear = () => {
   image.value = null
 }
 
-//Add Event
+//Add event
 const addNewEvent = () => {
   storeEvents.addEvent(newEvent)
   valueClear()
 }
 
-//Image upload
+//Image upload events
 const handleImageUpload = (file) => {
   image.value = file
   storeEvents.getImageUrl(file.value.name, file.value)
 }
 
-//Edit Event
+//Edit event
 const editEvent = (id) => {
   for (let i = 0; i < storeEvents.events.length; i++) {
     if (storeEvents.events[i].id === id) {
@@ -107,60 +111,170 @@ const closeEditEvent = () => {
   tempId.value = ''
 }
 
-const gallery = ref(allGallery)
-const genresGallery = ref(allGenresGallery)
-const filteredGallery = ref('')
-
-/* ---------- Modal ---------- */
+//Modal events
 const showDeleteModal = ref(false)
 const showEditModal = ref(false)
 
-/* Open Edit Modal */
+//Open Edit Modal events
 const openEditModal = (id) => {
   editEvent(id)
   showEditModal.value = true
   disableScroll()
 }
 
-/* Close Edit Modal */
+//Close Edit Modal events
 const closeEditModal = () => {
   closeEditEvent()
   showEditModal.value = false
   enableScroll()
 }
 
-/* Confirm Edit Modal */
+//Confirm Edit Modal events
 const confirmEdit = () => {
   saveEditEvent()
   showEditModal.value = false
   enableScroll()
 }
 
-/* Open Delete Modal */
+//Open Delete Modal events
 const openDeleteModal = (id) => {
   deleteID.value = id
   showDeleteModal.value = true
   disableScroll()
 }
 
-/* Close Delete Modal */
+//Close Delete Modal events
 const closeDeleteModal = () => {
   showDeleteModal.value = false
   enableScroll()
   deleteID.value = ''
 }
 
-/* Confirm Delete Modal */
+//Confirm Delete Modal events
 const confirmDelete = () => {
   storeEvents.deleteEvent(deleteID.value)
   showDeleteModal.value = false
   closeDeleteModal()
 }
 
+/*------------------------- Genres -------------------------*/
+//V-model genres info storing
+const newGenre = reactive({
+  title: '',
+  genre: '',
+
+  coverImg: '',
+  coverImgName: ''
+})
+
+//Temporary values genres
+const imageGenre = ref()
+const tempIdGenre = ref()
+const deleteIDGenre = ref()
+
+//Values clear genres
+const valueClearGenre = () => {
+  newGenre.title = ''
+  newGenre.genre = ''
+
+  newGenre.coverImg = ''
+  newGenre.coverImgName = ''
+  imageGenre.value = null
+}
+
+//Add Genre
+const addNewGenre = () => {
+  storeGenres.addGenre(newGenre)
+  valueClearGenre()
+}
+
+//Image upload genres
+const handleImageUploadGenre = (file) => {
+  imageGenre.value = file
+  storeGenres.getImageUrl(file.value.name, file.value)
+}
+
+//Edit Genre
+const editGenre = (id) => {
+  for (let i = 0; i < storeGenres.genres.length; i++) {
+    if (storeGenres.genres[i].id === id) {
+      newGenre.title = storeGenres.genres[i].title
+      newGenre.genre = storeGenres.genres[i].genre
+
+      newGenre.coverImg = storeGenres.genres[i].coverImg
+      newGenre.coverImgName = storeGenres.genres[i].coverImgName
+      tempIdGenre.value = storeGenres.genres[i].id
+    }
+  }
+}
+
+//Save genre editing
+const saveEditGenre = async () => {
+  storeGenres.updateImage(tempIdGenre.value)
+  storeGenres.updateGenres(newGenre, tempIdGenre.value)
+  valueClearGenre()
+  tempIdGenre.value = ''
+}
+
+//Close genre editing
+const closeEditGenre = () => {
+  storeGenres.closeEditing(tempIdGenre.value)
+  valueClearGenre()
+  tempIdGenre.value = ''
+}
+
+//Modal Genre
+const showDeleteModalGenre = ref(false)
+const showEditModalGenre = ref(false)
+
+//Open Edit Modal Genre
+const openEditModalGenre = (id) => {
+  editGenre(id)
+  showEditModalGenre.value = true
+  disableScroll()
+}
+
+//Close Edit Modal Genre
+const closeEditModalGenre = () => {
+  closeEditGenre()
+  showEditModalGenre.value = false
+  enableScroll()
+}
+
+//Confirm Edit Modal Genre
+const confirmEditGenre = () => {
+  saveEditGenre()
+  showEditModalGenre.value = false
+  enableScroll()
+}
+
+//Open Delete Modal Genre
+const openDeleteModalGenre = (id) => {
+  deleteIDGenre.value = id
+  showDeleteModalGenre.value = true
+  disableScroll()
+}
+
+//Close Delete Modal Genre
+const closeDeleteModalGenre = () => {
+  showDeleteModalGenre.value = false
+  enableScroll()
+  deleteIDGenre.value = ''
+}
+
+//Confirm Delete Modal Genre
+const confirmDeleteGenre = () => {
+  storeGenres.deleteGenre(deleteIDGenre.value)
+  showDeleteModalGenre.value = false
+  closeDeleteModalGenre()
+}
+
+/* ---------- Disable Scroll ---------- */
 const disableScroll = () => {
   document.body.classList.add('overflow-hidden')
 }
 
+/* ---------- Enable Scroll ---------- */
 const enableScroll = () => {
   document.body.classList.remove('overflow-hidden')
 }
@@ -190,32 +304,29 @@ const genres = reactive([
   { id: 3, name: 'Deft', filter: 'deft', active: false }
 ])
 
+let filteredGenreGallery = ref()
+
 const handleGenreState = (id) => {
   genres.forEach((genre) => {
     if (genre.id == id) {
       genre.active = true
-      filteredGallery.value = genresGallery.value.filter((image) => image.genre == genre.filter)
+      filteredGenreGallery.value = storeGenres.genres.filter((image) => image.genre == genre.filter)
     } else {
       genre.active = false
     }
   })
 }
 
-/* ---------- Handle File Select ---------- */
-/* const selectedFile = ref('')
-const handleFileChange = (event) => {
-  const file = event.target.files[0]
-  selectedFile.value = file
-} */
-
 onMounted(() => {
   handleGenreState(genres[0].id)
   storeEvents.getEvents()
+  storeGenres.getGenres()
 })
 </script>
 
 <template>
-  <!------- Edit Modal ------->
+  <!-------------- Event --------------->
+  <!-- Edit Modal Event -->
   <div
     v-show="showEditModal"
     class="modal h-[100%] w-[100%] z-[15] fixed top-0 left-0 right-0 overflow-auto"
@@ -224,12 +335,11 @@ onMounted(() => {
       @saved="confirmEdit"
       @canceled="closeEditModal"
       @imageSelected="handleImageUpload"
-      :editID="editID"
       :newEvent="newEvent"
       :storeEvents="storeEvents"
     />
   </div>
-  <!------- Delete Modal ------->
+  <!-- Delete Modal Event -->
   <div
     v-show="showDeleteModal"
     @click.self="closeDeleteModal"
@@ -256,6 +366,61 @@ onMounted(() => {
         <button
           class="flex flex-col mt-[1.5rem] w-fit mx-auto text-[1rem] relative group"
           @click="closeDeleteModal"
+        >
+          <span
+            class="font-[500] py-[.25rem] px-[1rem] border-[1px] bg-red-700 border-red-700 z-[1] group-hover:border-lightText ease-in duration-[.15s] delay-[.05s]"
+            >No</span
+          >
+          <span
+            class="font-[500] py-[.25rem] px-[1rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s]"
+            >No</span
+          >
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-------------- Genre --------------->
+  <!-- Edit Modal Genre -->
+  <div
+    v-show="showEditModalGenre"
+    class="modal h-[100%] w-[100%] z-[15] fixed top-0 left-0 right-0 overflow-auto"
+  >
+    <EditGenreGallery
+      @saved="confirmEditGenre"
+      @canceled="closeEditModalGenre"
+      @imageSelected="handleImageUploadGenre"
+      :newGenre="newGenre"
+      :storeGenres="storeGenres"
+    />
+  </div>
+  <!-- Delete Modal Genre -->
+  <div
+    v-show="showDeleteModalGenre"
+    @click.self="closeDeleteModalGenre"
+    class="modal h-[100%] w-[100%] z-[15] fixed top-0 left-0 right-0 bottom-0"
+  >
+    <div
+      class="flex flex-col justify-center items-center py-[2rem] px-[1rem] absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] mx-auto bg-darkBG border-[1px] border-baseColor w-[250px] sm:w-[350px] sm:py-[3rem] sm:gap-[.5rem]"
+    >
+      <p class="font-[500] sm:text-[1.25rem]">Are you sure you want to delete?</p>
+      <div class="flex gap-[1rem] mx-auto text-[1.25rem] px-[.5rem] sm:gap-[1.5rem]">
+        <button
+          class="flex flex-col mt-[1.5rem] w-fit mx-auto text-[1rem] relative group"
+          @click="confirmDeleteGenre"
+        >
+          <span
+            class="font-[500] py-[.25rem] px-[1rem] border-[1px] bg-green-700 border-green-700 z-[1] group-hover:border-lightText ease-in duration-[.15s] delay-[.05s]"
+            >Yes</span
+          >
+          <span
+            class="font-[500] py-[.25rem] px-[1rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s]"
+            >Yes</span
+          >
+        </button>
+        <button
+          class="flex flex-col mt-[1.5rem] w-fit mx-auto text-[1rem] relative group"
+          @click="closeDeleteModalGenre"
         >
           <span
             class="font-[500] py-[.25rem] px-[1rem] border-[1px] bg-red-700 border-red-700 z-[1] group-hover:border-lightText ease-in duration-[.15s] delay-[.05s]"
@@ -337,7 +502,12 @@ onMounted(() => {
     </div>
     <!-- Genres -->
     <div v-else-if="options[1].active">
-      <AddPicturesGenres />
+      <AddPicturesGenres
+        :newGenre="newGenre"
+        :storeGenres="storeGenres"
+        @imageSelected="handleImageUploadGenre"
+        @addGenre="addNewGenre"
+      />
       <h2
         class="flex items-center justify-center mx-auto text-[2rem] font-bold mt-[8rem] uppercase xs:text-[2.5rem] md:text-[5rem] md:mt-[10rem]"
       >
@@ -364,10 +534,16 @@ onMounted(() => {
         </button>
       </div>
       <div
-        v-if="filteredGallery.length"
+        v-if="filteredGenreGallery.length"
         class="my-[3rem] md:mt-[4rem] flex justify-center gap-[4rem] flex-wrap"
       >
-        <GenresGallery v-for="image in filteredGallery" :key="image.id" :image="image" />
+        <GenresGallery
+          v-for="genre in filteredGenreGallery"
+          :key="genre.id"
+          :genre="genre"
+          @modal-delete-open="openDeleteModalGenre"
+          @modal-edit-open="openEditModalGenre"
+        />
       </div>
       <div
         v-else

@@ -163,7 +163,7 @@ const addEvent = () => {
               v-model="newEvent.genre"
             >
               <option disabled>Genres..</option>
-              <option value="manaclub">Mana Club</option>
+              <option value="manaClub">Mana Club</option>
               <option value="deft">Deft</option>
               <option value="dub">DUB</option>
               <option value="vertex">Vertex</option>

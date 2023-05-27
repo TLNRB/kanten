@@ -171,7 +171,7 @@ const cancelChanges = () => {
             v-model="newEvent.genre"
           >
             <option value="other">Other</option>
-            <option value="manaclub">Mana Club</option>
+            <option value="manaClub">Mana Club</option>
             <option value="deft">Deft</option>
             <option value="dub">DUB</option>
             <option value="vertex">Vertex</option>
