@@ -2,11 +2,11 @@
 const { event } = defineProps(['event'])
 const emit = defineEmits(['modal-delete-open', 'modal-edit-open'])
 const deleteModal = () => {
-  emit('modal-delete-open')
+  emit('modal-delete-open', event.id)
 }
 
 const editModal = () => {
-  emit('modal-edit-open')
+  emit('modal-edit-open', event.id)
 }
 </script>
 
@@ -19,7 +19,7 @@ const editModal = () => {
       <!-- Cover Image -->
       <img :src="event.coverImg" alt="" />
       <!-- Title -->
-      <div class="flex flex-col mr-auto text-[1.25rem] px-[.75rem]">
+      <div class="flex flex-col mr-auto text-[1.25rem] px-[.5rem]">
         <p class="font-[500] text-baseColor">Title:</p>
         <p class="font-[500]">{{ event.title }}</p>
       </div>
@@ -55,6 +55,7 @@ const editModal = () => {
       </div>
       <!-- Age -->
       <div class="flex flex-col mr-auto text-[1.25rem] px-[.5rem]">
+        <p class="font-[500] text-baseColor">Age:</p>
         <p class="font-[500]">{{ event.age }}</p>
       </div>
       <!-- Performer -->

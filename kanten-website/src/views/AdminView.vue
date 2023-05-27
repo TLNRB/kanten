@@ -31,9 +31,14 @@ const newEvent = reactive({
   age: '',
   performer: '',
   address: '',
-  ticket: ''
+  ticket: '',
+
+  coverImg: '',
+  coverImgName: ''
 })
 const image = ref(null)
+const tempId = ref()
+const deleteID = ref()
 
 const valueClear = () => {
   newEvent.title = ''
@@ -47,6 +52,9 @@ const valueClear = () => {
   newEvent.performer = ''
   newEvent.address = ''
   newEvent.ticket = ''
+
+  newEvent.coverImg = ''
+  newEvent.coverImgName = ''
   image.value = null
 }
 
@@ -62,6 +70,44 @@ const handleImageUpload = (file) => {
   storeEvents.getImageUrl(file.value.name, file.value)
 }
 
+//Edit Event
+const editEvent = (id) => {
+  for (let i = 0; i < storeEvents.events.length; i++) {
+    if (storeEvents.events[i].id === id) {
+      newEvent.title = storeEvents.events[i].title
+      newEvent.shortDesc = storeEvents.events[i].shortDesc
+      newEvent.longDesc = storeEvents.events[i].longDesc
+      newEvent.date = storeEvents.events[i].date
+      newEvent.time = storeEvents.events[i].time
+      newEvent.price = storeEvents.events[i].price
+      newEvent.genre = storeEvents.events[i].genre
+      newEvent.age = storeEvents.events[i].age
+      newEvent.performer = storeEvents.events[i].performer
+      newEvent.address = storeEvents.events[i].address
+      newEvent.ticket = storeEvents.events[i].ticket
+
+      newEvent.coverImg = storeEvents.events[i].coverImg
+      newEvent.coverImgName = storeEvents.events[i].coverImgName
+      tempId.value = storeEvents.events[i].id
+    }
+  }
+}
+
+//Save event editing
+const saveEditEvent = async () => {
+  storeEvents.updateImage(tempId.value)
+  storeEvents.updateEvents(newEvent, tempId.value)
+  valueClear()
+  tempId.value = ''
+}
+
+//Close event editing
+const closeEditEvent = () => {
+  storeEvents.closeEditing(tempId.value)
+  valueClear()
+  tempId.value = ''
+}
+
 const events = ref(allEvents)
 const gallery = ref(allGallery)
 const genresGallery = ref(allGenresGallery)
@@ -71,36 +117,44 @@ const filteredGallery = ref('')
 const showDeleteModal = ref(false)
 const showEditModal = ref(false)
 
-/* Edit Modal */
-const openEditModal = () => {
+/* Open Edit Modal */
+const openEditModal = (id) => {
+  editEvent(id)
   showEditModal.value = true
   disableScroll()
 }
 
+/* Close Edit Modal */
 const closeEditModal = () => {
+  closeEditEvent()
   showEditModal.value = false
   enableScroll()
 }
 
+/* Confirm Edit Modal */
 const confirmEdit = () => {
-  console.log('edited')
+  saveEditEvent()
   showEditModal.value = false
-  closeEditModal()
+  enableScroll()
 }
 
-/* Delete Modal */
-const openDeleteModal = () => {
+/* Open Delete Modal */
+const openDeleteModal = (id) => {
+  deleteID.value = id
   showDeleteModal.value = true
   disableScroll()
 }
 
+/* Close Delete Modal */
 const closeDeleteModal = () => {
   showDeleteModal.value = false
   enableScroll()
+  deleteID.value = ''
 }
 
+/* Confirm Delete Modal */
 const confirmDelete = () => {
-  console.log('deleted')
+  storeEvents.deleteEvent(deleteID.value)
   showDeleteModal.value = false
   closeDeleteModal()
 }
@@ -168,7 +222,14 @@ onMounted(() => {
     v-show="showEditModal"
     class="modal h-[100%] w-[100%] z-[15] fixed top-0 left-0 right-0 overflow-auto"
   >
-    <EditEvent @saved="confirmEdit" @canceled="closeEditModal" />
+    <EditEvent
+      @saved="confirmEdit"
+      @canceled="closeEditModal"
+      @imageSelected="handleImageUpload"
+      :editID="editID"
+      :newEvent="newEvent"
+      :storeEvents="storeEvents"
+    />
   </div>
   <!------- Delete Modal ------->
   <div

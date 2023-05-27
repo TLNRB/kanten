@@ -5,6 +5,7 @@ const { newEvent } = defineProps(['newEvent'])
 
 const emit = defineEmits(['imageSelected', 'addEvent'])
 
+const error = ref('')
 const image = ref('')
 const handleChange = (e) => {
   const file = e.target.files[0]
@@ -13,7 +14,26 @@ const handleChange = (e) => {
 }
 
 const addEvent = () => {
-  emit('addEvent')
+  if (
+    !newEvent.title ||
+    !newEvent.shortDesc ||
+    !newEvent.longDesc ||
+    !image.value.name ||
+    !newEvent.date ||
+    !newEvent.time ||
+    !newEvent.price ||
+    !newEvent.genre ||
+    !newEvent.age ||
+    !newEvent.performer ||
+    !newEvent.address ||
+    !newEvent.ticket
+  ) {
+    error.value = 'Fill in every information or wait for image upload (5s)'
+  } else {
+    emit('addEvent')
+    error.value = ''
+    image.value = ''
+  }
 }
 </script>
 
@@ -212,6 +232,8 @@ const addEvent = () => {
           ></div>
         </div>
       </div>
+      <!-- Error -->
+      <p class="pt-[.5rem] pl-[.5rem] text-[1rem] text-red-500">{{ error }}</p>
       <!-- Submit Button -->
       <button
         class="flex flex-col mt-[2.5rem] mx-auto text-[1rem] relative group sm:mt-[3rem]"
