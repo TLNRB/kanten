@@ -170,11 +170,11 @@ const cancelChanges = () => {
             class="w-[100%] h-[42px] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none"
             v-model="newEvent.genre"
           >
-            <option value="other">Other</option>
             <option value="manaClub">Mana Club</option>
+            <option value="vertex">Vertex</option>
             <option value="deft">Deft</option>
             <option value="dub">DUB</option>
-            <option value="vertex">Vertex</option>
+            <option value="other">Other</option>
           </select>
 
           <div

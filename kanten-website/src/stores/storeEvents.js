@@ -88,7 +88,7 @@ export const useStoreEvents = defineStore('storeEvents', {
         }
       }
 
-      if (!coverImageCondition) {
+      if (!coverImageCondition && filteredEvent[0].coverImgName) {
         deleteObject(imageRef)
       }
       await deleteDoc(doc(eventsCollectionRef, id))

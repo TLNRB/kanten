@@ -9,6 +9,7 @@ export const useStoreGenres = defineStore('storeGenres', {
   state: () => {
     return {
       genres: [],
+      filteredGenres: [],
       coverImgName: null,
       coverImg: null
     }

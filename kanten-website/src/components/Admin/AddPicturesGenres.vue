@@ -36,9 +36,10 @@ const addGenre = () => {
             v-model="newGenre.genre"
           >
             <option value="manaClub">Mana Club</option>
+            <option value="vertex">Vertex</option>
             <option value="deft">Deft</option>
             <option value="dub">DUB</option>
-            <option value="vertex">Vertex</option>
+            <option value="other">Other</option>
           </select>
 
           <div
