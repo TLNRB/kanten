@@ -10,7 +10,6 @@ import AddPicturesGenres from '../components/Admin/AddPicturesGenres.vue'
 import GenresGallery from '../components/Admin/GenresGallery.vue'
 
 /* ---------- Import Databases ---------- */
-import allEvents from '../data/eventsDB.js'
 import allGallery from '../data/studioGalleryDB.js'
 import allGenresGallery from '../data/genresGalleryDB.js'
 /* ---------- Import Store ---------- */
@@ -108,7 +107,6 @@ const closeEditEvent = () => {
   tempId.value = ''
 }
 
-const events = ref(allEvents)
 const gallery = ref(allGallery)
 const genresGallery = ref(allGenresGallery)
 const filteredGallery = ref('')
@@ -307,14 +305,19 @@ onMounted(() => {
     <!-- Sections goes here -->
     <!-- Events -->
     <div v-if="options[0].active">
-      <AddEvents :newEvent="newEvent" @imageSelected="handleImageUpload" @addEvent="addNewEvent" />
+      <AddEvents
+        :newEvent="newEvent"
+        :storeEvents="storeEvents"
+        @imageSelected="handleImageUpload"
+        @addEvent="addNewEvent"
+      />
       <h2
         class="flex items-center justify-center mx-auto text-[2rem] font-bold mt-[8rem] uppercase xs:text-[2.5rem] md:text-[5rem] md:mt-[10rem]"
       >
         Existing Events
       </h2>
       <div
-        v-if="events.length"
+        v-if="storeEvents.events.length"
         class="my-[3rem] md:mt-[4rem] flex justify-center gap-[4rem] flex-wrap"
       >
         <ExistingEvent

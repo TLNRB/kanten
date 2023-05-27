@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 
-const { newEvent } = defineProps(['newEvent'])
+const { newEvent, storeEvents } = defineProps(['newEvent', 'storeEvents'])
 
 const emit = defineEmits(['imageSelected', 'addEvent'])
 
@@ -18,7 +18,6 @@ const addEvent = () => {
     !newEvent.title ||
     !newEvent.shortDesc ||
     !newEvent.longDesc ||
-    !image.value.name ||
     !newEvent.date ||
     !newEvent.time ||
     !newEvent.price ||
@@ -26,7 +25,9 @@ const addEvent = () => {
     !newEvent.age ||
     !newEvent.performer ||
     !newEvent.address ||
-    !newEvent.ticket
+    !newEvent.ticket ||
+    !storeEvents.coverImgName ||
+    !storeEvents.coverImg
   ) {
     error.value = 'Fill in every information or wait for image upload (5s)'
   } else {
