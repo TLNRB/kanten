@@ -56,13 +56,6 @@ const dropdownStateChange = () => {
   }
 }
 
-/* ---------- Navlink active page change ---------- */
-const emit = defineEmits(['stateChange'])
-const linkActiveStateChange = (sectionRoute) => {
-  dropdownStateChange()
-  emit('stateChange', sectionRoute)
-}
-
 /* ---------- Disable Scroll ---------- */
 const disableScroll = () => {
   document.body.classList.add('overflow-hidden')
@@ -96,7 +89,7 @@ const handleScroll = () => {
   } else if (window.pageYOffset > 0 && window.innerWidth > 1059) {
     isScrollingXL.value = false
     isScrollingLG.value = true
-    isScrolling.value = false
+    isScrollingSM.value = false
   } else if (window.pageYOffset > 0 && window.innerWidth < 1060) {
     isScrollingXL.value = false
     isScrollingLG.value = false
@@ -222,7 +215,7 @@ onUnmounted(() => {
           <RouterLink
             :to="section.route"
             class="h-[50px] flex flex-col cursor-pointer group xs:h-[60px] sm:h-[80px] lg:h-[35px]"
-            @click="linkActiveStateChange(section.route)"
+            @click="dropdownStateChange"
           >
             <span
               class="group-hover:translate-y-[-45px] ease-in duration-[.2s] xs:text-[3rem] xs:group-hover:translate-y-[-55px] sm:text-[4rem] sm:group-hover:translate-y-[-75px] lg:text-[1.5rem] lg:font-[500] lg:group-hover:translate-y-[-35px]"

@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+import { RouterLink } from 'vue-router'
+</script>
 
 <template>
   <section class="py-[4rem] px-[1rem] md:px-[4rem] lg:py-[6rem] xxl:px-[12.5rem] xxl:gap-[9rem]">
@@ -76,7 +78,10 @@
         <p class="w-[50px] text-right font-[500] xs:w-auto">140,-</p>
       </div>
     </div>
-    <button class="flex flex-col mt-[2.5rem] text-[1.25rem] relative group sm:mt-[3rem]">
+    <RouterLink
+      to="events"
+      class="flex flex-col mt-[2.5rem] w-fit text-[1.25rem] relative group sm:mt-[3rem]"
+    >
       <span
         class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] bg-darkBG border-baseColor z-[1] group-hover:text-baseColor group-hover:border-lightText ease-in duration-[.15s] delay-[.05s] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem]"
         >Explore All Events</span
@@ -85,7 +90,7 @@
         class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem]"
         >Explore All Events</span
       >
-    </button>
+    </RouterLink>
   </section>
 </template>
 

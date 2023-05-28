@@ -1,6 +1,6 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { RouterView } from 'vue-router'
+import { ref, onMounted, watch } from 'vue'
+import { RouterView, useRouter } from 'vue-router'
 import Navbar from './components/Navbar.vue'
 import FooterSection from './components/FooterSection.vue'
 
@@ -8,6 +8,11 @@ import { useStoreAuth } from './stores/storeAuth.js'
 
 /*----- Stores -----*/
 const storeAuth = useStoreAuth()
+
+const router = useRouter()
+watch(router.currentRoute, () => {
+  changeSectionState(router.currentRoute.value.name)
+})
 
 onMounted(() => {
   storeAuth.init()
@@ -22,9 +27,9 @@ const sections = ref([
   { id: 'community', title: 'Community', route: 'community', active: false }
 ])
 
-const changeSectionState = (sectionRoute) => {
+const changeSectionState = (sectionID) => {
   sections.value.forEach((section) => {
-    if (section.route == sectionRoute) {
+    if (section.id == sectionID) {
       section.active = true
     } else {
       section.active = false
@@ -35,7 +40,7 @@ const changeSectionState = (sectionRoute) => {
 
 <template>
   <div>
-    <Navbar :sections="sections" @stateChange="changeSectionState" />
+    <Navbar :sections="sections" />
     <RouterView />
     <FooterSection :sections="sections" />
   </div>

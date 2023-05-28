@@ -32,12 +32,18 @@
     </p>
     <form
       class="flex items-center pl-[1.5rem] pt-[1rem] pb-[2rem] border-[1px] border-baseColor relative xs:pl-[2.5rem] sm:w-[525px] sm:mx-auto sm:pl-[3rem] md:w-[630px] md:pb-[4rem] md:pt-[2rem] xl:w-[700px]"
+      @submit.prevent="subscribe"
     >
-      <div class="w-[85%] xs:w-[92.5%] sm:w-[91%] xl:w-[92.5%]">
+      <div class="w-[85%] xs:w-[91.5%] sm:w-[92%] xl:w-[92.5%]">
         <input
           class="w-[100%] mb-[1rem] text-[1rem] py-[.25rem] border-b-[1px] border-baseColor bg-transparent outline-none sm:text-[1.125rem] sm:py-[.5rem] md:text-[1.25rem] md:py-[.75rem]"
           type="text"
-          placeholder="Full name"
+          placeholder="First name"
+        />
+        <input
+          class="w-[100%] mb-[1rem] text-[1rem] py-[.25rem] border-b-[1px] border-baseColor bg-transparent outline-none sm:text-[1.125rem] sm:py-[.5rem] md:text-[1.25rem] md:py-[.75rem]"
+          type="text"
+          placeholder="Last name"
         />
         <input
           class="w-[100%] py-[.25rem] text-[1rem] border-b-[1px] border-baseColor bg-transparent outline-none sm:text-[1.125rem] sm:py-[.5rem] md:text-[1.25rem] md:py-[.75rem]"
@@ -46,19 +52,20 @@
         />
       </div>
       <div
-        class="absolute translate-y-[.5rem] right-[-2.8rem] sm:right-[-3.5rem] md:right-[-5.5rem] md:translate-y-[1rem]"
+        class="absolute translate-y-[.5rem] right-[-4.5rem] sm:right-[-5.5em] md:right-[-7.75rem] md:translate-y-[1rem]"
       >
-        <button class="flex flex-col text-[1.25rem] relative group">
+        <button class="flex flex-col text-[1.25rem] relative group" type="submit">
           <span
-            class="font-[600] py-[.375rem] px-[1.125rem] rotate-[-90deg] uppercase w-[132px] border-[1px] bg-baseColor border-baseColor z-[1] group-hover:border-lightText ease-in duration-[.15s] delay-[.05s] sm:w-[154px] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem] md:w-[224px]"
+            class="font-[600] py-[.375rem] px-[1.125rem] rotate-[-90deg] uppercase w-[181px] border-[1px] bg-baseColor border-baseColor z-[1] group-hover:border-lightText ease-in duration-[.15s] delay-[.05s] sm:w-[214px] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem] md:w-[295px]"
             >Send</span
           ><span
-            class="font-[600] py-[.375rem] px-[1.125rem] rotate-[-90deg] uppercase w-[132px] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s] sm:w-[154px] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem] md:w-[224px]"
+            class="font-[600] py-[.375rem] px-[1.125rem] rotate-[-90deg] uppercase w-[181px] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s] sm:w-[214px] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem] md:w-[295px]"
             >Send</span
           >
         </button>
       </div>
     </form>
+    <p v-if="message">{{ message }}</p>
   </section>
 </template>
 
