@@ -7,8 +7,6 @@ import logodub from '../images/logo-dub.png'
 import logodeft from '../images/logo-deft.png'
 import logomanaclub from '../images/logo-manaclub.png'
 import logovertex from '../images/logo-vertex.png'
-import statuemanaclub from '../images/statue-manaclub.png'
-
 
 const getSinglegenre = () => {
     const state = ref([
@@ -19,7 +17,6 @@ const getSinglegenre = () => {
             category: 'dub',
             maindescription: 'Reggae rises, vibes unite, and the rhythm of the islands transports you to a state of pure bliss.',
             logo: logodub,
-            statue: statuemanaclub,
             description1: 'A place where music meets bass, and creates an ongoing and endless flow of waves.',
             description2: 'Enter the Exuberant World of Mana Club: Surrender to the Beats, Ignite Your Spirit, and Dance Through the Night. Let Your Soul Soar in a Mesmerizing Rave Experience Like No Other!',
         },
@@ -30,7 +27,6 @@ const getSinglegenre = () => {
             category: 'deft',
             maindescription: "Unleash the beat, own the flow, and ignite the stage with hip-hop's electrifying glow.",
             logo: logodeft,
-            statue: statuemanaclub,
             description1: 'A place where music meets bass, and creates an ongoing and endless flow of waves.',
             description2: 'Enter the Exuberant World of Mana Club: Surrender to the Beats, Ignite Your Spirit, and Dance Through the Night. Let Your Soul Soar in a Mesmerizing Rave Experience Like No Other!',
         },
@@ -41,7 +37,6 @@ const getSinglegenre = () => {
             category: 'manaclub',
             maindescription: 'A Rave where music collides with bass, generating an eternal and boundless cascade of waves.',
             logo: logomanaclub,
-            statue: statuemanaclub,
             description1: 'A place where music meets bass, and creates an ongoing and endless flow of waves.',
             description2: 'Enter the Exuberant World of Mana Club: Surrender to the Beats, Ignite Your Spirit, and Dance Through the Night. Let Your Soul Soar in a Mesmerizing Rave Experience Like No Other!',
         },
@@ -52,7 +47,6 @@ const getSinglegenre = () => {
             category: 'vertex',
             maindescription: 'Where pulsating house beats converge, igniting an euphoric dance experience that resonates deep within.',
             logo:  logovertex,
-            statue: statuemanaclub,
             description1: 'A place where music meets bass, and creates an ongoing and endless flow of waves.',
             description2: 'Enter the Exuberant World of Mana Club: Surrender to the Beats, Ignite Your Spirit, and Dance Through the Night. Let Your Soul Soar in a Mesmerizing Rave Experience Like No Other!',
         },

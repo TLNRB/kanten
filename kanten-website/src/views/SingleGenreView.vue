@@ -25,11 +25,10 @@ const genre = computed( () => {
     class="mt-[5rem] pt-[2rem] md:mt-[7.875rem]  lg:pt-[2rem] xl:mt-[10rem] "
     >
     <div class="flex flex-col md:flex-row mx-[1.3rem] md:mx-[4.5rem] xxl:mx-[12.6rem]">
-      <img class="hidden lg:block md:w-[10rem] h-fit lg:w-[25rem] xl:w-[30rem]  " :src="genre.logo" alt="">
-      <img class=" block lg:hidden md:w-[12rem] " :src="genre.statue" alt="">
+      <img class=" md:w-[12rem] h-fit lg:w-[25rem] xl:w-[30rem]  " :src="genre.logo" alt="">
 
-      <div class="lg:top-[6rem] xl:top-[7rem] xl:ml-[-1.2rem] lg:ml-[-1rem] relative">
-        <h1 class="font-bold text-[2rem] xs:text-[2.5rem] relative top-[-2rem] md:top-[0] md:h-fit xs:top-[-3rem] h-[1.5rem] sm:text-[3rem] md:text-[2rem] lg:text-[4rem] xl:text-[5rem]">{{ genre.title }}</h1>
+      <div class="lg:top-[6rem] md:ml-[2rem] xl:top-[7rem] xl:ml-[-1.2rem] lg:ml-[-1rem] relative">
+        <h1 class="font-bold text-[2rem] xs:text-[2.5rem] mb-[1rem] lg:mb-[0] sm:text-[3rem] md:text-[2rem] lg:text-[4rem] xl:text-[5rem]">{{ genre.title }}</h1>
       <div >
         <p class="font-medium text-[1rem] xs:text-[1.25rem] sm:text-[1.3rem] sm:font-normal md:text-[1rem] lg:text-[1.2rem] xl:text-[1.4rem] pb-[1rem]">{{ genre.description1 }}</p>
         <p class="font-medium text-[1rem] xs:text-[1.25rem] sm:text-[1.3rem] sm:font-normal md:text-[1rem] lg:text-[1.2rem] xl:text-[1.4rem]">{{ genre.description2 }}</p>
