@@ -15,7 +15,7 @@ const { statueK } = defineProps(['statueK'])
         alt="Statue blowing a bubble gum between Kanten's K letter"
       />
       <div
-        class="mx-auto text-center text-[2.5rem] xs:text-[3rem] sm:text-[4rem] xl:text-[5rem] xxxl:text-[6rem]"
+        class="mx-auto mt-[.5rem] text-center text-[2.5rem] xs:text-[3rem] sm:text-[4rem] xl:text-[5rem] xxxl:text-[6rem]"
       >
         <div class="flex flex-col items-center w-fit mx-auto sm:flex-row sm:gap-[1rem]">
           <p class="flex flex-col relative uppercase leading-none sm:leading-none">
@@ -35,7 +35,7 @@ const { statueK } = defineProps(['statueK'])
             of Culture at
           </p>
           <p
-            class="flex flex-col relative w-fit mx-auto leading-snug translate-y-[-12px] uppercase sm:leading-none sm:translate-y-0"
+            class="flex flex-col relative w-fit mx-auto leading-snug translate-y-[-6px] uppercase sm:leading-none sm:translate-y-0"
           >
             <span class="font-bold text-baseColor z-[1]">Kanten</span>
             <span class="textStroke">Kanten</span>

@@ -192,7 +192,7 @@ onUnmounted(() => {
           class="h-[9px] w-[9px] my-auto rounded-full bg-baseColor ease-in duration-[.2s]"
           :class="{ 'dropdown-activeState': dropdownState }"
         ></div>
-        <div class="h-[24px] flex flex-col overflow-hidden">
+        <div class="h-[24px] flex flex-col pt-[3px] overflow-hidden">
           <span
             class="tetx-lightText ease-in duration-[.2s]"
             :class="{ 'translate-y-[-24px]': dropdownState }"
@@ -223,7 +223,7 @@ onUnmounted(() => {
               >{{ section.title }}</span
             >
             <span
-              class="font-[500] text-baseColor rotate-6 translate-y-[-15px] group-hover:translate-y-[-60px] group-hover:rotate-0 ease-in duration-[.2s] xs:text-[3rem] xs:group-hover:translate-y-[-70px] sm:text-[4rem] sm:group-hover:translate-y-[-90px] sm:translate-y-[-10px] lg:text-[1.5rem] lg:group-hover:translate-y-[-45px]"
+              class="font-[500] text-baseColor rotate-6 translate-y-[-5px] group-hover:translate-y-[-60px] group-hover:rotate-0 ease-in duration-[.2s] xs:text-[3rem] xs:group-hover:translate-y-[-70px] sm:text-[4rem] sm:group-hover:translate-y-[-95px] lg:text-[1.5rem] lg:group-hover:translate-y-[-45px]"
               >{{ section.title }}</span
             >
           </RouterLink>
