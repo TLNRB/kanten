@@ -14,7 +14,6 @@ import LoginView from '../views/LoginView.vue'
 import AdminView from '../views/AdminView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -45,18 +44,18 @@ const router = createRouter({
       component: CommunityView
     },
     {
-
       path: '/singleeventview/:id',
       name: 'singleeventview',
       component: SingleEventView,
-      props: true 
+      props: true
     },
     {
       path: '/singlegenreview/:id',
       name: 'singlegenreview',
       component: SingleGenreView,
-      props: true 
-
+      props: true
+    },
+    {
       path: '/membership',
       name: 'membership',
       component: MembershipView
@@ -78,7 +77,6 @@ const router = createRouter({
       path: '/:catchall(.*)*',
       name: 'notfound',
       component: NotFoundView
-
     }
   ],
   scrollBehavior(to, from, savedPosition) {

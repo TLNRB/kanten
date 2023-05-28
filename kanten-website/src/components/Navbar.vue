@@ -192,7 +192,7 @@ onUnmounted(() => {
           class="h-[9px] w-[9px] my-auto rounded-full bg-baseColor ease-in duration-[.2s]"
           :class="{ 'dropdown-activeState': dropdownState }"
         ></div>
-        <div class="h-[24px] flex flex-col pt-[3px] overflow-hidden">
+        <div class="h-[24px] flex flex-col pt-[1.5px] overflow-hidden">
           <span
             class="tetx-lightText ease-in duration-[.2s]"
             :class="{ 'translate-y-[-24px]': dropdownState }"
@@ -286,14 +286,14 @@ onUnmounted(() => {
 
 .profile-dropdown-loggedIn {
   bottom: -6rem;
-  left: 0;
+  left: 0.5rem;
 }
 
 .profile-dropdownBox-loggedIn {
   width: 127px;
   height: 94px;
   bottom: -6.5rem;
-  left: -0.5rem;
+  left: 0rem;
 }
 
 .profile-button-loggedIn {
