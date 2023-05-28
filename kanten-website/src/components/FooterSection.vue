@@ -25,6 +25,9 @@ const updateFooter = () => {
       footerData.display = 'flex'
       footerData.image = screenWidth.value < 560 ? logoWhite : logoRectWhite
       break
+    case 'membership':
+      footerData.display = 'none'
+      break
     case 'login':
       footerData.display = 'none'
       break
