@@ -21,11 +21,21 @@ const sections = ref([
   { id: 'studio', title: 'Studio', route: 'studio', active: false },
   { id: 'community', title: 'Community', route: 'community', active: false }
 ])
+
+const changeSectionState = (sectionRoute) => {
+  sections.value.forEach((section) => {
+    if (section.route == sectionRoute) {
+      section.active = true
+    } else {
+      section.active = false
+    }
+  })
+}
 </script>
 
 <template>
   <div>
-    <Navbar :sections="sections" />
+    <Navbar :sections="sections" @stateChange="changeSectionState" />
     <RouterView />
     <FooterSection :sections="sections" />
   </div>

@@ -46,28 +46,97 @@ const screenWidth = ref(window.innerWidth)
 const dropdownState = ref(false)
 
 const dropdownStateChange = () => {
-  dropdownState.value = !dropdownState.value
+  if (screenWidth.value < 1060) {
+    dropdownState.value = !dropdownState.value
+    if (dropdownState.value) {
+      disableScroll()
+    } else {
+      enableScroll()
+    }
+  }
+}
+
+/* ---------- Navlink active page change ---------- */
+const emit = defineEmits(['stateChange'])
+const linkActiveStateChange = (sectionRoute) => {
+  dropdownStateChange()
+  emit('stateChange', sectionRoute)
+}
+
+/* ---------- Disable Scroll ---------- */
+const disableScroll = () => {
+  document.body.classList.add('overflow-hidden')
+}
+
+/* ---------- Enable Scroll ---------- */
+const enableScroll = () => {
+  document.body.classList.remove('overflow-hidden')
 }
 
 /* ---------- Resize handling ---------- */
 function handleResize() {
   screenWidth.value = window.innerWidth
+  if (screenWidth.value > 1060) {
+    dropdownState.value = false
+    enableScroll()
+  }
 }
+
+/* ---------- Scroll handling ---------- */
+//Nav move up after scroll position
+const isScrollingXL = ref(false)
+const isScrollingLG = ref(false)
+const isScrollingSM = ref(false)
+
+const handleScroll = () => {
+  if (window.pageYOffset > 0 && window.innerWidth > 1199) {
+    isScrollingXL.value = true
+    isScrollingLG.value = false
+    isScrollingSM.value = false
+  } else if (window.pageYOffset > 0 && window.innerWidth > 1059) {
+    isScrollingXL.value = false
+    isScrollingLG.value = true
+    isScrolling.value = false
+  } else if (window.pageYOffset > 0 && window.innerWidth < 1060) {
+    isScrollingXL.value = false
+    isScrollingLG.value = false
+    isScrollingSM.value = true
+  } else {
+    isScrollingXL.value = false
+    isScrollingLG.value = false
+    isScrollingSM.value = false
+  }
+}
+
+const isScrolling = computed(() => {
+  if (isScrollingXL.value) {
+    return 'scroll-up-xl'
+  } else if (isScrollingLG.value) {
+    return 'scroll-up-lg'
+  } else if (isScrollingSM.value) {
+    return 'scroll-up-sm'
+  } else {
+    return
+  }
+})
 
 /*---------- Add resize event listener when component is mounted ---------- */
 onMounted(() => {
   window.addEventListener('resize', handleResize)
+  window.addEventListener('scroll', handleScroll)
 })
 /*---------- Remove resize event listener when component is mounted ---------- */
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
+  window.removeEventListener('scroll', handleScroll)
 })
 </script>
 
 <template>
   <div>
     <nav
-      class="flex justify-between items-center z-10 bg-darkBG border-t-[1px] border-b-[1px] border-darkerText py-[1rem] fixed top-[1.5rem] right-[1rem] left-[1rem] md:top-[2.5rem] md:right-[2rem] md:left-[2rem] xl:top-[3rem] xl:right-[3rem] xl:left-[3rem]"
+      class="flex justify-between items-center z-10 bg-darkBG border-t-[1px] border-b-[1px] border-darkerText p-[1rem] fixed top-[1.5rem] right-0 left-0 ease-in-out duration-[.3s] lg:top-[2.5rem] lg:px-[2rem] xl:top-[3rem] xl:px-[3rem]"
+      :class="[isScrolling]"
     >
       <!------- Logo Image ------->
       <div>
@@ -123,7 +192,7 @@ onUnmounted(() => {
 
       <!------- Dropdown Text ------->
       <div
-        class="flex gap-[6px] ml-auto mr-[1rem] text-[1.5rem] translate-y-[2px] group cursor-pointer uppercase leading-none md:hidden"
+        class="flex gap-[6px] ml-auto mr-[1rem] text-[1.5rem] translate-y-[2px] group cursor-pointer uppercase leading-none lg:hidden"
         @click="dropdownStateChange"
       >
         <div
@@ -146,39 +215,65 @@ onUnmounted(() => {
 
       <!------- Nav Links ------->
       <div
-        class="flex flex-col items-center w-[100%] ml-auto h-fit absolute top-[8rem] translate-x-[110%] text-[2.5rem] uppercase leading-[60px] ease-in duration-[.3s] xs:leading-[70px] sm:leading-[90px] md:items-end md:translate-x-0 md:w-auto md:right-0 md:top-[1.625rem] md:leading-[45px]"
+        class="flex flex-col gap-[1.25rem] items-center w-[100%] ml-auto h-fit absolute top-[12rem] xs:top-[10rem] translate-x-[110%] text-[2.5rem] uppercase leading-[60px] ease-in duration-[.3s] xs:leading-[70px] xs:gap-[1.5rem] sm:leading-[90px] lg:flex-row lg:gap-[2.5rem] lg:items-end lg:translate-x-0 lg:w-auto lg:relative lg:right-0 lg:top-[-.25rem] lg:leading-[45px]"
         :class="{ 'dropdown-nav-active': dropdownState }"
       >
         <div v-for="section in sections" :key="section.id" class="overflow-hidden">
           <RouterLink
             :to="section.route"
-            class="h-[50px] flex flex-col cursor-pointer group xs:h-[60px] sm:h-[80px] md:h-[35px]"
+            class="h-[50px] flex flex-col cursor-pointer group xs:h-[60px] sm:h-[80px] lg:h-[35px]"
+            @click="linkActiveStateChange(section.route)"
           >
             <span
-              class="group-hover:translate-y-[-45px] ease-in duration-[.2s] xs:text-[3rem] xs:group-hover:translate-y-[-55px] sm:text-[4rem] sm:group-hover:translate-y-[-75px] md:text-[1.5rem] md:font-[500] md:group-hover:translate-y-[-35px]"
+              class="group-hover:translate-y-[-45px] ease-in duration-[.2s] xs:text-[3rem] xs:group-hover:translate-y-[-55px] sm:text-[4rem] sm:group-hover:translate-y-[-75px] lg:text-[1.5rem] lg:font-[500] lg:group-hover:translate-y-[-35px]"
               :class="{ 'text-darkerText': section.active }"
               >{{ section.title }}</span
             >
             <span
-              class="font-[500] text-baseColor rotate-6 translate-y-[-15px] group-hover:translate-y-[-60px] group-hover:rotate-0 ease-in duration-[.2s] xs:text-[3rem] xs:group-hover:translate-y-[-70px] sm:text-[4rem] sm:group-hover:translate-y-[-90px] sm:translate-y-[-10px] md:text-[1.5rem] md:group-hover:translate-y-[-45px]"
+              class="font-[500] text-baseColor rotate-6 translate-y-[-15px] group-hover:translate-y-[-60px] group-hover:rotate-0 ease-in duration-[.2s] xs:text-[3rem] xs:group-hover:translate-y-[-70px] sm:text-[4rem] sm:group-hover:translate-y-[-90px] sm:translate-y-[-10px] lg:text-[1.5rem] lg:group-hover:translate-y-[-45px]"
               >{{ section.title }}</span
             >
           </RouterLink>
         </div>
       </div>
+      <!-- Dark Background for nav dropdown -->
+      <div
+        class="absolute min-h-[100vh] top-0 right-0 bottom-0 w-0 opacity-0 ease-in duration-[.3s] z-[-1]"
+        :class="{ 'bg-darkBG dropdown-background-active': dropdownState }"
+      ></div>
     </nav>
-
-    <!-- Dark Background for nav dropdown -->
-    <div
-      class="absolute top-0 right-0 bottom-0 opacity-0 w-0 ease-in duration-[.3s] z-[5]"
-      :class="{ 'bg-darkBG dropdown-background-active': dropdownState }"
-    ></div>
   </div>
 </template>
 
 <style scoped>
+.scroll-up-sm {
+  transform: translateY(-1.5rem);
+  padding: 1rem;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #181818;
+  transition: all 0.3s ease-in-out;
+}
+.scroll-up-lg {
+  transform: translateY(-2.5rem);
+  padding: 1rem 2rem;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #181818;
+  transition: all 0.3s ease-in-out;
+}
+
+.scroll-up-xl {
+  transform: translateY(-3rem);
+  padding: 1rem 3rem;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #181818;
+  transition: all 0.3s ease-in-out;
+}
+
 .dropdown-nav-active {
-  transform: translateX(0);
+  transform: translateX(-1rem);
   transition-delay: all ease-in 1s;
 }
 
