@@ -5,10 +5,15 @@ import AllEventsView from '../views/AllEventsView.vue'
 import GenreView from '../views/GenreView.vue'
 import StudioView from '../views/StudioView.vue'
 import CommunityView from '../views/CommunityView.vue'
+
+import SingleEventView from '../views/SingleEventView.vue'
+import SingleGenreView from '../views/SingleGenreView.vue'
+
 import MembershipView from '../views/MembershipView.vue'
 import LoginView from '../views/LoginView.vue'
 import AdminView from '../views/AdminView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +45,18 @@ const router = createRouter({
       component: CommunityView
     },
     {
+
+      path: '/singleeventview/:id',
+      name: 'singleeventview',
+      component: SingleEventView,
+      props: true 
+    },
+    {
+      path: '/singlegenreview/:id',
+      name: 'singlegenreview',
+      component: SingleGenreView,
+      props: true 
+
       path: '/membership',
       name: 'membership',
       component: MembershipView
@@ -61,6 +78,7 @@ const router = createRouter({
       path: '/:catchall(.*)*',
       name: 'notfound',
       component: NotFoundView
+
     }
   ],
   scrollBehavior(to, from, savedPosition) {

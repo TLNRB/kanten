@@ -28,6 +28,7 @@ module.exports = {
         hipHopColor: '#81F4D1',
         raveColor: '#A809E5',
         houseColor: '#FF0000',
+        deftColor: '#20E062',
         dancehallColor: '#FEFE00'
       }
     }
