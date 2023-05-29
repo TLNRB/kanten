@@ -28,6 +28,9 @@ const updateFooter = () => {
     case 'membership':
       footerData.display = 'none'
       break
+    case 'volunteer':
+      footerData.display = 'none'
+      break
     case 'login':
       footerData.display = 'none'
       break

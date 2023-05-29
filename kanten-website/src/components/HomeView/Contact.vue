@@ -53,14 +53,14 @@
         />
       </div>
       <div
-        class="absolute translate-y-[.5rem] left-[-5.25rem] sm:left-[-6.5rem] md:left-[-8.75rem] md:translate-y-[1rem]"
+        class="absolute translate-y-[.5rem] left-[-5.25rem] rotate-[-90deg] sm:left-[-6.5rem] md:left-[-8.75rem] md:translate-y-[1rem]"
       >
         <button class="flex flex-col text-[1.25rem] relative group">
           <span
-            class="font-[600] py-[.375rem] px-[1.125rem] rotate-[-90deg] uppercase w-[212px] border-[1px] bg-baseColor border-baseColor z-[1] group-hover:border-lightText ease-in duration-[.15s] delay-[.05s] sm:w-[248px] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem] md:w-[332px]"
+            class="font-[600] py-[.375rem] px-[1.125rem] uppercase w-[212px] border-[1px] bg-baseColor border-baseColor z-[1] group-hover:border-lightText ease-in duration-[.15s] delay-[.05s] sm:w-[248px] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem] md:w-[332px]"
             >Send</span
           ><span
-            class="font-[600] py-[.375rem] px-[1.125rem] rotate-[-90deg] uppercase w-[212px] border-[1px] border-lightText absolute top-[4px] left-[-4px] group-hover:top-[0] group-hover:left-[0] ease-in duration-[.2s] sm:w-[248px] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem] md:w-[332px]"
+            class="font-[600] py-[.375rem] px-[1.125rem] uppercase w-[212px] border-[1px] border-lightText absolute top-[-4px] left-[-4px] group-hover:top-[0] group-hover:left-[0] ease-in duration-[.2s] sm:w-[248px] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem] md:w-[332px]"
             >Send</span
           >
         </button>

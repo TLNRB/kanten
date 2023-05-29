@@ -9,7 +9,7 @@ import { RouterLink } from 'vue-router'
 
 <template>
   <section
-    class="overflow-x-hidden flex flex-col mt-[6.875rem] py-[2rem] md:mt-[7.875rem] md:pt-[4rem] lg:py-[4rem] xl:mt-[8.375rem]"
+    class="overflow-x-hidden flex flex-col mt-[6.875rem] py-[2rem] md:mt-[7.875rem] sm:py-[4rem] lg:pb-[5rem] xl:mt-[8.375rem]"
   >
     <!-- Title -->
     <div class="mb-[2rem] px-[1rem] md:px-[4rem] xxl:px-[12.5rem]">
@@ -58,7 +58,7 @@ import { RouterLink } from 'vue-router'
       <div
         class="mt-[1.5rem] flex flex-wrap items-center justify-center gap-[1.25rem] md:gap-[2rem] lg:mt-[4rem]"
       >
-        <RouterLink to="membership" class="flex flex-col text-center text-[1.25rem] relative group">
+        <RouterLink to="volunteer" class="flex flex-col text-center text-[1.25rem] relative group">
           <span
             class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] bg-baseColor border-darkBG z-[1] group-hover:text-darkBG group-hover:border-lightText ease-in duration-[.15s] delay-[.05s] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem]"
             >Volunteer now</span
@@ -82,7 +82,7 @@ import { RouterLink } from 'vue-router'
     </div>
     <!-- Privacy text -->
     <div
-      class="flex pt-[2rem] px-[1rem] md:px-[4rem] md:pt-[4rem] md:pb-[3rem] md:gap-[2.5rem] lg:pb-[0] xxl:px-[12.5rem] leading-snug"
+      class="flex pt-[2rem] px-[1rem] sm:pt-[4rem] md:px-[4rem] md:pt-[4rem] md:gap-[2.5rem] lg:pt-[5rem] xxl:px-[12.5rem] leading-snug"
     >
       <img class="hidden md:block" :src="lock" alt="Lock" />
       <div class="flex justify-center flex-col gap-[1.5rem] sm:text-[1.25rem] lg:text-[1.5rem]">
