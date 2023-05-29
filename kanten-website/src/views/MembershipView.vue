@@ -1,7 +1,13 @@
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import Successful from '../components/Successful.vue'
 /* import zebraPattern from '../images/zebraPattern.svg' */
+
+/* ---------- Import Stores ---------- */
+import { useStoreMembers } from '../stores/storeMembers'
+
+/* ---------- Stores ---------- */
+const storeMembers = useStoreMembers()
 
 /*----- Sign Up -----*/
 //V-model member info storing
@@ -34,7 +40,7 @@ const valueClear = () => {
 }
 
 //Add Member
-const addMember = () => {
+const addNewMember = () => {
   if (
     !newMember.name ||
     !newMember.email ||
@@ -46,6 +52,7 @@ const addMember = () => {
   ) {
     error.value = 'Fill in all the required fields!'
   } else {
+    storeMembers.addMember(newMember)
     openModal()
     valueClear()
   }
@@ -86,7 +93,10 @@ const closeModal = () => {
         of Kanten
       </p>
     </div>
-    <form class="sm:w-[500px] sm:mx-auto md:w-[645px] md:text-[1.5rem]" @submit.prevent="addMember">
+    <form
+      class="sm:w-[500px] sm:mx-auto md:w-[645px] md:text-[1.5rem]"
+      @submit.prevent="addNewMember"
+    >
       <!-- Name input -->
       <div class="flex flex-col mb-[1rem] md:mb-[1.25rem]">
         <label class="font-[500]">Name</label>
