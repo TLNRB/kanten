@@ -4,14 +4,14 @@ import Successful from '../components/Successful.vue'
 /* import zebraPattern from '../images/zebraPattern.svg' */
 
 /* ---------- Import Stores ---------- */
-import { useStoreMembers } from '../stores/storeMembers'
+import { useStoreVolunteers } from '../stores/storeVolunteers'
 
 /* ---------- Stores ---------- */
-const storeMembers = useStoreMembers()
+const storeVolunteers = useStoreVolunteers()
 
 /*----- Sign Up -----*/
-//V-model member info storing
-const newMember = reactive({
+//V-model volunteer info storing
+const newVolunteer = reactive({
   name: '',
   email: '',
   phone: '',
@@ -22,37 +22,37 @@ const newMember = reactive({
 })
 
 //Values
-const text = 'We are pleased to welcome you as our newest member at Kanten.'
+const text = 'We are happy to welcome you at Kanten as one of our volunteer.'
 const error = ref('')
 const signedUp = ref(false)
 
-//Clear values members
+//Clear values volunteer
 const valueClear = () => {
-  newMember.name = ''
-  newMember.email = ''
-  newMember.phone = ''
-  newMember.address = ''
-  newMember.postnumber = ''
-  newMember.city = ''
-  newMember.birthday = ''
+  newVolunteer.name = ''
+  newVolunteer.email = ''
+  newVolunteer.phone = ''
+  newVolunteer.address = ''
+  newVolunteer.postnumber = ''
+  newVolunteer.city = ''
+  newVolunteer.birthday = ''
 
   error.value = ''
 }
 
-//Add Member
-const addNewMember = () => {
+//Add Volunteer
+const addNewVolunteer = () => {
   if (
-    !newMember.name ||
-    !newMember.email ||
-    !newMember.phone ||
-    !newMember.address ||
-    !newMember.postnumber ||
-    !newMember.city ||
-    !newMember.birthday
+    !newVolunteer.name ||
+    !newVolunteer.email ||
+    !newVolunteer.phone ||
+    !newVolunteer.address ||
+    !newVolunteer.postnumber ||
+    !newVolunteer.city ||
+    !newVolunteer.birthday
   ) {
     error.value = 'Fill in all the required fields!'
   } else {
-    storeMembers.addMember(newMember)
+    storeVolunteers.addVolunteer(newVolunteer)
     openModal()
     valueClear()
   }
@@ -81,10 +81,10 @@ const closeModal = () => {
       <h1
         class="flex flex-col relative text-[2rem] uppercase xs:text-[2.5rem] md:text-[5rem] leading-none"
       >
-        <span class="font-bold text-baseColor z-[1]">Member</span>
+        <span class="font-bold text-baseColor z-[1]">Volunteer</span>
         <span
           class="font-bold absolute top-[1.5px] left-[1.5px] z-[0] md:top-[2.5px] md:left-[2.5px]"
-          >Member</span
+          >Volunteer</span
         >
       </h1>
       <p
@@ -95,7 +95,7 @@ const closeModal = () => {
     </div>
     <form
       class="sm:w-[500px] sm:mx-auto md:w-[645px] md:text-[1.5rem]"
-      @submit.prevent="addNewMember"
+      @submit.prevent="addNewVolunteer"
     >
       <!-- Name input -->
       <div class="flex flex-col mb-[1rem] md:mb-[1.25rem]">
@@ -104,7 +104,7 @@ const closeModal = () => {
           <input
             class="w-[99%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
             type="text"
-            v-model="newMember.name"
+            v-model="newVolunteer.name"
           />
           <div
             class="w-[99%] h-[42px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] sm:w-[100%] md:h-[62px]"
@@ -118,7 +118,7 @@ const closeModal = () => {
           <input
             class="w-[99%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
             type="email"
-            v-model="newMember.email"
+            v-model="newVolunteer.email"
           />
           <div
             class="w-[99%] h-[42px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] sm:w-[100%] md:h-[62px]"
@@ -132,7 +132,7 @@ const closeModal = () => {
           <input
             class="w-[99%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
             type="text"
-            v-model="newMember.phone"
+            v-model="newVolunteer.phone"
           />
           <div
             class="w-[99%] h-[42px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] sm:w-[100%] md:h-[62px]"
@@ -146,7 +146,7 @@ const closeModal = () => {
           <input
             class="w-[99%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
             type="text"
-            v-model="newMember.address"
+            v-model="newVolunteer.address"
           />
           <div
             class="w-[99%] h-[42px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] sm:w-[100%] md:h-[62px]"
@@ -162,7 +162,7 @@ const closeModal = () => {
             <input
               class="w-[100%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none md:py-[.75rem] md:px-[1.25rem]"
               type="text"
-              v-model="newMember.postnumber"
+              v-model="newVolunteer.postnumber"
             />
             <div
               class="w-[100%] h-[42px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] md:h-[62px]"
@@ -176,7 +176,7 @@ const closeModal = () => {
             <input
               class="w-[98%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
               type="text"
-              v-model="newMember.city"
+              v-model="newVolunteer.city"
             />
             <div
               class="w-[98%] h-[42px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] sm:w-[100%] md:h-[62px]"
@@ -191,7 +191,7 @@ const closeModal = () => {
           <input
             class="w-[99%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none select-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
             type="date"
-            v-model="newMember.birthday"
+            v-model="newVolunteer.birthday"
           />
           <div
             class="w-[99%] h-[44px] border-[1px] border-baseColor absolute top-[6px] left-[6px] z-[-1] sm:w-[100%] md:h-[64px]"

@@ -107,7 +107,7 @@ onMounted(() => {
             class="mt-[2.5rem] flex flex-wrap items-center justify-center gap-[1.25rem] px-[1rem] md:gap-[2rem] md:mt-[3rem] lg:mt-[2.5rem] xl:mt-[3rem]"
           >
             <RouterLink
-              to="membership"
+              to="volunteer"
               class="flex flex-col text-center text-[1.25rem] relative group"
             >
               <span

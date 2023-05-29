@@ -10,6 +10,7 @@ import SingleEventView from '../views/SingleEventView.vue'
 import SingleGenreView from '../views/SingleGenreView.vue'
 
 import MembershipView from '../views/MembershipView.vue'
+import VolunteerView from '../views/VolunteerView.vue'
 import LoginView from '../views/LoginView.vue'
 import AdminView from '../views/AdminView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
@@ -59,6 +60,11 @@ const router = createRouter({
       path: '/membership',
       name: 'membership',
       component: MembershipView
+    },
+    {
+      path: '/volunteer',
+      name: 'volunteer',
+      component: VolunteerView
     },
     {
       path: '/login-admin',
