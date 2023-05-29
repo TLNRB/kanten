@@ -1,4 +1,6 @@
 <script setup>
+import { RouterLink } from 'vue-router'
+
 const { statueK } = defineProps(['statueK'])
 </script>
 
@@ -13,7 +15,7 @@ const { statueK } = defineProps(['statueK'])
         alt="Statue blowing a bubble gum between Kanten's K letter"
       />
       <div
-        class="mx-auto text-center text-[2.5rem] xs:text-[3rem] sm:text-[4rem] xl:text-[5rem] xxxl:text-[6rem]"
+        class="mx-auto mt-[.5rem] text-center text-[2.5rem] xs:text-[3rem] sm:text-[4rem] xl:text-[5rem] xxxl:text-[6rem]"
       >
         <div class="flex flex-col items-center w-fit mx-auto sm:flex-row sm:gap-[1rem]">
           <p class="flex flex-col relative uppercase leading-none sm:leading-none">
@@ -33,7 +35,7 @@ const { statueK } = defineProps(['statueK'])
             of Culture at
           </p>
           <p
-            class="flex flex-col relative w-fit mx-auto leading-snug translate-y-[-12px] uppercase sm:leading-none sm:translate-y-0"
+            class="flex flex-col relative w-fit mx-auto leading-snug translate-y-[-6px] uppercase sm:leading-none sm:translate-y-0"
           >
             <span class="font-bold text-baseColor z-[1]">Kanten</span>
             <span class="textStroke">Kanten</span>
@@ -45,8 +47,9 @@ const { statueK } = defineProps(['statueK'])
         <hr
           class="border-baseColor mx-auto xs:w-[282px] sm:w-[456px] xl:w-[536px] xxl:w-[566px] xxxl:w-[646px]"
         />
-        <button
-          class="flex flex-col mt-[2.5rem] mx-auto text-[1.25rem] relative group sm:mt-[3rem]"
+        <RouterLink
+          to="community"
+          class="flex flex-col mt-[2.5rem] w-fit mx-auto text-[1.25rem] relative group sm:mt-[3rem]"
         >
           <span
             class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] bg-darkBG border-baseColor z-[1] group-hover:text-baseColor group-hover:border-lightText ease-in duration-[.15s] delay-[.05s] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem]"
@@ -56,7 +59,7 @@ const { statueK } = defineProps(['statueK'])
             class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem]"
             >Join The Commuinty</span
           >
-        </button>
+        </RouterLink>
       </div>
     </div>
   </main>

@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { RouterLink } from 'vue-router'
 
 //Defining image props
 const { statue, wavyLines, boldLines } = defineProps(['statue', 'wavyLines', 'boldLines'])
@@ -105,7 +106,10 @@ onMounted(() => {
           <div
             class="mt-[2.5rem] flex flex-wrap items-center justify-center gap-[1.25rem] px-[1rem] md:gap-[2rem] md:mt-[3rem] lg:mt-[2.5rem] xl:mt-[3rem]"
           >
-            <button class="flex flex-col text-center text-[1.25rem] relative group">
+            <RouterLink
+              to="membership"
+              class="flex flex-col text-center text-[1.25rem] relative group"
+            >
               <span
                 class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] bg-baseColor border-darkBG z-[1] group-hover:text-darkBG group-hover:border-lightText ease-in duration-[.15s] delay-[.05s] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem]"
                 >Volunteer now</span
@@ -114,8 +118,11 @@ onMounted(() => {
                 class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem]"
                 >Volunteer now</span
               >
-            </button>
-            <button class="flex flex-col text-center text-[1.25rem] relative group">
+            </RouterLink>
+            <RouterLink
+              to="membership"
+              class="flex flex-col text-center text-[1.25rem] relative group"
+            >
               <span
                 class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] bg-baseColor border-darkBG z-[1] group-hover:text-darkBG group-hover:border-lightText ease-in duration-[.15s] delay-[.05s] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem]"
                 >Be a member</span
@@ -124,7 +131,7 @@ onMounted(() => {
                 class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem]"
                 >Be a member</span
               >
-            </button>
+            </RouterLink>
           </div>
         </div>
       </div>
