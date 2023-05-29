@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive } from 'vue'
+import { reactive } from 'vue'
 import jQuery from 'jquery'
 /* import $ from 'jquery' */
 
