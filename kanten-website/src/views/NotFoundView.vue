@@ -2,7 +2,7 @@
 
 <template>
   <main
-    class="bg-[url('../images/gridGray.svg')] min-h-[100vh] py-[6rem] overflow-x-hidden flex justify-center items-center flex-col md:py-[4rem]"
+    class="bg-[url('../images/gridGray.svg')] min-h-[100vh] overflow-x-hidden flex justify-center items-center flex-col pt-[6.875rem] pb-[4rem] xs:pt-[7.875rem] md:pt-[9.875rem] md:pb-[5rem] xl:pt-[11rem] xl:pb-[6rem]"
   >
     <h1
       class="flex items-center justify-center relative mx-auto text-[7rem] uppercase tracking-[.75rem] leading-none sm:text-[12rem] md:tracking-[1.5rem] md:text-[16rem] xl:text-[20rem] xl:tracking-[1.5rem]"

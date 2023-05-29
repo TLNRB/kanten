@@ -9,10 +9,10 @@ import { RouterLink } from 'vue-router'
 
 <template>
   <section
-    class="overflow-x-hidden flex flex-col mt-[6.875rem] py-[2rem] md:mt-[7.875rem] sm:py-[4rem] lg:pb-[5rem] xl:mt-[8.375rem]"
+    class="overflow-x-hidden flex flex-col mt-[6.875rem] py-[3rem] sm:py-[4rem] md:mt-[7.875rem] lg:pb-[5rem] xl:mt-[8.375rem]"
   >
     <!-- Title -->
-    <div class="mb-[2rem] px-[1rem] md:px-[4rem] xxl:px-[12.5rem]">
+    <div class="mb-[3rem] px-[1rem] sm:mb-[4rem] md:px-[4rem] xxl:px-[12.5rem]">
       <h1 class="flex flex-col items-center mb-[2rem] md:mb-[6rem]">
         <p class="text-[2.5rem] font-bold uppercase leading-none sm:text-[4rem] lg:text-[5rem]">
           Join the
@@ -33,7 +33,7 @@ import { RouterLink } from 'vue-router'
     </div>
     <!-- Call to action -->
     <div
-      class="bg-baseColor text-darkText relative py-[1.5rem] px-[1rem] md:px-[4rem] md:pb-[3rem] lg:pt-[3rem] xxl:px-[12.5rem]"
+      class="bg-baseColor text-darkText relative py-[1.5rem] px-[1rem] sm:py-[2rem] md:px-[4rem] md:py-[3rem] lg:pt-[3rem] xxl:px-[12.5rem]"
     >
       <p
         class="font-[500] text-center mb-[1.5rem] leading-snug sm:text-[1.25rem] md:w-[650px] md:mx-auto lg:w-[450px] lg:text-[1.5rem] lg:leading-tight xxxl:w-[490px]"
@@ -82,7 +82,7 @@ import { RouterLink } from 'vue-router'
     </div>
     <!-- Privacy text -->
     <div
-      class="flex pt-[2rem] px-[1rem] sm:pt-[4rem] md:px-[4rem] md:pt-[4rem] md:gap-[2.5rem] lg:pt-[5rem] xxl:px-[12.5rem] leading-snug"
+      class="flex pt-[3rem] px-[1rem] sm:pt-[4rem] md:px-[4rem] md:pt-[4rem] md:gap-[2.5rem] lg:pt-[5rem] xxl:px-[12.5rem] leading-snug"
     >
       <img class="hidden md:block" :src="lock" alt="Lock" />
       <div class="flex justify-center flex-col gap-[1.5rem] sm:text-[1.25rem] lg:text-[1.5rem]">
