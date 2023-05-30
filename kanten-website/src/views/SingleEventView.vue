@@ -1,204 +1,304 @@
 <script setup>
+import { toRefs, ref, computed, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
-import { toRefs, computed } from 'vue';
-import singleevent from '../data/singleevent'
-import { useRouter } from 'vue-router';
-import  circle  from '../images/circle.png'
-import back from '../images/back.svg'
+/* ---------- Import Stores ---------- */
+import { useStoreEvents } from '../stores/storeEvents'
+/* ---------- Stores ---------- */
+const storeEvents = useStoreEvents()
+
 const router = useRouter()
 const goBack = () => {
-    router.go(-1)
+  router.go(-1)
 }
-const {state} = singleevent()
+
 const props = defineProps({
-    id: String
+  id: String
 })
 const { id } = toRefs(props)
 
-const event = computed( () => {
-    return state.value.find(item => item.id == id.value)
+const event = computed(() => {
+  return storeEvents.events.find((item) => item.id == id.value)
 })
 
+/*----- Spliting the detailed description -----*/
+// Split the text into an array of paragraphs
+const paragraphs = ref([])
 
+// Split the text into paragraphs after every two sentences
+const splitTextIntoParagraphs = () => {
+  const sentences = event.value.longDesc.split('. ')
+  let temp = ''
+  let counter = 0
+
+  for (let i = 0; i < sentences.length; i++) {
+    temp += sentences[i] + '. '
+
+    if ((i + 1) % 2 === 0) {
+      paragraphs.value[counter] = temp
+      temp = ''
+      counter++
+    }
+  }
+
+  // If there are remaining sentences, add them as the last paragraph
+  if (temp !== '') {
+    paragraphs.value[counter] = temp
+  }
+}
+
+let formattedDate = ref('')
+
+// Converting the date to english format
+const dateFormatter = () => {
+  const values = event.value.date.split('-')
+  formattedDate.value = `${values[2]}. ${values[1]}. ${values[0]}`
+}
+
+onMounted(() => {
+  splitTextIntoParagraphs()
+  dateFormatter()
+  storeEvents.getEvents()
+})
 </script>
 
 <template>
-  
-  <main 
-    v-if="event"
-    class="mt-[5rem] pt-[2rem] overflow-x-hidden md:mt-[7.875rem]  lg:pt-[2rem] xl:mt-[8rem]"
-    >
-    <div class="flex relative justify-between top-[5rem]  mx-[1.3rem] md:mx-[4.5rem] xxl:mx-[12.6rem]">
-    <button class="" @click="goBack()">
-      <img 
-        class="w-[3rem]" 
-        :src="back" alt="">
+  <main class="mt-[6.875rem] overflow-x-hidden relative lg:mt-[7.875rem] xl:mt-[8.375rem]">
+    <div class="absolute top-[2rem] left-[1rem] md:left-[2rem] xl:left-[3rem] xl:top-[3rem]">
+      <button
+        class="h-[32px] w-[32px] rounded-full ease-in duration-[.2s] sm:h-[44px] sm:w-[44px]"
+        :class="event.genre"
+        @click="goBack()"
+      >
+        <font-awesome-icon
+          class="text-[1.375rem] translate-y-[3px] ease-in duration-[.05s] sm:text-[1.75rem] sm:translate-y-[2px]"
+          :icon="['fas', 'arrow-left']"
+        />
       </button>
-      <div>
-    <div class="h-[0]">
-    <img 
-      class="w-[4rem] relative md:w-[4.3rem] xxl:w-[5rem]  "
-      :src="circle" alt="">
     </div>
-    <h1 
-      class="relative h-[0] text-[2.8rem] text-white xxl:text-[3.6rem] ml-[0.4rem]  md:ml-[0.5rem] xxl:ml-[0.5rem]">
-       {{ event.age }}
+    <img
+      class="w-[100%] object-cover h-[300px] md:h-[400px] lg:h-[500px] xxl:h-[600px]"
+      :src="event.coverImg"
+    />
+    <div class="flex flex-col justify-center px-[1rem] md:px-[4rem] xxl:px-[12.5rem]">
+      <h1
+        class="font-bold relative text-[1.5rem] leading-tight drop-shadow-xl top-[-.75rem] xs:text-[1.75rem] sm:top-[-1.25rem] sm:text-[2.5rem] sm:leading-none lg:text-[4rem] lg:top-[-1.5rem]"
+      >
+        {{ event.title }}
       </h1>
-    </div>
-    </div>
-    <img 
-    class=" w-[100%] object-cover h-[23rem] sm:h-[30rem]"
-        :src="event.image"
-    /> 
-    <div 
-      class="px-[1rem] md:px-[4rem] xxl:px-[12.5rem]">
-      <h1 
-        class="font-bold h-[4rem] sm:h-[6.5rem] xl:h-[7.5rem] text-lightText w-[80%] lg:w-[50%] relative top-[-1.25rem] xl:top-[-2rem] sm:top-[-2.4rem] text-[1.5rem] xs:text-[1.6rem] sm:text-[2.8rem] lg:text-[3rem] ">
-          {{ event.title }} 
-      </h1>
-      <h3 
-         class=" text-[1.2rem] xs:text-[1.4rem] sm:text-[1.8rem] lg:text-[2rem] "  :class="event.category">
-          {{ event.category }}
+      <h3
+        class="text-[1.25rem] font-[500] leading-tight sm:text-[1.5rem] lg:text-[2rem] uppercase"
+        :class="event.genre"
+      >
+        {{ event.genre }}
       </h3>
-      <div class="lg:flex xl:mb-[2rem] justify-between items-baseline">
-         <p 
-           class="py-[1rem] lg:w-[80%] text-[1.2rem] sm:text-[1.4rem] xl:text-[1.6rem]">
-             An event for party lovers and everyone else. If you like rave music this event is for you!
-         </p>
-         <div
-             class="xl:h-[1.3rem] group">
-                 <div 
-                 class=" relative z-[1] w-fit px-[1rem] py-[0.1rem]  group-hover:border-[1px]  ease-in duration-[.15s] " :class="event.category">
-                    <a href="">
-                       <h2 
-                       class="category text-darkBG text-[1.25rem] group-hover:text-lightText sm:text-[1rem] md:text-[1.25rem] xl:text-[1.5rem] " :class="event.category">
-                       Buy tickets
-                      </h2>  
-                    </a>     
-                 </div>
-                <div
-                 class="borderStroke  group-hover:mt-[-2.5px] md:group-hover:mt-[-2.5px] sm:group-hover:mt-[-1px] lg:group-hover:mt-[-2.8px] xl:group-hover:mt-[-2px] group-hover:ml-[0] duration-[.2s]">
-                 <h3 
-                 class=" text-[1.25rem]  sm:text-[1rem] md:text-[1.25rem] xl:text-[1.5rem]">
-                 Buy tickets
-              </h3>           
-            </div>
-          </div>
-       </div>
+      <div
+        class="flex flex-col gap-[1.5rem] mt-[1.5rem] mb-[2.5rem] sm:mb-[3rem] lg:mt-[2rem] lg:mb-[4rem] lg:flex-row lg:items-center lg:justify-between"
+      >
+        <p class="sm:text-[1.25rem] xl:text-[1.5rem]">
+          {{ event.shortDesc }}
+        </p>
+        <a
+          :href="event.ticket"
+          target="_blank"
+          class="flex flex-col w-fit mr-auto text-[1rem] relative group lg:mr-0"
+        >
+          <span
+            class="font-[500] py-[.375rem] px-[1.125rem] border-[1px] z-[1] group-hover:border-lightText ease-in duration-[.15s] delay-[.05s] sm:py-[.5rem] sm:px-[1.25rem] sm:text-[1.5rem]"
+            :class="event.genre"
+            >Buy Tickets</span
+          >
+          <span
+            class="font-[500] py-[.375rem] px-[1.125rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s] sm:py-[.5rem] sm:px-[1.25rem] sm:text-[1.5rem]"
+            >Buy Tickets</span
+          >
+        </a>
       </div>
-      <div 
-         class=" text-darkBG lg:flex justify-between items-center flex-row-reverse  py-[1rem] lg:py-[3rem] px-[1rem] md:px-[4rem] xxl:px-[12.5rem] "  :class="event.category">
-         <div class="lg:w-[40%]">
-             <div
-                class="flex py-[1rem] lg:py-[2rem] justify-between items-center border-b-[1px] border-darkBG ">
-                 <h3 
-                   class="text-[1.25rem] ">
-                    DATE＆TIME
-                 </h3>
-                 <h3 
-                   class="text-[1.5rem] font-medium">
-                   {{ event.date }}
-                 </h3>
-             </div>
-             <div 
-               class="flex py-[1rem] lg:py-[2rem] justify-between items-center border-b-[1px] border-darkBG ">
-                 <h3 
-                   class="text-[1.25rem] ">
-                     PERFOMER
-                 </h3>
-                 <h3
-                   class="text-[1.5rem] font-medium">
-                    {{ event.performer }}
-                 </h3>
-             </div>
-             <div 
-               class="flex py-[1rem] lg:py-[2rem] justify-between items-center  ">
-                <h3 
-                  class="text-[1.25rem] ">
-                   PRICE
-                </h3>
-                <h3 
-                  class="text-[1.5rem] font-medium">
-                    {{ event.price }},-
-                </h3>
-           </div>
-          </div>
-          <div class="py-[1rem] lg:w-[55%] text-[1rem] sm:text-[1.2rem] xl:text-[1.4rem]">
-            <p class="pb-[1.2rem] xl:pb-[2rem]">{{ event.description1 }}</p>
-            <p class="pb-[1.2rem] xl:pb-[2rem]">{{ event.description2 }}</p>
-            <p class="pb-[1.2rem] xl:pb-[2rem]">{{ event.description3 }}</p>
-            <p class="pb-[1.2rem] xl:pb-[2rem]">{{ event.description4 }}</p>
-          </div>
+    </div>
+    <div
+      class="text-darkBG flex flex-col gap-[4rem] items-center pt-[2rem] pb-[3rem] px-[1rem] md:pt-[3rem] md:pb-[1.75rem] md:px-[4rem] lg:flex-row-reverse lg:justify-between lg:pt-[4rem] lg:pb-[2.5rem] xxl:px-[12.5rem]"
+      :class="event.genre"
+    >
+      <div class="w-[100%] lg:w-[40%] xl:w-[400px]">
+        <div
+          class="flex items-center justify-between gap-[1.5rem] leading-none pb-[1rem] border-b-[1px] border-darkBG sm:pb-[1.5rem]"
+        >
+          <p class="text-[1rem] font-[500] uppercase sm:text-[1.25rem]">Date＆Time</p>
+          <p class="text-[1.25rem] font-[500] sm:text-[1.5rem]">{{ formattedDate }}</p>
         </div>
+        <div
+          class="flex items-center justify-between gap-[1.5rem] leading-none py-[1rem] border-b-[1px] border-darkBG sm:py-[1.5rem]"
+        >
+          <p class="text-[1rem] font-[500] uppercase sm:text-[1.25rem]">Performer</p>
+          <p class="text-[1.25rem] font-medium sm:text-[1.5rem]">
+            {{ event.performer }}
+          </p>
+        </div>
+        <div
+          class="flex items-center justify-between gap-[1.5rem] leading-none py-[1rem] border-b-[1px] border-darkBG sm:py-[1.5rem]"
+        >
+          <p class="text-[1rem] font-[500] uppercase sm:text-[1.25rem]">Price</p>
+          <p class="text-[1.25rem] font-medium sm:text-[1.5rem]">{{ event.price }},-</p>
+        </div>
+        <div
+          class="flex items-center justify-between gap-[1.5rem] leading-none pt-[1rem] sm:pt-[1.5rem]"
+        >
+          <p class="text-[1rem] font-[500] uppercase sm:text-[1.25rem]">Age</p>
+          <p class="text-[1.25rem] font-medium sm:text-[1.5rem]">{{ event.age }}+</p>
+        </div>
+      </div>
+      <div class="sm:text-[1.25rem] lg:w-[60%] lg:text-[1.5rem]">
+        <p
+          v-for="(paragraph, index) in paragraphs"
+          :key="index"
+          class="pb-[1.25rem] lg:pb-[1.5rem]"
+        >
+          {{ paragraph }}
+        </p>
+      </div>
+    </div>
   </main>
-    <div v-else> Loading...</div>
+  <!--   <div v-else>Loading...</div> -->
 </template>
 
 <style scoped>
-h3.OTHER{
-  color: #1ECECE;
+h3.other {
+  color: #1ecece;
 }
 
-div.OTHER{
-  background-color: #1ECECE;
-}
-h3.DEFT{
-  color: #20E062;
+div.other {
+  background-color: #1ecece;
 }
 
-div.DEFT{
-  background-color: #20E062;
-}
-h3.MANA.CLUB{
-  color: #A809E5;
-}
-
-div.MANA.CLUB{
-  background-color: #A809E5;
-}
-h3.VERTEX{
-  color: #EA3397;
+span.other {
+  border-color: #1ecece;
+  background-color: #1ecece;
+  color: #282828;
 }
 
-div.VERTEX{
-  background-color: #EA3397;
-}
-h3.DUB{
-  color: #FFD930;
+span.other:hover {
+  background-color: #181818;
+  color: #1ecece;
 }
 
-div.DUB{
-  background-color: #FFD930;
-}
-.borderStroke {
-  /* color: #f4f4f4; */
-  margin-top: 3px;
-  margin-left: 3px;
-  border: 1px solid #F4F4F4;
-  top: -2.55rem;
-  position: relative;
-  width: fit-content;
-  padding: 0.1rem 1rem;
-}
-@media screen and (max-width: 560px) {
-    .borderStroke{
-        top: -2rem;
-    }
+button.other {
+  background-color: #1ecece;
+  color: #282828;
 }
 
-@media screen and (min-width: 560px) {
-    .borderStroke{
-        top: -1.8rem;
-    }
+button.other:hover {
+  background-color: #f4f4f4;
 }
-@media screen and (min-width: 768px) {
-    .borderStroke{
-        top: -2rem;
-    }
+
+h3.deft {
+  color: #20e062;
 }
-@media screen and (min-width: 1200px) {
-    .borderStroke{
-        top: -2.5rem;
-    }
+
+div.deft {
+  background-color: #20e062;
+}
+
+span.deft {
+  border-color: #20e062;
+  background-color: #20e062;
+  color: #282828;
+}
+
+span.deft:hover {
+  background-color: #181818;
+  color: #20e062;
+}
+
+button.deft {
+  color: #282828;
+  background-color: #20e062;
+}
+
+button.deft:hover {
+  background-color: #f4f4f4;
+}
+
+h3.manaClub {
+  color: #a809e5;
+}
+
+div.manaClub {
+  background-color: #a809e5;
+}
+
+span.manaClub {
+  border-color: #a809e5;
+  background-color: #a809e5;
+}
+
+span.manaClub:hover {
+  background-color: #181818;
+  color: #a809e5;
+  border-color: #f4f4f4;
+}
+
+button.manaClub {
+  background-color: #a809e5;
+}
+
+button.manaClub:hover {
+  color: #282828;
+  background-color: #f4f4f4;
+}
+
+h3.vertex {
+  color: #ea3397;
+}
+
+div.vertex {
+  background-color: #ea3397;
+}
+
+span.vertex {
+  border-color: #ea3397;
+  background-color: #ea3397;
+  color: #282828;
+}
+
+span.vertex:hover {
+  background-color: #181818;
+  color: #ea3397;
+}
+
+button.vertex {
+  color: #282828;
+  background-color: #ea3397;
+}
+
+button.vertex:hover {
+  background-color: #f4f4f4;
+}
+
+h3.dub {
+  color: #ffd930;
+}
+
+div.dub {
+  background-color: #ffd930;
+}
+
+span.dub {
+  border-color: #ffd930;
+  background-color: #ffd930;
+  color: #282828;
+}
+
+span.dub:hover {
+  background-color: #181818;
+  color: #ffd930;
+}
+
+button.dub {
+  color: #282828;
+  background-color: #ffd930;
+}
+
+button.dub:hover {
+  background-color: #f4f4f4;
 }
 </style>

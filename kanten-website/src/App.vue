@@ -21,10 +21,10 @@ onMounted(() => {
 // ---------- NavBar ----------
 const sections = ref([
   { id: 'home', title: 'Home', route: '/', active: true },
-  { id: 'events', title: 'Events', route: 'events', active: false },
-  { id: 'genres', title: 'Genres', route: 'genres', active: false },
-  { id: 'studio', title: 'Studio', route: 'studio', active: false },
-  { id: 'community', title: 'Community', route: 'community', active: false }
+  { id: 'events', title: 'Events', route: '/events', active: false },
+  { id: 'genres', title: 'Genres', route: '/genres', active: false },
+  { id: 'studio', title: 'Studio', route: '/studio', active: false },
+  { id: 'community', title: 'Community', route: '/community', active: false }
 ])
 
 const changeSectionState = (sectionID) => {

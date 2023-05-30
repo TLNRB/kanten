@@ -45,13 +45,13 @@ const router = createRouter({
       component: CommunityView
     },
     {
-      path: '/singleeventview/:id',
+      path: '/events/:id',
       name: 'singleeventview',
       component: SingleEventView,
       props: true
     },
     {
-      path: '/singlegenreview/:id',
+      path: '/genres/:id',
       name: 'singlegenreview',
       component: SingleGenreView,
       props: true

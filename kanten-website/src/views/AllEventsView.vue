@@ -1,20 +1,20 @@
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 /* ---------- Importing Section Components ---------- */
 import Event from '../components/EventView/Event.vue'
-import singleevent from '../data/singleevent'
-/* ---------- Importing Images ---------- */
-const { state } = singleevent()
 
-let numLines = ref(0)
+/* ---------- Import Stores ---------- */
+import { useStoreEvents } from '../stores/storeEvents'
+/* ---------- Stores ---------- */
+const storeEvents = useStoreEvents()
+
+let numLines = ref('')
 
 const backgroundLines = () => {
-  /* const lines = [] */
-  console.log(numLines.value)
-  if (state.value.length % 2 == 0) {
-    numLines.value = state.value.length / 2
+  if (storeEvents.events.length % 2 == 0) {
+    numLines.value = storeEvents.events.length / 2
   } else {
-    numLines.value = Math.floor(state.value.length / 2)
+    numLines.value = Math.floor(storeEvents.events.length / 2)
     numLines.value++
   }
 
@@ -26,11 +26,11 @@ const backgroundLines = () => {
     return numLines.value
   } else {
     // Large screens
-    if (state.value.length % 6 == 0) {
-      numLines.value = state.value.length / 6
+    if (storeEvents.events.length % 6 == 0) {
+      numLines.value = storeEvents.events.length / 6
       return numLines.value
     } else {
-      numLines.value = Math.floor(state.value.length / 6)
+      numLines.value = Math.floor(storeEvents.events.length / 6)
       numLines.value++
       return numLines.value
     }
@@ -43,6 +43,7 @@ const updateBackgroundLines = () => {
 }
 
 onMounted(() => {
+  storeEvents.getEvents()
   backgroundLines()
   window.addEventListener('resize', updateBackgroundLines)
 })
@@ -58,27 +59,28 @@ onUnmounted(() => {
 
     <section class="pb-[4rem] px-[1rem] md:px-[4rem] lg:pb-[6rem] xxl:px-[12.5rem]">
       <div
+        v-if="storeEvents.events.length"
         class="flex flex-col justify-center items-center flex-wrap gap-[2.5rem] sm:gap-[4rem] sm:flex-row"
       >
         <div
-          v-for="item in state"
-          :key="item.id"
+          v-for="event in storeEvents.events"
+          :key="event.id"
           class="h-[416px] w-[248px] flex flex-col items-center p-[.5rem] bg-darkBG border-solid border-[1px] z-[1] border-baseColor xs:h-[434px] xs:w-[320px] sm:h-[580px] sm:w-[445px]"
         >
-          <img class="object-cover h-[260px] w-[100%] sm:h-[348px]" :src="item.image" />
+          <img class="object-cover h-[260px] w-[100%] sm:h-[348px]" :src="event.coverImg" />
           <div class="ml-[.25rem] flex flex-col justify-center">
             <h1
-              class="font-bold leading-none text-[1.25rem] z-[1] relative top-[-.5rem] drop-shadow-md xs:text-[1.75rem] xs:top-[-.75rem] sm:text-[2.25rem] sm:top-[-1rem] sm:drop-shadow-xl"
+              class="font-bold leading-none text-[1.25rem] z-[1] relative top-[-.5rem] drop-shadow-xl xs:text-[1.75rem] xs:top-[-.75rem] sm:text-[2.25rem] sm:top-[-1rem]"
             >
-              {{ item.title }}
+              {{ event.title }}
             </h1>
             <h3
               class="relative font-[500] text-[1.25rem] leading-tight mt-[.5rem] xs:text-[1.5rem] xs:mt-[.25rem] sm:text-[2rem]"
             >
-              {{ item.date }}
+              {{ event.date }}
             </h3>
             <RouterLink
-              :to="{ name: 'singleeventview', params: { id: item.id } }"
+              :to="{ name: 'singleeventview', params: { id: event.id } }"
               class="flex flex-col w-fit mt-[1rem] mr-auto text-[1rem] relative group sm:mt-[1.5rem] sm:mb-[1.25rem]"
             >
               <span
@@ -92,6 +94,12 @@ onUnmounted(() => {
             </RouterLink>
           </div>
         </div>
+      </div>
+      <div
+        v-else
+        class="mt-[2rem] text-[1rem] flex justify-center text-normalText italic md:text-[1.25rem]"
+      >
+        No events found
       </div>
     </section>
     <section

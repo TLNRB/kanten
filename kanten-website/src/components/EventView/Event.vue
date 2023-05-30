@@ -2,7 +2,7 @@
 
 <template>
   <main
-    class="mt-[6.875rem] pt-[4rem] pb-[2rem] px-[1rem] overflow-x-hidden md:mt-[7.875rem] md:px-[4rem] lg:pt-[6rem] lg:pb-[4rem] xl:mt-[8.375rem] xxl:px-[12.5rem]"
+    class="mt-[6.875rem] pt-[4rem] pb-[2rem] px-[1rem] overflow-x-hidden lg:mt-[7.875rem] md:px-[4rem] lg:pt-[6rem] lg:pb-[4rem] xl:mt-[8.375rem] xxl:px-[12.5rem]"
   >
     <div
       class="mx-auto text-center flex flex-col text-[2.5rem] xs:text-[3rem] sm:text-[4rem] xl:text-[5rem] xxxl:text-[6rem]"

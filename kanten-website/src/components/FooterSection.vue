@@ -31,6 +31,12 @@ const updateFooter = () => {
     case 'volunteer':
       footerData.display = 'none'
       break
+    case 'singleeventview':
+      footerData.backgroundColor = '#181818'
+      footerData.textColor = '#F4F4F4'
+      footerData.display = 'flex'
+      footerData.image = screenWidth.value < 560 ? logoWhite : logoRectWhite
+      break
     case 'login':
       footerData.display = 'none'
       break

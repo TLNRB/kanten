@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 /* ---------- Importing Section Components ---------- */
 import Home from '../components/HomeView/Home.vue'
 import About from '../components/HomeView/About.vue'
@@ -19,13 +19,20 @@ import loop from '../images/loop.svg'
 /* ---------- Importing Collabs ---------- */
 import allCollabs from '../data/collaborations.js'
 
+/* ---------- Import Stores ---------- */
+import { useStoreEvents } from '../stores/storeEvents'
+/* ---------- Stores ---------- */
+const storeEvents = useStoreEvents()
+
 const collabs = ref(allCollabs)
+
+onMounted(() => {})
 </script>
 
 <template>
   <Home :statueK="statueK" />
   <About :statue="statue" :wavyLines="wavyLinesBlack" :boldLines="boldLinesBlack" />
-  <Events />
+  <Events :storeEvents="storeEvents" />
   <Collaborators :collabs="collabs" :sculpture="sculpture" :loop="loop" />
   <Newsletter />
   <Contact />

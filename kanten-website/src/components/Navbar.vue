@@ -128,7 +128,7 @@ onUnmounted(() => {
 <template>
   <div>
     <nav
-      class="flex justify-between items-center z-10 bg-darkBG border-t-[1px] border-b-[1px] border-darkerText p-[1rem] fixed top-[1.5rem] right-0 left-0 ease-in-out duration-[.3s] lg:top-[2.5rem] lg:px-[2rem] xl:top-[3rem] xl:px-[3rem]"
+      class="flex justify-between items-center z-10 bg-darkBG border-t-[1px] border-b-[1px] border-darkerText p-[1rem] fixed top-[1.5rem] right-0 left-0 ease-in-out duration-[.3s] md:px-[2rem] lg:top-[2.5rem] xl:top-[3rem] xl:px-[3rem]"
       :class="[isScrolling]"
     >
       <!------- Logo Image ------->
@@ -138,7 +138,7 @@ onUnmounted(() => {
             class="h-[3.25rem]"
             :src="screenWidth < 560 ? logo : logoLong"
             alt="Kanten logo"
-            @click="router.push('/')"
+            @click="router.replace('/')"
           />
         </a>
       </div>

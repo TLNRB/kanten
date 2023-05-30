@@ -151,7 +151,7 @@ const cancelChanges = () => {
           <input
             class="w-[98%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%]"
             type="text"
-            placeholder="e.g. 50,-"
+            placeholder="e.g. 50"
             v-model="newEvent.price"
           />
           <div
@@ -189,7 +189,7 @@ const cancelChanges = () => {
           <input
             class="w-[98%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%]"
             type="text"
-            placeholder="e.g. 16+"
+            placeholder="e.g. 16"
             v-model="newEvent.age"
           />
           <div
