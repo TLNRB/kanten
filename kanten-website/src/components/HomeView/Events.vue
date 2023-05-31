@@ -1,8 +1,15 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 
 const { storeEvents } = defineProps(['storeEvents'])
+
+//Routing
+const router = useRouter()
+
+const navigate = (id) => {
+  router.push({ name: 'singleeventview', params: { id: id } })
+}
 
 // Converting the date to english format
 const dateFormatter = (date) => {
@@ -89,7 +96,8 @@ onMounted(() => {
       <div
         v-for="event in sortedEvents"
         :key="event.id"
-        class="flex items-center justify-between uppercase leading-tight py-[1rem] border-b-[1px] border-baseColor text-[1rem] xs:text-[1.125rem] sm:text-[1.25rem] md:text-[2rem] md:px-[1rem] md:py-[1.5rem] md:leading-none lg:py-[1.75rem] lg:px-[2rem]"
+        class="flex items-center justify-between uppercase leading-tight cursor-pointer py-[1rem] border-b-[1px] border-baseColor text-[1rem] xs:text-[1.125rem] sm:text-[1.25rem] md:text-[2rem] md:px-[1rem] md:py-[1.5rem] md:leading-none lg:py-[1.75rem] lg:px-[2rem]"
+        @click="navigate(event.id)"
       >
         <div class="w-[70px] xs:w-auto">
           <p class="font-[500]">{{ dateFormatter(event.date) }}</p>

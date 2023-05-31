@@ -2,13 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { useStoreAuth } from '../stores/storeAuth.js'
 import HomeView from '../views/HomeView.vue'
 import AllEventsView from '../views/AllEventsView.vue'
-import GenreView from '../views/GenreView.vue'
+import SingleEventView from '../views/SingleEventView.vue'
+import GenresView from '../views/GenresView.vue'
+import ManaClubView from '../views/ManaClubView.vue'
 import StudioView from '../views/StudioView.vue'
 import CommunityView from '../views/CommunityView.vue'
-
-import SingleEventView from '../views/SingleEventView.vue'
-import SingleGenreView from '../views/SingleGenreView.vue'
-
 import MembershipView from '../views/MembershipView.vue'
 import VolunteerView from '../views/VolunteerView.vue'
 import LoginView from '../views/LoginView.vue'
@@ -30,10 +28,22 @@ const router = createRouter({
       component: AllEventsView
     },
     {
+      path: '/events/:id',
+      name: 'singleeventview',
+      component: SingleEventView,
+      props: true
+    },
+    {
       path: '/genres',
       name: 'genres',
-      component: GenreView
+      component: GenresView
     },
+    {
+      path: '/manaClub',
+      name: 'manaClub',
+      component: ManaClubView
+    },
+
     {
       path: '/studio',
       name: 'studio',
@@ -43,18 +53,6 @@ const router = createRouter({
       path: '/community',
       name: 'community',
       component: CommunityView
-    },
-    {
-      path: '/events/:id',
-      name: 'singleeventview',
-      component: SingleEventView,
-      props: true
-    },
-    {
-      path: '/genres/:id',
-      name: 'singlegenreview',
-      component: SingleGenreView,
-      props: true
     },
     {
       path: '/membership',
