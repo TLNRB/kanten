@@ -9,7 +9,7 @@ let styleSheet
 function calculateLeft() {
   const windowWidth = window.innerWidth
   const divWidth = slider.value.offsetWidth
-  const leftValue = -(divWidth - windowWidth)
+  const leftValue = -(divWidth - windowWidth + 10)
 
   // Update left value within keyframe animation
   const keyframes = `@keyframes slide {
@@ -94,14 +94,18 @@ onUnmounted(() => {
     </div>
     <div
       ref="slider"
-      class="slider flex items-center justify-start gap-[2rem] bottom-[3rem] w-fit absolute sm:gap-[4rem] md:bottom-[6rem] md:gap-[6rem] xl:gap-[10rem]"
+      class="slider flex items-center justify-start gap-[3rem] bottom-[3rem] w-fit absolute xs:gap-[4rem] md:bottom-[6rem] md:gap-[6rem] lg:gap-[8rem] xl:gap-[10rem]"
     >
       <div
         v-for="collab in collabs"
         :key="collab.id"
-        class="w-[80px] h-[80px] flex items-center justify-center md:w-[100px] md:h-[100px]"
+        class="w-[80px] h-[80px] flex items-center justify-center md:w-[100px] md:h-[100px] xxl:w-[120px] xxl:h-[120px]"
       >
-        <img class="h-[50px] md:h-[70px]" :src="collab.img" :alt="collab.desc" />
+        <img
+          class="h-[60px] object-contain md:h-[80px] xxl:h-[100px]"
+          :src="collab.img"
+          :alt="collab.desc"
+        />
       </div>
     </div>
   </section>
