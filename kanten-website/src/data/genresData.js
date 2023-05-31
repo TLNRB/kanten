@@ -3,12 +3,12 @@ import videoDub from '../images/dub-genre_1.mp4'
 import videoDeft from '../images/deft-genre_1.mp4'
 import videoManaClub from '../images/manaclub-genre_1.mp4'
 import videoVertex from '../images/vertex-genre_1.mp4'
-import logoDub from '../images/dubLogo.png'
-import logoDeft from '../images/deftLogo.png'
-import logoManaClub from '../images/manaClubLogo.png'
-import logoVertex from '../images/vertexLogo.png'
+import logoDub from '../images/dubLogo.svg'
+import logoDeft from '../images/deftLogo.svg'
+import logoManaClub from '../images/manaClubLogo.svg'
+import logoVertex from '../images/vertexLogo.svg'
 
-const genresData = () => [
+const genresData = [
   {
     id: 1,
     video: videoManaClub,

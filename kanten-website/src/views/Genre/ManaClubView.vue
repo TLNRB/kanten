@@ -1,75 +1,112 @@
 <script setup>
-import { toRefs, computed } from 'vue'
-import singlegenre from '../data/singlegenre'
+import { ref, onMounted } from 'vue'
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue'
+// Import Swiper styles
+import 'swiper/css'
+import allGenresData from '../../data/genresData.js'
+import allGenresGallery from '../../data/genresGallery.js'
 import { useRouter } from 'vue-router'
+
+const genresData = ref(allGenresData)
+const genresGallery = ref(allGenresGallery)
+
+/*----- Finding the correct genre -----*/
+let genre = ref('')
+
+const gennresFilter = () => {
+  genre.value = genresData.value.find((item) => item.category == 'manaClub')
+}
+
+/*----- Routing -----*/
 const router = useRouter()
 const goBack = () => {
   router.go(-1)
 }
-const { state } = singlegenre()
-const props = defineProps({
-  id: String
-})
-const { id } = toRefs(props)
 
-const genre = computed(() => {
-  return state.value.find((item) => item.id == id.value)
+onMounted(() => {
+  gennresFilter()
 })
 </script>
 
 <template>
-  <main v-if="genre" class="mt-[5rem] pt-[2rem] md:mt-[7.875rem] lg:pt-[2rem] xl:mt-[10rem]">
-    <div class="flex flex-col md:flex-row mx-[1.3rem] md:mx-[4.5rem] xxl:mx-[12.6rem]">
-      <img class="md:w-[12rem] h-fit lg:w-[25rem] xl:w-[30rem]" :src="genre.logo" alt="" />
-
-      <div class="lg:top-[6rem] md:ml-[2rem] xl:top-[7rem] xl:ml-[-1.2rem] lg:ml-[-1rem] relative">
+  <main
+    class="mt-[6.875rem] py-[2.5rem] overflow-x-hidden md:pt-[4rem] lg:mt-[7.875rem] lg:pt-[8rem] xl:mt-[8.375rem]"
+  >
+    <div
+      class="px-[1rem] md:px-[4rem] lg:flex lg:justify-center lg:items-center lg:mt-[5rem] lg:mb-[6rem] xxl:px-[12.5rem] xxl:mt-[3rem]"
+    >
+      <img
+        class="xs:h-[375px] xs:mx-auto sm:h-[520px] md:h-[600px] lg:h-[500px] lg:translate-y-[-4rem] lg:brightness-[85%] xxl:h-[550px]"
+        :src="genre.logo"
+        :alt="`${genre.title} Logo`"
+      />
+      <div
+        class="flex flex-col gap-[1rem] mb-[1rem] translate-y-[-1.5rem] sm:mb-[1.5rem] md:translate-y-[-2.5rem] md:mb-[.5rem] lg:translate-y-0 lg:ml-[-1rem]"
+      >
         <h1
-          class="font-bold text-[2rem] xs:text-[2.5rem] mb-[1rem] lg:mb-[0] sm:text-[3rem] md:text-[2rem] lg:text-[4rem] xl:text-[5rem]"
+          class="text-[2.5rem] font-bold leading-tight uppercase xs:text-[3rem] sm:text-[4.5rem] md:text-[5rem] lg:translate-y-[1rem] lg:text-[4.5rem] lg:translate-x-[-5px]"
         >
           {{ genre.title }}
         </h1>
-        <div>
-          <p
-            class="font-medium text-[1rem] xs:text-[1.25rem] sm:text-[1.3rem] sm:font-normal md:text-[1rem] lg:text-[1.2rem] xl:text-[1.4rem] pb-[1rem]"
-          >
-            {{ genre.description1 }}
-          </p>
-          <p
-            class="font-medium text-[1rem] xs:text-[1.25rem] sm:text-[1.3rem] sm:font-normal md:text-[1rem] lg:text-[1.2rem] xl:text-[1.4rem]"
-          >
-            {{ genre.description2 }}
-          </p>
-        </div>
-
-        <div
-          class="group top-[0.5rem] xs:top-[1rem] lg:top-[4rem] xl:top-[5.5rem] relative flex justify-end"
+        <p class="sm:text-[1.25rem]">{{ genre.shortDesc }}</p>
+        <p class="sm:text-[1.25rem]">{{ genre.longerDesc }}</p>
+        <button
+          @click="goBack()"
+          class="flex flex-col w-fit mt-[1rem] ml-auto text-[1rem] relative group sm:mt-[1.5rem] sm:mb-[1.25rem]"
         >
-          <div>
-            <div
-              class="relative z-[1] w-fit px-[1rem] py-[0.1rem] bg-darkBG group-hover:border-[1px] ease-in duration-[.15s]"
-              :class="genre.category"
-            >
-              <button class="" @click="goBack()">
-                <h3
-                  class="bg-darkBG text-[1.25rem] xs:text-[1.5rem] sm:text-[1rem] md:text-[1.25rem] xl:text-[1.5rem]"
-                >
-                  Go back
-                </h3>
-              </button>
-            </div>
-            <div
-              class="borderStroke group-hover:mt-[-2.5px] xs:group-hover:mt-[0] md:group-hover:mt-[-2.5px] sm:group-hover:mt-[-1px] lg:group-hover:mt-[-2.8px] xl:group-hover:mt-[-2px] group-hover:ml-[0] duration-[.2s]"
-              :class="genre.category"
-            >
-              <h3
-                class="bg-darkBG text-[1.25rem] xs:text-[1.5rem] sm:text-[1rem] md:text-[1.25rem] xl:text-[1.5rem]"
-              >
-                Go back
-              </h3>
-            </div>
-          </div>
-        </div>
+          <span
+            class="font-[500] py-[.375rem] px-[1.125rem] border-[1px] bg-darkBG border-manaClub z-[1] group-hover:text-manaClub group-hover:border-lightText ease-in duration-[.15s] delay-[.05s] sm:py-[.5rem] sm:px-[1.25rem] sm:text-[1.5rem]"
+            >Go Back</span
+          >
+          <span
+            class="font-[500] py-[.375rem] px-[1.125rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s] sm:py-[.5rem] sm:px-[1.25rem] sm:text-[1.5rem]"
+            >Go Back</span
+          >
+        </button>
       </div>
+    </div>
+    <div
+      class="bg-[url('../images/squareGrid.svg')] flex flex-col gap-[1rem] items-center bg-manaClub text-darkText py-[2rem] px-[1rem] sm:py-[2.5rem] md:py-[4rem] md:px-[4rem] xxl:px-[12.5rem]"
+    >
+      <h2 class="text-[2.5rem] font-bold uppercase sm:text-[4rem] md:text-[4.5rem] md:leading-none">
+        Gallery
+      </h2>
+      <p class="font-[500] leading-tight sm:text-[1.25rem] sm:font-semibold">
+        Check out some pictures from the previous years!
+      </p>
+      <div v-if="genresGallery.length" class="my-[1rem] sm:mt-[2rem]">
+        <swiper
+          class="h-[240px] w-[85vw] mx-[1rem] md:mx-[4rem] xs:h-[300px] sm:h-[380px] md:h-[460px] lg:h-[500px] lg:w-[881px] xxl:h-[550px] xxl:w-[900px]"
+          :slides-per-view="1"
+          @swiper="onSwiper"
+          @slideChange="onSlideChange"
+        >
+          <swiper-slide v-for="image in genresGallery" :key="image.id"
+            ><img class="h-[100%] w-[100%] object-cover" :src="image.src" :alt="image.desc"
+          /></swiper-slide>
+          ...
+        </swiper>
+      </div>
+      <div
+        v-else
+        class="mt-[2rem] text-[1rem] flex justify-center text-normalText italic md:text-[1.25rem]"
+      >
+        No images found
+      </div>
+      <button
+        @click="goBack()"
+        class="flex flex-col w-fit mt-[1rem] mx-auto text-[1rem] relative group sm:mt-[1.5rem]"
+      >
+        <span
+          class="font-[500] py-[.375rem] px-[1.125rem] border-[1px] bg-manaClub border-darkBG text-darkText z-[1] group-hover:text-lightText ease-in duration-[.15s] delay-[.05s] sm:py-[.5rem] sm:px-[1.25rem] sm:text-[1.5rem]"
+          >Explore Events</span
+        >
+        <span
+          class="font-[500] py-[.375rem] px-[1.125rem] border-[1px] border-darkBG absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s] sm:py-[.5rem] sm:px-[1.25rem] sm:text-[1.5rem]"
+          >Explore Events</span
+        >
+      </button>
     </div>
   </main>
 </template>
