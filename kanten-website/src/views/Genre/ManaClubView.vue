@@ -1,20 +1,28 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'
 // Import Swiper styles
 import 'swiper/css'
 import allGenresData from '../../data/genresData.js'
-import allGenresGallery from '../../data/genresGallery.js'
-import { useRouter } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
+/* ---------- Import Stores ---------- */
+import { useStoreGenres } from '../../stores/storeGenres.js'
+
+/* ---------- Stores ---------- */
+const storeGenres = useStoreGenres()
 
 const genresData = ref(allGenresData)
-const genresGallery = ref(allGenresGallery)
+
+/*----- Filter the correct genre images -----*/
+const filterImages = () => {
+  storeGenres.filteredGenres = storeGenres.genres.filter((image) => image.genre == 'manaClub')
+}
 
 /*----- Finding the correct genre -----*/
 let genre = ref('')
 
-const gennresFilter = () => {
+const genresFilter = () => {
   genre.value = genresData.value.find((item) => item.category == 'manaClub')
 }
 
@@ -24,8 +32,24 @@ const goBack = () => {
   router.go(-1)
 }
 
+let timeout
+let counter = 0
+
+const timeOutClear = () => {
+  clearInterval(timeout)
+}
+
 onMounted(() => {
-  gennresFilter()
+  storeGenres.getGenres()
+  genresFilter()
+  timeout = setInterval(() => {
+    if (counter == 15 || storeGenres.genres.length != 0) {
+      filterImages()
+      timeOutClear()
+    } else {
+      counter++
+    }
+  }, 1000)
 })
 </script>
 
@@ -72,30 +96,30 @@ onMounted(() => {
       <h2 class="text-[2.5rem] font-bold uppercase sm:text-[4rem] md:text-[4.5rem] md:leading-none">
         Gallery
       </h2>
-      <p class="font-[500] leading-tight sm:text-[1.25rem] sm:font-semibold">
+      <p class="font-[500] text-center leading-tight sm:text-[1.25rem] sm:font-semibold">
         Check out some pictures from the previous years!
       </p>
-      <div v-if="genresGallery.length" class="my-[1rem] sm:mt-[2rem]">
+      <div v-if="storeGenres.filteredGenres.length" class="my-[1rem] sm:mt-[2rem]">
         <swiper
           class="h-[240px] w-[85vw] mx-[1rem] md:mx-[4rem] xs:h-[300px] sm:h-[380px] md:h-[460px] lg:h-[500px] lg:w-[881px] xxl:h-[550px] xxl:w-[900px]"
           :slides-per-view="1"
           @swiper="onSwiper"
           @slideChange="onSlideChange"
         >
-          <swiper-slide v-for="image in genresGallery" :key="image.id"
-            ><img class="h-[100%] w-[100%] object-cover" :src="image.src" :alt="image.desc"
+          <swiper-slide v-for="image in storeGenres.filteredGenres" :key="image.id"
+            ><img class="h-[100%] w-[100%] object-cover" :src="image.coverImg" :alt="image.title"
           /></swiper-slide>
           ...
         </swiper>
       </div>
       <div
         v-else
-        class="mt-[2rem] text-[1rem] flex justify-center text-normalText italic md:text-[1.25rem]"
+        class="mt-[2rem] text-[1rem] flex justify-center text-darkText italic md:text-[1.25rem]"
       >
         No images found
       </div>
-      <button
-        @click="goBack()"
+      <RouterLink
+        to="/events"
         class="flex flex-col w-fit mt-[1rem] mx-auto text-[1rem] relative group sm:mt-[1.5rem]"
       >
         <span
@@ -106,7 +130,7 @@ onMounted(() => {
           class="font-[500] py-[.375rem] px-[1.125rem] border-[1px] border-darkBG absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s] sm:py-[.5rem] sm:px-[1.25rem] sm:text-[1.5rem]"
           >Explore Events</span
         >
-      </button>
+      </RouterLink>
     </div>
   </main>
 </template>
