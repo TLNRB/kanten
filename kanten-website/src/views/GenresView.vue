@@ -1,9 +1,8 @@
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
+import Preloader from '../components/Preloader.vue'
 import allGenresData from '../data/genresData.js'
 import { RouterLink } from 'vue-router'
-/* Immport Images */
-import wavyLinesBlack from '../images/wavyLinesBlack.svg'
 
 const genresData = ref(allGenresData)
 
@@ -28,9 +27,22 @@ const handleGenreState = (id) => {
     }
   })
 }
+
+//Preloader
+const loading = ref(true)
+document.body.style.overflow = 'hidden'
+
+// Simulate a delay to show the preloader
+onMounted(() => {
+  setTimeout(() => {
+    loading.value = false
+    document.body.style.overflow = 'visible'
+  }, 3250)
+})
 </script>
 
 <template>
+  <Preloader class="absolute top-0 left-0 right-0 z-[11]" :class="{ display: !loading }" />
   <main class="mt-[6.875rem] py-[2.5rem] overflow-x-hidden lg:mt-[7.875rem] xl:mt-[8.375rem]">
     <div
       class="mt-[1rem] mb-[2.5rem] flex flex-wrap items-center justify-center gap-[1.25rem] px-[1rem] md:px-[4rem] md:gap-[2rem] lg:mb-[1rem] md:mt-[1.5rem] lg:mt-[3rem] xxl:px-[12.5rem]"
@@ -93,56 +105,14 @@ const handleGenreState = (id) => {
         </div>
       </div>
     </div>
-
-    <!-- <div class="sm:translate-y-[-2rem] lg:translate-y-[-3.75rem]">
-      <video
-        :src="filteredGenre.video"
-        autoplay
-        muted
-        type="video/mp4"
-        class="w-[100%] scale-[130%] sm:scale-100 md:w-[768px] md:mx-auto lg:w-[1060px] xl:w-[1150px]"
-      ></video>
-      <div
-        class="bg-[url('../images/squareGrid.svg')] flex pt-[20%] pb-[2rem] px-[1rem] xs:pt-[17.5%] sm:py-[4rem] md:px-[4rem] lg:items-center xxl:px-[12.5rem]"
-        :class="`background-${activeFilter}`"
-      >
-        <img
-          class="hidden w-[200px] lg:block xl:w-[240px] xxxl:w-[280px]"
-          :src="wavyLinesBlack"
-          alt="Wavy Lines"
-        />
-        <div
-          class="flex flex-col gap-[2.5rem] text-darkText leading-snug sm:w-[500px] sm:mx-auto md:w-[550px]"
-        >
-          <p class="font-[500] sm:text-[1.25rem] lg:text-[1.5rem] lg:text-center">
-            {{ filteredGenre.mainDesc }}
-          </p>
-          <RouterLink
-            :to="`/genres/${activeFilter}`"
-            class="flex flex-col w-fit mr-auto text-[1rem] relative group lg:mx-auto"
-          >
-            <span
-              class="font-[500] py-[.375rem] px-[1.125rem] border-[1px] border-darkBG text-darkText z-[1] ease-in duration-[.2s] sm:py-[.5rem] sm:px-[1.25rem] sm:text-[1.5rem]"
-              :class="`background-${activeFilter}`"
-              >Explore Events</span
-            >
-            <span
-              class="font-[500] py-[.375rem] px-[1.125rem] border-[1px] border-darkBG absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s] sm:py-[.5rem] sm:px-[1.25rem] sm:text-[1.5rem]"
-              >Explore Events</span
-            >
-          </RouterLink>
-        </div>
-        <img
-          class="hidden w-[200px] lg:block xl:w-[240px] xxxl:w-[280px]"
-          :src="wavyLinesBlack"
-          alt="Wavy Lines"
-        />
-      </div>
-    </div> -->
   </main>
 </template>
 
 <style scoped>
+.display {
+  display: none;
+}
+
 /*----- Mana Club Styling -----*/
 .active-manaClub {
   background-color: #a809e5;

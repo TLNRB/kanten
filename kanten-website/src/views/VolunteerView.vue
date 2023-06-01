@@ -1,7 +1,7 @@
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
+import Preloader from '../components/Preloader.vue'
 import Successful from '../components/Successful.vue'
-/* import zebraPattern from '../images/zebraPattern.svg' */
 
 /* ---------- Import Stores ---------- */
 import { useStoreVolunteers } from '../stores/storeVolunteers'
@@ -67,9 +67,22 @@ const openModal = () => {
 const closeModal = () => {
   signedUp.value = false
 }
+
+//Preloader
+const loading = ref(true)
+document.body.style.overflow = 'hidden'
+
+// Simulate a delay to show the preloader
+onMounted(() => {
+  setTimeout(() => {
+    loading.value = false
+    document.body.style.overflow = 'visible'
+  }, 3250)
+})
 </script>
 
 <template>
+  <Preloader class="absolute top-0 left-0 right-0 z-[11]" :class="{ display: !loading }" />
   <section
     v-if="!signedUp"
     class="relative overflow-hidden min-h-[100vh] flex flex-col justify-center pt-[6.875rem] pb-[4rem] px-[1rem] xs:pt-[7.875rem] md:px-[4rem] md:pt-[9.875rem] md:pb-[5rem] xl:pt-[11rem] xl:pb-[6rem] xxl:px-[12.5rem]"
@@ -227,6 +240,10 @@ const closeModal = () => {
 </template>
 
 <style scoped>
+.display {
+  display: none;
+}
+
 input[type='date']::-webkit-calendar-picker-indicator {
   filter: invert(1);
   cursor: pointer;

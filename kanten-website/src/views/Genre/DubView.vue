@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 // Import Swiper styles
 import 'swiper/css'
 import allGenresData from '../../data/genresData.js'
+import Preloader from '../../components/Preloader.vue'
 import { RouterLink, useRouter } from 'vue-router'
 /* ---------- Import Stores ---------- */
 import { useStoreGenres } from '../../stores/storeGenres.js'
@@ -39,6 +40,11 @@ const timeOutClear = () => {
   clearInterval(timeout)
 }
 
+//Preloader
+const loading = ref(true)
+document.body.style.overflow = 'hidden'
+
+// Simulate a delay to show the preloader
 onMounted(() => {
   storeGenres.getGenres()
   genresFilter()
@@ -50,10 +56,15 @@ onMounted(() => {
       counter++
     }
   }, 1000)
+  setTimeout(() => {
+    loading.value = false
+    document.body.style.overflow = 'visible'
+  }, 3250)
 })
 </script>
 
 <template>
+  <Preloader class="absolute top-0 left-0 right-0 z-[11]" :class="{ display: !loading }" />
   <main
     class="mt-[6.875rem] py-[2.5rem] overflow-x-hidden md:pt-[4rem] lg:mt-[7.875rem] lg:pt-[8rem] xl:mt-[8.375rem]"
   >
@@ -135,4 +146,8 @@ onMounted(() => {
   </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+.display {
+  display: none;
+}
+</style>

@@ -1,6 +1,7 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted } from 'vue'
 /* ---------- Importing Section Components ---------- */
+import Preloader from '../components/Preloader.vue'
 import Home from '../components/HomeView/Home.vue'
 import About from '../components/HomeView/About.vue'
 import Events from '../components/HomeView/Events.vue'
@@ -26,10 +27,21 @@ const storeEvents = useStoreEvents()
 
 const collabs = ref(allCollabs)
 
-onMounted(() => {})
+//Preloader
+const loading = ref(true)
+document.body.style.overflow = 'hidden'
+
+// Simulate a delay to show the preloader
+onMounted(() => {
+  setTimeout(() => {
+    loading.value = false
+    document.body.style.overflow = 'visible'
+  }, 3250)
+})
 </script>
 
 <template>
+  <Preloader class="absolute top-0 left-0 right-0 z-[11]" :class="{ display: !loading }" />
   <Home :statueK="statueK" />
   <About :statue="statue" :wavyLines="wavyLinesBlack" :boldLines="boldLinesBlack" />
   <Events :storeEvents="storeEvents" />
@@ -38,4 +50,8 @@ onMounted(() => {})
   <Contact />
 </template>
 
-<style scoped></style>
+<style scoped>
+.display {
+  display: none;
+}
+</style>

@@ -2,6 +2,7 @@
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 /* ---------- Importing Section Components ---------- */
 import Event from '../components/EventView/Event.vue'
+import Preloader from '../components/Preloader.vue'
 
 /* ---------- Import Stores ---------- */
 import { useStoreEvents } from '../stores/storeEvents'
@@ -103,6 +104,10 @@ const timeOutClear = () => {
   clearInterval(timeout)
 }
 
+//Preloader
+const loading = ref(true)
+document.body.style.overflow = 'hidden'
+
 onMounted(() => {
   storeEvents.getEvents()
   window.addEventListener('resize', updateBackgroundLines)
@@ -115,6 +120,10 @@ onMounted(() => {
       counter++
     }
   }, 1000)
+  setTimeout(() => {
+    loading.value = false
+    document.body.style.overflow = 'visible'
+  }, 3250)
 })
 
 onUnmounted(() => {
@@ -123,6 +132,7 @@ onUnmounted(() => {
 </script>
 
 <template>
+  <Preloader class="absolute top-0 left-0 right-0 z-[11]" :class="{ display: !loading }" />
   <div class="relative">
     <Event />
 
@@ -204,6 +214,10 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+.display {
+  display: none;
+}
+
 .active {
   background-color: #1ecece;
   border-color: #1ecece;

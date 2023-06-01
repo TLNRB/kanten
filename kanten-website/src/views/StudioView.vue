@@ -1,5 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import Preloader from '../components/Preloader.vue'
+
 /* ---------- Importing Images ---------- */
 import sculpture from '../images/sculpture.svg'
 import wavyLinesLong from '../images/wavyLinesThreeLong.svg'
@@ -10,14 +12,6 @@ import { useStoreStudio } from '../stores/storeStudio'
 
 /* ---------- Stores ---------- */
 const storeStudio = useStoreStudio()
-
-/* ---------- Assigning a column number between (1-3) to each image ---------- */
-/* const assignNumber = () => {
-  for (let i = 0; i < gallery.length; i++) {
-    gallery.value[i].cols = (i % 3) + 1
-    console.log(gallery.value)
-  }
-} */
 
 /* ---------- Filtering images based on column value ---------- */
 const filteredImages = (colNum) => {
@@ -32,10 +26,20 @@ function handleResize() {
 }
 
 /*---------- Add resize event listener when component is mounted ---------- */
+//Preloader
+const loading = ref(true)
+document.body.style.overflow = 'hidden'
+
+// Simulate a delay to show the preloader
 onMounted(() => {
   window.addEventListener('resize', handleResize)
   storeStudio.getStudio()
+  setTimeout(() => {
+    loading.value = false
+    document.body.style.overflow = 'visible'
+  }, 3250)
 })
+
 /*---------- Remove resize event listener when component is mounted ---------- */
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
@@ -43,6 +47,7 @@ onUnmounted(() => {
 </script>
 
 <template>
+  <Preloader class="absolute top-0 left-0 right-0 z-[11]" :class="{ display: !loading }" />
   <section
     class="bg-[url('../images/gridGray.svg')] overflow-x-hidden flex flex-col mt-[6.875rem] pt-[1rem] sm:pt-[2rem] md:mt-[7.875rem] lg:pt-[4rem] xl:mt-[8.375rem]"
   >
@@ -159,4 +164,8 @@ onUnmounted(() => {
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.display {
+  display: none;
+}
+</style>

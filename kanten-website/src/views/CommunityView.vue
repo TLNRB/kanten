@@ -1,13 +1,28 @@
 <script setup>
+import { ref, onMounted } from 'vue'
+import Preloader from '../components/Preloader.vue'
+import { RouterLink } from 'vue-router'
+
 /* ---------- Importing Images ---------- */
 import handLeft from '../images/handLeft.svg'
 import handRight from '../images/handRight.svg'
 import lock from '../images/lock.svg'
 
-import { RouterLink } from 'vue-router'
+//Preloader
+const loading = ref(true)
+document.body.style.overflow = 'hidden'
+
+// Simulate a delay to show the preloader
+onMounted(() => {
+  setTimeout(() => {
+    loading.value = false
+    document.body.style.overflow = 'visible'
+  }, 3250)
+})
 </script>
 
 <template>
+  <Preloader class="absolute top-0 left-0 right-0 z-[11]" :class="{ display: !loading }" />
   <section
     class="overflow-x-hidden flex flex-col mt-[6.875rem] py-[3rem] sm:py-[4rem] md:mt-[7.875rem] lg:pb-[5rem] xl:mt-[8.375rem]"
   >
@@ -97,4 +112,8 @@ import { RouterLink } from 'vue-router'
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.display {
+  display: none;
+}
+</style>
