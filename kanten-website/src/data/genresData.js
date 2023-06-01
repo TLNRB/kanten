@@ -1,8 +1,7 @@
-import { ref } from 'vue'
-import videoDub from '../images/dub-genre_1.mp4'
-import videoDeft from '../images/deft-genre_1.mp4'
-import videoManaClub from '../images/manaclub-genre_1.mp4'
-import videoVertex from '../images/vertex-genre_1.mp4'
+import vertexGenre from '../images/vertexGenre.svg'
+import deftGenre from '../images/deftGenre.svg'
+import manaClubGenre from '../images/manaClubGenre.svg'
+import dubGenre from '../images/dubGenre.svg'
 import logoDub from '../images/dubLogo.svg'
 import logoDeft from '../images/deftLogo.svg'
 import logoManaClub from '../images/manaClubLogo.svg'
@@ -11,7 +10,7 @@ import logoVertex from '../images/vertexLogo.svg'
 const genresData = [
   {
     id: 1,
-    video: videoManaClub,
+    cover: manaClubGenre,
     logo: logoManaClub,
     title: 'Mana Club',
     category: 'manaClub',
@@ -23,7 +22,7 @@ const genresData = [
   },
   {
     id: 2,
-    video: videoDeft,
+    cover: deftGenre,
     logo: logoDeft,
     title: 'Deft',
     category: 'deft',
@@ -35,7 +34,7 @@ const genresData = [
   },
   {
     id: 3,
-    video: videoVertex,
+    cover: vertexGenre,
     logo: logoVertex,
     title: 'Vertex',
     category: 'vertex',
@@ -47,7 +46,7 @@ const genresData = [
   },
   {
     id: 4,
-    video: videoDub,
+    cover: dubGenre,
     logo: logoDub,
     title: 'Dub',
     category: 'dub',

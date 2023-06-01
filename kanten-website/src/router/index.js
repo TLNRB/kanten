@@ -15,6 +15,8 @@ import VolunteerView from '../views/VolunteerView.vue'
 import LoginView from '../views/LoginView.vue'
 import AdminView from '../views/AdminView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
+/* ---------- Import Stores ---------- */
+import { useStoreEvents } from '../stores/storeEvents.js'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,7 +36,22 @@ const router = createRouter({
       path: '/events/:id',
       name: 'singleeventview',
       component: SingleEventView,
-      props: true
+      props: true,
+      beforeEnter(to) {
+        /* ---------- Stores ---------- */
+        const storeEvents = useStoreEvents()
+        const id = to.params.id
+        const exists = storeEvents.events.some((event) => event.id === id)
+
+        if (!exists) {
+          return {
+            name: 'notfound',
+            params: { pathMatch: to.path.substring(1).split('/') },
+            query: to.query,
+            hash: to.hash
+          }
+        }
+      }
     },
     {
       path: '/genres',
@@ -42,22 +59,22 @@ const router = createRouter({
       component: GenresView
     },
     {
-      path: '/manaClub',
+      path: '/genres/manaClub',
       name: 'manaClub',
       component: ManaClubView
     },
     {
-      path: '/vertex',
+      path: '/genres/vertex',
       name: 'vertex',
       component: VertexView
     },
     {
-      path: '/deft',
+      path: '/genres/deft',
       name: 'deft',
       component: DeftView
     },
     {
-      path: '/dub',
+      path: '/genres/dub',
       name: 'dub',
       component: DubView
     },

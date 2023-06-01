@@ -2,6 +2,8 @@
 import { ref, reactive, onMounted } from 'vue'
 import allGenresData from '../data/genresData.js'
 import { RouterLink } from 'vue-router'
+/* Immport Images */
+import wavyLinesBlack from '../images/wavyLinesBlack.svg'
 
 const genresData = ref(allGenresData)
 
@@ -29,9 +31,9 @@ const handleGenreState = (id) => {
 </script>
 
 <template>
-  <main class="mt-[6.875rem] pt-[2.5rem] overflow-x-hidden] lg:mt-[7.875rem] xl:mt-[8.375rem]">
+  <main class="mt-[6.875rem] py-[2.5rem] overflow-x-hidden lg:mt-[7.875rem] xl:mt-[8.375rem]">
     <div
-      class="mt-[1rem] mb-[4rem] flex flex-wrap items-center justify-center gap-[1.25rem] px-[1rem] md:px-[4rem] md:gap-[2rem] md:mt-[2rem] lg:mt-[3rem] xxl:px-[12.5rem]"
+      class="mt-[1rem] mb-[2.5rem] flex flex-wrap items-center justify-center gap-[1.25rem] px-[1rem] md:px-[4rem] md:gap-[2rem] lg:mb-[1rem] md:mt-[1.5rem] lg:mt-[3rem] xxl:px-[12.5rem]"
     >
       <button
         v-for="genre in genres"
@@ -50,71 +52,32 @@ const handleGenreState = (id) => {
         >
       </button>
     </div>
-    <!-- <div
+
+    <div
       v-for="genre in genresData"
       :key="genre.id"
-      class="translate-y-[-2rem]"
-      :class="[activeFilter == genre.category ? 'block' : 'hidden']"
+      class="relative"
+      :class="[genre.category == activeFilter ? 'block' : 'hidden']"
     >
-      <video
-        :src="filteredGenre.video"
-        autoplay
-        muted
-        type="video/mp4"
-        class="w-[100%] md:w-[750px] md:mx-auto"
-      ></video>
-      <div
-        class="text-darkText leading-snug relative py-[4rem] px-[1rem] md:px-[4rem] xxl:px-[12.5rem]"
-        :class="`background-${activeFilter}`"
-      >
+      <img
+        class="w-[275px] mx-auto px-[1rem] xs:w-[360px] sm:w-[560px] md:w-[768px] lg:w-[900px]"
+        :src="genre.cover"
+        :alt="`${genre.title} logo`"
+      />
+      <div :class="`background-${activeFilter}`">
         <div
-          class="flex flex-col gap-[2.5rem] md:absolute md:w-[400px] md:top-[-6rem] md:right-[50%] md:translate-x-[82.5%] md:text-white"
-        >
-          <p class="font-[500] sm:text-[1.25rem]">
-            {{ filteredGenre.mainDesc }}
-          </p>
-          <RouterLink
-            :to="`/${activeFilter}`"
-            class="flex flex-col w-fit mr-auto text-[1rem] relative group"
-          >
-            <span
-              class="font-[500] py-[.375rem] px-[1.125rem] border-[1px] border-darkBG text-darkText z-[1] ease-in duration-[.2s] sm:py-[.5rem] sm:px-[1.25rem] sm:text-[1.5rem]"
-              :class="`background-${activeFilter}`"
-              >Explore Events</span
-            >
-            <span
-              class="font-[500] py-[.375rem] px-[1.125rem] border-[1px] border-darkBG absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s] sm:py-[.5rem] sm:px-[1.25rem] sm:text-[1.5rem]"
-              >Explore Events</span
-            >
-          </RouterLink>
-        </div>
-      </div>
-    </div> -->
-    <div class="translate-y-[-2rem]">
-      <video
-        :src="filteredGenre.video"
-        autoplay
-        muted
-        type="video/mp4"
-        class="w-[100%] md:w-[750px] md:mx-auto"
-      ></video>
-      <div
-        class="text-darkText leading-snug relative py-[4rem] px-[1rem] md:px-[4rem] xxl:px-[12.5rem]"
-        :class="`background-${activeFilter}`"
-      >
-        <div
-          class="flex flex-col gap-[2.5rem] md:absolute md:w-[400px] md:top-[-6rem] md:right-[50%] md:translate-x-[82.5%] md:text-white"
+          class="flex flex-col gap-[2.5rem] text-darkText leading-snug mt-[-3.5rem] pt-[6rem] pb-[2rem] px-[1rem] xs:mt-[-4.5rem] xs:pt-[7rem] sm:mt-[-7.5rem] sm:pt-[10.5rem] sm:pb-[3rem] md:px-[4rem] md:w-[700px] md:mx-auto md:mt-[-9rem] md:pt-[12rem] md:pb-[4rem] lg:mt-[-11rem] lg:pt-[2rem]"
           :class="[
-            activeFilter == 'manaClub' || activeFilter == 'deft'
-              ? 'md:top-[-6rem] md:right-[50%] md:translate-x-[82.5%]'
-              : 'md:top-[-6rem] md:left-[50%] md:translate-x-[-82.5%]'
+            genre.category == 'manaClub' || genre.category == 'deft'
+              ? 'lg:translate-x-[35%] lg:w-[590px] '
+              : 'lg:translate-x-[-42.5%] lg:w-[535px] xxl:translate-x-[-45%] xxl:w-[525px]'
           ]"
         >
-          <p class="font-[500] sm:text-[1.25rem]">
-            {{ filteredGenre.mainDesc }}
+          <p class="font-[500] sm:text-[1.25rem] lg:text-[1.5rem]">
+            {{ genre.mainDesc }}
           </p>
           <RouterLink
-            :to="`/${activeFilter}`"
+            :to="`/genres/${activeFilter}`"
             class="flex flex-col w-fit mr-auto text-[1rem] relative group"
           >
             <span
@@ -130,6 +93,52 @@ const handleGenreState = (id) => {
         </div>
       </div>
     </div>
+
+    <!-- <div class="sm:translate-y-[-2rem] lg:translate-y-[-3.75rem]">
+      <video
+        :src="filteredGenre.video"
+        autoplay
+        muted
+        type="video/mp4"
+        class="w-[100%] scale-[130%] sm:scale-100 md:w-[768px] md:mx-auto lg:w-[1060px] xl:w-[1150px]"
+      ></video>
+      <div
+        class="bg-[url('../images/squareGrid.svg')] flex pt-[20%] pb-[2rem] px-[1rem] xs:pt-[17.5%] sm:py-[4rem] md:px-[4rem] lg:items-center xxl:px-[12.5rem]"
+        :class="`background-${activeFilter}`"
+      >
+        <img
+          class="hidden w-[200px] lg:block xl:w-[240px] xxxl:w-[280px]"
+          :src="wavyLinesBlack"
+          alt="Wavy Lines"
+        />
+        <div
+          class="flex flex-col gap-[2.5rem] text-darkText leading-snug sm:w-[500px] sm:mx-auto md:w-[550px]"
+        >
+          <p class="font-[500] sm:text-[1.25rem] lg:text-[1.5rem] lg:text-center">
+            {{ filteredGenre.mainDesc }}
+          </p>
+          <RouterLink
+            :to="`/genres/${activeFilter}`"
+            class="flex flex-col w-fit mr-auto text-[1rem] relative group lg:mx-auto"
+          >
+            <span
+              class="font-[500] py-[.375rem] px-[1.125rem] border-[1px] border-darkBG text-darkText z-[1] ease-in duration-[.2s] sm:py-[.5rem] sm:px-[1.25rem] sm:text-[1.5rem]"
+              :class="`background-${activeFilter}`"
+              >Explore Events</span
+            >
+            <span
+              class="font-[500] py-[.375rem] px-[1.125rem] border-[1px] border-darkBG absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s] sm:py-[.5rem] sm:px-[1.25rem] sm:text-[1.5rem]"
+              >Explore Events</span
+            >
+          </RouterLink>
+        </div>
+        <img
+          class="hidden w-[200px] lg:block xl:w-[240px] xxxl:w-[280px]"
+          :src="wavyLinesBlack"
+          alt="Wavy Lines"
+        />
+      </div>
+    </div> -->
   </main>
 </template>
 

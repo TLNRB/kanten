@@ -123,7 +123,7 @@ onMounted(() => {
         class="flex flex-col w-fit mt-[1rem] mx-auto text-[1rem] relative group sm:mt-[1.5rem]"
       >
         <span
-          class="font-[500] py-[.375rem] px-[1.125rem] border-[1px] bg-manaClub border-darkBG text-darkText z-[1] group-hover:text-lightText ease-in duration-[.15s] delay-[.05s] sm:py-[.5rem] sm:px-[1.25rem] sm:text-[1.5rem]"
+          class="font-[500] py-[.375rem] px-[1.125rem] border-[1px] bg-manaClub border-darkBG text-darkText z-[1] ease-in duration-[.15s] delay-[.05s] sm:py-[.5rem] sm:px-[1.25rem] sm:text-[1.5rem]"
           >Explore Events</span
         >
         <span
