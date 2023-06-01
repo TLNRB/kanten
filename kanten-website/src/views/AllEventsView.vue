@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, onMounted, onUnmounted } from 'vue'
 /* ---------- Importing Section Components ---------- */
 import Event from '../components/EventView/Event.vue'
 
@@ -8,13 +8,44 @@ import { useStoreEvents } from '../stores/storeEvents'
 /* ---------- Stores ---------- */
 const storeEvents = useStoreEvents()
 
+/* ---------- Genres with filter ---------- */
+let activeFilter = 'all'
+let filteredEvents = ref('')
+
+const genres = reactive([
+  { id: 0, name: 'All', filter: 'all', active: true },
+  { id: 1, name: 'Mana Club', filter: 'manaClub', active: false },
+  { id: 2, name: 'Vertex', filter: 'vertex', active: false },
+  { id: 3, name: 'Deft', filter: 'deft', active: false },
+  { id: 4, name: 'Dub', filter: 'dub', active: false },
+  { id: 5, name: 'Other', filter: 'other', active: false }
+])
+
+const handleGenreState = (id) => {
+  genres.forEach((genre) => {
+    if (genre.id == id) {
+      genre.active = true
+      activeFilter = genre.filter
+      filteredEvents.value = storeEvents.events.filter(
+        (event) => event.genre == activeFilter || activeFilter == 'all'
+      )
+    } else {
+      genre.active = false
+    }
+  })
+  backgroundLines()
+}
+
+/* ---------- Background line(s) placement and calculations ---------- */
 let numLines = ref('')
 
 const backgroundLines = () => {
-  if (storeEvents.events.length % 2 == 0) {
-    numLines.value = storeEvents.events.length / 2
+  if (filteredEvents.value.length <= 1) {
+    numLines.value = 0
+  } else if (filteredEvents.value.length % 2 == 0) {
+    numLines.value = filteredEvents.value.length / 2
   } else {
-    numLines.value = Math.floor(storeEvents.events.length / 2)
+    numLines.value = Math.floor(filteredEvents.value.length / 2)
     numLines.value++
   }
 
@@ -26,30 +57,34 @@ const backgroundLines = () => {
     return numLines.value
   } else if (screenWidth > 1081 && screenWidth < 1863) {
     // Medium screens
-    if (
-      storeEvents.events.length % 4 == 0 ||
-      storeEvents.events.length % 4 == 1 ||
-      storeEvents.events.length % 4 == 2
+    if (filteredEvents.value.length <= 3) {
+      return (numLines.value = 0)
+    } else if (
+      filteredEvents.value.length % 4 == 0 ||
+      filteredEvents.value.length % 4 == 1 ||
+      filteredEvents.value.length % 4 == 2
     ) {
-      numLines.value = Math.floor(storeEvents.events.length / 4)
+      numLines.value = Math.floor(filteredEvents.value.length / 4)
       return numLines.value
     } else {
-      numLines.value = Math.floor(storeEvents.events.length / 4)
+      numLines.value = Math.floor(filteredEvents.value.length / 4)
       numLines.value++
       return numLines.value
     }
   } else {
     // Large screens
-    if (
-      storeEvents.events.length % 6 == 0 ||
-      storeEvents.events.length % 6 == 1 ||
-      storeEvents.events.length % 6 == 2 ||
-      storeEvents.events.length % 6 == 3
+    if (filteredEvents.value.length <= 3) {
+      return numLines.value
+    } else if (
+      filteredEvents.value.length % 6 == 0 ||
+      filteredEvents.value.length % 6 == 1 ||
+      filteredEvents.value.length % 6 == 2 ||
+      filteredEvents.value.length % 6 == 3
     ) {
-      numLines.value = Math.floor(storeEvents.events.length / 6)
+      numLines.value = Math.floor(filteredEvents.value.length / 6)
       return numLines.value
     } else {
-      numLines.value = Math.floor(storeEvents.events.length / 6)
+      numLines.value = Math.floor(filteredEvents.value.length / 6)
       numLines.value++
       return numLines.value
     }
@@ -61,10 +96,25 @@ const updateBackgroundLines = () => {
   backgroundLines() // Trigger re-computation of background lines
 }
 
+let timeout
+let counter = 0
+
+const timeOutClear = () => {
+  clearInterval(timeout)
+}
+
 onMounted(() => {
   storeEvents.getEvents()
-  backgroundLines()
   window.addEventListener('resize', updateBackgroundLines)
+  timeout = setInterval(() => {
+    if (counter == 15 || storeEvents.events.length != 0) {
+      handleGenreState(0)
+      backgroundLines()
+      timeOutClear()
+    } else {
+      counter++
+    }
+  }, 1000)
 })
 
 onUnmounted(() => {
@@ -78,11 +128,31 @@ onUnmounted(() => {
 
     <section class="pb-[4rem] px-[1rem] md:px-[4rem] lg:pb-[6rem] xxl:px-[12.5rem]">
       <div
-        v-if="storeEvents.events.length"
+        class="mt-[2.5rem] mb-[3rem] flex flex-wrap items-center justify-center gap-[1.25rem] lg:gap-[2rem] lg:mt-[1rem] lg:mb-[4rem]"
+      >
+        <button
+          v-for="genre in genres"
+          :key="genre.id"
+          class="flex flex-col text-center text-[1.25rem] relative group"
+          @click="handleGenreState(genre.id)"
+        >
+          <span
+            class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] border-baseColor z-[1] bg-darkBG ease-in duration-[.15s] delay-[.05s] group-hover:border-lightText group-hover:text-baseColor lg:py-[.5rem] lg:px-[1.25rem] lg:text-[1.5rem]"
+            :class="[genre.active ? 'active' : '']"
+            >{{ genre.name }}</span
+          >
+          <span
+            class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s] md:py-[.5rem] lg:px-[1.25rem] lg:text-[1.5rem]"
+            >{{ genre.name }}</span
+          >
+        </button>
+      </div>
+      <div
+        v-if="filteredEvents.length"
         class="flex flex-col justify-center items-center flex-wrap gap-[2.5rem] sm:gap-[4rem] sm:flex-row"
       >
         <div
-          v-for="event in storeEvents.events"
+          v-for="event in filteredEvents"
           :key="event.id"
           class="h-[416px] w-[248px] flex flex-col items-center p-[.5rem] bg-darkBG border-solid border-[1px] z-[1] border-baseColor xs:h-[434px] xs:w-[320px] sm:h-[580px] sm:w-[445px]"
         >
@@ -122,7 +192,7 @@ onUnmounted(() => {
       </div>
     </section>
     <section
-      class="absolute top-[587px] bottom-[272px] left-0 right-0 flex flex-col items-center gap-[456px] z-[-1] xs:top-[553px] xs:bottom-[282px] xs:gap-[474px] sm:top-[656px] sm:bottom-[354px] sm:gap-[644px] lg:top-[665px] lg:bottom-[386px] xxxl:top-[740px] xxxl:bottom-[386px]"
+      class="absolute bottom-[272px] left-0 right-0 flex flex-col items-center gap-[456px] z-[-1] xs:top-[727px] xs:bottom-[281px] xs:gap-[474px] sm:top-[824px] sm:bottom-[354px] sm:gap-[644px] md:top-[760px] lg:top-[799px] lg:bottom-[386px] xl:top-[842px] xxxl:top-[874px] xxxl:bottom-[386px]"
     >
       <div
         v-for="(line, index) in numLines"
@@ -133,4 +203,16 @@ onUnmounted(() => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.active {
+  background-color: #1ecece;
+  border-color: #1ecece;
+  transition: ease-in 0.2s;
+}
+
+.active:hover {
+  color: #f4f4f4;
+  border-color: #1ecece;
+  transition: ease-in 0.2s;
+}
+</style>
