@@ -97,7 +97,7 @@ onMounted(() => {
         Gallery
       </h2>
       <p class="font-[500] text-center leading-tight sm:text-[1.25rem] sm:font-semibold">
-        Check out some pictures from the previous years!
+        Swipe to check out some pictures from the previous years!
       </p>
       <div v-if="storeGenres.filteredGenres.length" class="my-[1rem] sm:mt-[2rem]">
         <swiper

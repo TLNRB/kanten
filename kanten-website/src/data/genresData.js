@@ -28,9 +28,10 @@ const genresData = [
     category: 'deft',
     mainDesc:
       "Unleash the beat, own the flow, and ignite the stage with hip-hop's electrifying glow.",
-    shortDesc: 'A place where music meets bass, and creates an ongoing and endless flow of waves.',
+    shortDesc:
+      'Unleash your inner rhythm and dive into the world of Deft, where the boundaries of hip-hop are pushed to the limit. ',
     longerDesc:
-      'Enter the Exuberant World of Mana Club: Surrender to the Beats, Ignite Your Spirit, and Dance Through the Night. Let Your Soul Soar in a Mesmerizing Rave Experience Like No Other!'
+      'Experience the relentless beats, intricate flows, and fearless lyricism that define Deft, as the genre blurs the lines and creates an electrifying fusion of innovation and raw authenticity.'
   },
   {
     id: 3,
@@ -40,9 +41,10 @@ const genresData = [
     category: 'vertex',
     mainDesc:
       'Where pulsating house beats converge, igniting an euphoric dance experience that resonates deep within.',
-    shortDesc: 'A place where music meets bass, and creates an ongoing and endless flow of waves.',
+    shortDesc:
+      'Get ready to ignite the dancefloor with Vertex, a genre-defying fusion of house and dancehall music. ',
     longerDesc:
-      'Enter the Exuberant World of Mana Club: Surrender to the Beats, Ignite Your Spirit, and Dance Through the Night. Let Your Soul Soar in a Mesmerizing Rave Experience Like No Other!'
+      'Feel the pulsating rhythms, infectious melodies, and irresistible grooves as Vertex takes you on a euphoric journey that bridges the worlds of electronic beats and vibes.'
   },
   {
     id: 4,
@@ -52,9 +54,10 @@ const genresData = [
     category: 'dub',
     mainDesc:
       'Reggae rises, vibes unite, and the rhythm of the islands transports you to a state of pure bliss.',
-    shortDesc: 'A place where music meets bass, and creates an ongoing and endless flow of waves.',
+    shortDesc:
+      'Step into the mesmerizing world of Dub, where the rich heritage of reggae meets the innovative realm of electronic music. ',
     longerDesc:
-      'Enter the Exuberant World of Mana Club: Surrender to the Beats, Ignite Your Spirit, and Dance Through the Night. Let Your Soul Soar in a Mesmerizing Rave Experience Like No Other!'
+      'Lose yourself in the deep basslines, ethereal echoes, and pulsating rhythms, surrendering to a sonic journey that transcends time and takes you on a captivating exploration of sound.'
   }
 ]
 

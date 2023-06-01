@@ -95,7 +95,7 @@ onMounted(() => {
       <div
         class="flex flex-col gap-[1.5rem] mt-[1.5rem] mb-[2.5rem] sm:mb-[3rem] lg:mt-[2rem] lg:mb-[4rem] lg:flex-row lg:items-center lg:justify-between"
       >
-        <p class="sm:text-[1.25rem] xl:text-[1.5rem]">
+        <p class="sm:text-[1.25rem] lg:w-[80%] xl:text-[1.5rem]">
           {{ event.shortDesc }}
         </p>
         <a

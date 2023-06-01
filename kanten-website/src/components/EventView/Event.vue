@@ -46,7 +46,7 @@
       </div>
     </div>
     <div
-      class="pt-[1rem] xs:text-[1rem] sm:text-[1.25rem] sm:py-[1rem] leading-snug xl:text-[1.5rem]"
+      class="pt-[1rem] xs:text-[1rem] sm:text-[1.25rem] sm:pt-[2.5rem] sm:pb-[1rem] leading-snug lg:pt-[4rem] xl:text-[1.5rem] xxxl:max-w-[1463px] xxxl:mx-auto"
     >
       Mark your calendars and prepare for unforgettable nights filled with non-stop music, wild
       energy, and incredible vibes. Don’t miss out on the hottest events in town – join us at

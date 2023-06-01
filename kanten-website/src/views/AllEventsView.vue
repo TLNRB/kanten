@@ -142,7 +142,7 @@ onUnmounted(() => {
             >{{ genre.name }}</span
           >
           <span
-            class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s] md:py-[.5rem] lg:px-[1.25rem] lg:text-[1.5rem]"
+            class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s] lg:py-[.5rem] lg:px-[1.25rem] lg:text-[1.5rem]"
             >{{ genre.name }}</span
           >
         </button>
