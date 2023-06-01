@@ -78,10 +78,24 @@ export const useStoreStudio = defineStore('storeStudio', {
     closeEditing(id) {
       const filteredStudio = this.studios.filter((studio) => studio.id === id)
 
-      if (filteredStudio[0].coverImgName !== this.coverImgName && this.coverImg != null) {
+      if (
+        filteredStudio[0].coverImgName !== this.coverImgName &&
+        this.coverImgName != null &&
+        this.coverImg != null
+      ) {
         // Create a reference to the image
         const imageRef = ref(getStorage(), this.coverImgName)
-        deleteObject(imageRef)
+        //Check if another event uses the same picture
+        let coverImageCondition = false
+        for (let i = 0; i < this.studios.length; i++) {
+          if (this.studios[i].coverImgName === this.coverImgName) {
+            coverImageCondition = true
+          }
+        }
+
+        if (!coverImageCondition) {
+          deleteObject(imageRef)
+        }
       }
       this.coverImg = null
       this.coverImgName = null
@@ -95,10 +109,26 @@ export const useStoreStudio = defineStore('storeStudio', {
     async updateImage(id) {
       const filteredStudio = this.studios.filter((studio) => studio.id === id)
 
-      if (filteredStudio[0].coverImg !== this.coverImg && this.coverImg !== null) {
+      if (
+        filteredStudio[0].coverImg !== this.coverImg &&
+        this.coverImgName != null &&
+        this.coverImg != null
+      ) {
         // Create a reference to the image
         const imageRef = ref(getStorage(), filteredStudio[0].coverImgName)
-        deleteObject(imageRef)
+        //Check if another event uses the same picture
+        let coverImageCondition = false
+        for (let i = 0; i < this.studios.length; i++) {
+          if (
+            this.studios[i].coverImgName === filteredStudio[0].coverImgName &&
+            this.studios[i].id !== filteredStudio[0].id
+          ) {
+            coverImageCondition = true
+          }
+        }
+        if (!coverImageCondition) {
+          deleteObject(imageRef)
+        }
 
         await updateDoc(doc(studioCollectionRef, id), {
           coverImgName: this.coverImgName,

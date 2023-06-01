@@ -5,6 +5,9 @@ import AllEventsView from '../views/AllEventsView.vue'
 import SingleEventView from '../views/SingleEventView.vue'
 import GenresView from '../views/GenresView.vue'
 import ManaClubView from '../views/Genre/ManaClubView.vue'
+import VertexView from '../views/Genre/VertexView.vue'
+import DeftView from '../views/Genre/DeftView.vue'
+import DubView from '../views/Genre/DubView.vue'
 import StudioView from '../views/StudioView.vue'
 import CommunityView from '../views/CommunityView.vue'
 import MembershipView from '../views/MembershipView.vue'
@@ -43,7 +46,21 @@ const router = createRouter({
       name: 'manaClub',
       component: ManaClubView
     },
-
+    {
+      path: '/vertex',
+      name: 'vertex',
+      component: VertexView
+    },
+    {
+      path: '/deft',
+      name: 'deft',
+      component: DeftView
+    },
+    {
+      path: '/dub',
+      name: 'dub',
+      component: DubView
+    },
     {
       path: '/studio',
       name: 'studio',

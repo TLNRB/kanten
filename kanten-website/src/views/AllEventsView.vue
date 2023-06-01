@@ -24,10 +24,29 @@ const backgroundLines = () => {
   if (screenWidth < 1082) {
     // Small screens
     return numLines.value
+  } else if (screenWidth > 1081 && screenWidth < 1863) {
+    // Medium screens
+    if (
+      storeEvents.events.length % 4 == 0 ||
+      storeEvents.events.length % 4 == 1 ||
+      storeEvents.events.length % 4 == 2
+    ) {
+      numLines.value = Math.floor(storeEvents.events.length / 4)
+      return numLines.value
+    } else {
+      numLines.value = Math.floor(storeEvents.events.length / 4)
+      numLines.value++
+      return numLines.value
+    }
   } else {
     // Large screens
-    if (storeEvents.events.length % 6 == 0) {
-      numLines.value = storeEvents.events.length / 6
+    if (
+      storeEvents.events.length % 6 == 0 ||
+      storeEvents.events.length % 6 == 1 ||
+      storeEvents.events.length % 6 == 2 ||
+      storeEvents.events.length % 6 == 3
+    ) {
+      numLines.value = Math.floor(storeEvents.events.length / 6)
       return numLines.value
     } else {
       numLines.value = Math.floor(storeEvents.events.length / 6)
@@ -68,7 +87,7 @@ onUnmounted(() => {
           class="h-[416px] w-[248px] flex flex-col items-center p-[.5rem] bg-darkBG border-solid border-[1px] z-[1] border-baseColor xs:h-[434px] xs:w-[320px] sm:h-[580px] sm:w-[445px]"
         >
           <img class="object-cover h-[260px] w-[100%] sm:h-[348px]" :src="event.coverImg" />
-          <div class="ml-[.25rem] flex flex-col justify-center">
+          <div class="ml-[.25rem] w-[100%] flex flex-col justify-center">
             <h1
               class="font-bold leading-none text-[1.25rem] z-[1] relative top-[-.5rem] drop-shadow-xl xs:text-[1.75rem] xs:top-[-.75rem] sm:text-[2.25rem] sm:top-[-1rem]"
             >
@@ -103,7 +122,7 @@ onUnmounted(() => {
       </div>
     </section>
     <section
-      class="absolute top-[587px] bottom-[272px] left-0 right-0 flex flex-col items-center gap-[456px] z-[-1] xs:top-[553px] xs:bottom-[282px] xs:gap-[474px] sm:top-[656px] sm:bottom-[354px] sm:gap-[644px] lg:top-[665px] lg:bottom-[386px]"
+      class="absolute top-[587px] bottom-[272px] left-0 right-0 flex flex-col items-center gap-[456px] z-[-1] xs:top-[553px] xs:bottom-[282px] xs:gap-[474px] sm:top-[656px] sm:bottom-[354px] sm:gap-[644px] lg:top-[665px] lg:bottom-[386px] xxxl:top-[740px] xxxl:bottom-[386px]"
     >
       <div
         v-for="(line, index) in numLines"

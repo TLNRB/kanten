@@ -16,14 +16,14 @@ const genresData = ref(allGenresData)
 
 /*----- Filter the correct genre images -----*/
 const filterImages = () => {
-  storeGenres.filteredGenres = storeGenres.genres.filter((image) => image.genre == 'manaClub')
+  storeGenres.filteredGenres = storeGenres.genres.filter((image) => image.genre == 'deft')
 }
 
 /*----- Finding the correct genre -----*/
 let genre = ref('')
 
 const genresFilter = () => {
-  genre.value = genresData.value.find((item) => item.category == 'manaClub')
+  genre.value = genresData.value.find((item) => item.category == 'deft')
 }
 
 /*----- Routing -----*/
@@ -80,7 +80,7 @@ onMounted(() => {
           class="flex flex-col w-fit mt-[1rem] ml-auto text-[1rem] relative group sm:mt-[1.5rem] sm:mb-[1.25rem]"
         >
           <span
-            class="font-[500] py-[.375rem] px-[1.125rem] border-[1px] bg-darkBG border-manaClub z-[1] group-hover:text-manaClub group-hover:border-lightText ease-in duration-[.15s] delay-[.05s] sm:py-[.5rem] sm:px-[1.25rem] sm:text-[1.5rem]"
+            class="font-[500] py-[.375rem] px-[1.125rem] border-[1px] bg-darkBG border-deft z-[1] group-hover:text-deft group-hover:border-lightText ease-in duration-[.15s] delay-[.05s] sm:py-[.5rem] sm:px-[1.25rem] sm:text-[1.5rem]"
             >Go Back</span
           >
           <span
@@ -91,7 +91,7 @@ onMounted(() => {
       </div>
     </div>
     <div
-      class="bg-[url('../images/squareGrid.svg')] flex flex-col gap-[1rem] items-center bg-manaClub text-darkText py-[2rem] px-[1rem] sm:py-[2.5rem] md:py-[4rem] md:px-[4rem] xxl:px-[12.5rem]"
+      class="bg-[url('../images/squareGrid.svg')] flex flex-col gap-[1rem] items-center bg-deft text-darkText py-[2rem] px-[1rem] sm:py-[2.5rem] md:py-[4rem] md:px-[4rem] xxl:px-[12.5rem]"
     >
       <h2 class="text-[2.5rem] font-bold uppercase sm:text-[4rem] md:text-[4.5rem] md:leading-none">
         Gallery
@@ -123,7 +123,7 @@ onMounted(() => {
         class="flex flex-col w-fit mt-[1rem] mx-auto text-[1rem] relative group sm:mt-[1.5rem]"
       >
         <span
-          class="font-[500] py-[.375rem] px-[1.125rem] border-[1px] bg-manaClub border-darkBG text-darkText z-[1] group-hover:text-lightText ease-in duration-[.15s] delay-[.05s] sm:py-[.5rem] sm:px-[1.25rem] sm:text-[1.5rem]"
+          class="font-[500] py-[.375rem] px-[1.125rem] border-[1px] bg-deft border-darkBG text-darkText z-[1] group-hover:text-lightText ease-in duration-[.15s] delay-[.05s] sm:py-[.5rem] sm:px-[1.25rem] sm:text-[1.5rem]"
           >Explore Events</span
         >
         <span
