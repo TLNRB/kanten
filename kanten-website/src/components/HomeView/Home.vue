@@ -15,7 +15,7 @@ const { statueK } = defineProps(['statueK'])
         alt="Statue blowing a bubble gum between Kanten's K letter"
       />
       <div
-        class="mx-auto mt-[.5rem] text-center text-[2.5rem] xs:text-[3rem] sm:text-[4rem] xl:text-[5rem] xxxl:text-[6rem]"
+        class="mx-auto mt-[2rem] text-center text-[2.5rem] xs:text-[3rem] sm:text-[4rem] sm:mt-[3rem] xl:text-[5rem] xxxl:text-[6rem]"
       >
         <div class="flex flex-col items-center w-fit mx-auto sm:flex-row sm:gap-[1rem]">
           <p class="flex flex-col relative uppercase leading-none sm:leading-none">
@@ -23,7 +23,7 @@ const { statueK } = defineProps(['statueK'])
             <span class="textStroke">Experience</span>
           </p>
           <p
-            class="font-semibold text-[1.25rem] leading-snug xs:text-[1.5rem] sm:text-[2rem] sm:translate-y-[.5rem] xxl:text-[2.5rem]"
+            class="font-semibold text-[1.25rem] leading-snug xs:text-[1.5rem] sm:text-[2rem] xxl:text-[2.5rem]"
           >
             the Edge
           </p>

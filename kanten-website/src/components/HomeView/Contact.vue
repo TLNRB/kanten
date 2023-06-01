@@ -29,7 +29,7 @@ const sendMessage = () => {
 
 <template>
   <section
-    class="flex flex-col py-[4rem] px-[1rem] md:px-[4rem] lg:py-[6rem] xxl:px-[12.5rem] overflow-x-hidden"
+    class="flex flex-col pt-[3rem] pb-[4rem] px-[1rem] md:pt-[4rem] md:px-[4rem] lg:py-[6rem] xxl:px-[12.5rem] overflow-x-hidden"
   >
     <h3
       class="text-[2rem] font-bold uppercase leading-none mb-[2rem] mx-auto md:mb-[4rem] md:text-[5rem]"
@@ -86,7 +86,7 @@ const sendMessage = () => {
           class="w-[100%] py-[.25rem] text-[1rem] border-b-[1px] border-baseColor bg-transparent outline-none sm:text-[1.125rem] sm:py-[.5rem] md:text-[1.25rem] md:py-[.75rem]"
           name="Message"
           required
-          placeholder="Message.."
+          placeholder="Message"
           v-model="contact.message"
         />
       </div>

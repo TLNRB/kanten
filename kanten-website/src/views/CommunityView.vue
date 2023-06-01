@@ -39,7 +39,7 @@ import { RouterLink } from 'vue-router'
         class="font-[500] text-center mb-[1.5rem] leading-snug sm:text-[1.25rem] md:w-[650px] md:mx-auto lg:w-[450px] lg:text-[1.5rem] lg:leading-tight xxxl:w-[490px]"
       >
         If you would like to become a part of this never ending journey, join our independent and
-        cohensive team today!
+        cohesive team today!
       </p>
       <div
         class="flex justify-center items-center lg:absolute lg:justify-between lg:px-[4rem] lg:w-[100%] lg:top-[-5rem] lg:left-[0] lg:right-[0] xl:top-[-5.5rem] xxl:px-[12.5rem] xxxl:top-[-6.5rem]"
@@ -86,10 +86,10 @@ import { RouterLink } from 'vue-router'
     >
       <img class="hidden md:block" :src="lock" alt="Lock" />
       <div class="flex justify-center flex-col gap-[1.5rem] sm:text-[1.25rem] lg:text-[1.5rem]">
-        <h4 class="font-semibold">Your privacy is importent to us!</h4>
+        <h4 class="font-semibold">Your privacy is important to us!</h4>
         <p>
-          By signing up, we will ask for a few important informations about you, such as you name,
-          phone number etc., but do not worry, we will always respect and keep your private stuff
+          By signing up, we will ask for a few important information about you, such as your name,
+          phone number etc., but do not worry, we will always respect and keep your private data
           safe and sound!
         </p>
       </div>

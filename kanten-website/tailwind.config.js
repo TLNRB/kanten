@@ -27,8 +27,8 @@ module.exports = {
         baseColor: '#1ECECE',
         manaClub: '#a809e5',
         vertex: '#ea3397',
-        dub: '#ffd930',
-        deft: '#20e062'
+        deft: '#20e062',
+        dub: '#ffd930'
       }
     }
   },

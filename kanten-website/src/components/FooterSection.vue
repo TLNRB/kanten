@@ -19,12 +19,6 @@ const route = useRoute()
 const updateFooter = () => {
   // Set footer based on the route name
   switch (route.name) {
-    case 'studio':
-      footerData.backgroundColor = '#181818'
-      footerData.textColor = '#F4F4F4'
-      footerData.display = 'flex'
-      footerData.image = screenWidth.value < 560 ? logoWhite : logoRectWhite
-      break
     case 'membership':
       footerData.display = 'none'
       break
@@ -32,6 +26,12 @@ const updateFooter = () => {
       footerData.display = 'none'
       break
     case 'singleeventview':
+      footerData.backgroundColor = '#181818'
+      footerData.textColor = '#F4F4F4'
+      footerData.display = 'flex'
+      footerData.image = screenWidth.value < 560 ? logoWhite : logoRectWhite
+      break
+    case 'genres':
       footerData.backgroundColor = '#181818'
       footerData.textColor = '#F4F4F4'
       footerData.display = 'flex'
@@ -132,7 +132,7 @@ onUnmounted(() => {
         />
       </div>
       <div
-        class="flex flex-col items-center w-[80px] md:gap-[.25rem] md:text-[1.125rem] md:w-[100px]"
+        class="flex flex-col items-center gap-[.25rem] w-[80px] md:gap-[.375rem] md:text-[1.125rem] md:w-[100px]"
       >
         <p
           class="cursor-pointer font-semibold hover:text-lightText ease-in duration-[.15s]"
@@ -144,24 +144,27 @@ onUnmounted(() => {
         </p>
       </div>
       <div
-        class="flex flex-col items-center gap-[1.6rem] w-[80px] text-[1.25rem] md:w-[100px] md:gap-[2.25rem] md:text-[1.5rem]"
+        class="flex flex-col items-center gap-[1.6rem] w-[80px] text-[1.25rem] md:w-[100px] md:gap-[1.5rem] md:text-[1.5rem]"
       >
-        <font-awesome-icon
-          class="cursor-pointer hover:text-lightText ease-in duration-[.15s]"
-          :icon="['fab', 'facebook-f']"
-        />
-        <font-awesome-icon
-          class="cursor-pointer hover:text-lightText ease-in duration-[.15s]"
-          :icon="['fab', 'linkedin-in']"
-        />
-        <font-awesome-icon
-          class="cursor-pointer hover:text-lightText ease-in duration-[.15s]"
-          :icon="['fab', 'instagram']"
-        />
+        <a href="https://www.facebook.com/kanten.esbjerg" target="_blank"
+          ><font-awesome-icon
+            class="cursor-pointer hover:text-lightText ease-in duration-[.15s]"
+            :icon="['fab', 'facebook-f']"
+        /></a>
+        <a href="https://www.instagram.com/kanten_esbjerg/" target="_blank"
+          ><font-awesome-icon
+            class="cursor-pointer hover:text-lightText ease-in duration-[.15s]"
+            :icon="['fab', 'instagram']"
+        /></a>
+        <a href="https://www.linkedin.com/company/kanten-esbjerg/about/" target="_blank"
+          ><font-awesome-icon
+            class="cursor-pointer hover:text-lightText ease-in duration-[.15s]"
+            :icon="['fab', 'linkedin-in']"
+        /></a>
       </div>
     </div>
     <p class="mx-auto pt-[1rem] text-[.875rem] md:pt-[1.25rem] md:text-[1rem]">
-      &copy; 2023 Kanten. All Rights Reserved
+      &copy; 2023 Kanten. All Rights Reserved.
     </p>
   </footer>
 </template>

@@ -92,6 +92,7 @@ onUnmounted(() => {
             high-quality rehearsal room. By virtue of Kanten's vision to help the musical growth
             layer to create music, a sound engineer will be offered who, according to agreement, can
             teach sound studio technique - as needed.
+            <br /><br />
             <span class="hidden xs:block"
               >With Kraftværket's location in Østerbyen, we want to raise interest in music,
               especially among local young people. The power plant can be used by anyone who plays
@@ -112,8 +113,8 @@ onUnmounted(() => {
         <p
           class="flex flex-col leading-none text-[2.5rem] uppercase relative translate-x-[-3rem] sm:translate-x-[2.5rem] sm:text-[4rem] lg:text-[5rem]"
         >
-          <span class="font-bold z-[1]">Photo</span>
-          <span class="font-bold text-baseColor absolute top-[2px] left-[2px] z-[0]">Photo</span>
+          <span class="font-bold z-[1]">Photos</span>
+          <span class="font-bold text-baseColor absolute top-[2px] left-[2px] z-[0]">Photos</span>
         </p>
         <p
           class="ml-auto font-semibold text-baseColor text-[1.5rem] leading-none sm:text-[2.5rem] lg:text-[3rem]"
