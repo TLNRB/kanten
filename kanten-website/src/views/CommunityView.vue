@@ -1,5 +1,6 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+import gsap from 'gsap'
 import Preloader from '../components/Preloader.vue'
 import { RouterLink } from 'vue-router'
 
@@ -12,12 +13,61 @@ import lock from '../images/lock.svg'
 const loading = ref(true)
 document.body.style.overflow = 'hidden'
 
+//Coontent animation
+const title = ref(null)
+const word = ref(null)
+const leftHand = ref(null)
+const rightHand = ref(null)
+
 // Simulate a delay to show the preloader
 onMounted(() => {
   setTimeout(() => {
     loading.value = false
     document.body.style.overflow = 'visible'
   }, 3250)
+  const tl = gsap.timeline({
+    delay: loading ? 3.2 : 0
+  })
+
+  tl.from(title.value, {
+    color: '#f4f4f4',
+    duration: 0.4,
+    ease: 'Power1'.easeInOut
+  })
+    .from(
+      word.value,
+
+      {
+        color: '#f4f4f4',
+        duration: 0.35,
+        ease: 'Power1'.easeInOut
+      },
+      0.3
+    )
+    .from(
+      leftHand.value,
+
+      {
+        x: window.innerWidth > 1060 ? -50 : -25,
+        opacity: 0,
+        duration: 0.75
+      },
+      0.5
+    )
+    .from(
+      rightHand.value,
+
+      {
+        x: window.innerWidth > 1060 ? 50 : 25,
+        opacity: 0,
+        duration: 0.75
+      },
+      0.5
+    )
+
+  onUnmounted(() => {
+    tl.kill()
+  })
 })
 </script>
 
@@ -35,15 +85,16 @@ onMounted(() => {
         <p
           class="flex flex-col leading-none text-[2.5rem] uppercase relative sm:text-[4rem] lg:text-[5rem]"
         >
-          <span class="font-bold text-baseColor z-[1]">Community</span>
+          <span class="font-bold text-baseColor z-[1]" ref="title">Community</span>
           <span class="font-bold absolute top-[2px] left-[2px] z-[0]">Community</span>
         </p>
       </h1>
       <p
         class="font-[500] leading-snug text-center sm:text-[1.25rem] md:w-[650px] md:mx-auto lg:w-[450px] lg:text-[1.5rem] lg:leading-tight xxxl:w-[490px]"
       >
-        Kanten is made and driven by <span class="font-[500] text-baseColor">you</span> just as much
-        as by us! Join us on this awesome journey and make this city a better place!
+        Kanten is made and driven by
+        <span class="font-[500] text-baseColor" ref="word">you</span> just as much as by us! Join us
+        on this awesome journey and make this city a better place!
       </p>
     </div>
     <!-- Call to action -->
@@ -61,11 +112,13 @@ onMounted(() => {
       >
         <img
           class="w-[120px] sm:w-[200px] md:w-[250px] lg:w-[275px] xl:w-[300px] xxxl:w-[350px]"
+          ref="leftHand"
           :src="handLeft"
           alt="Hand pointing ro the right"
         />
         <img
           class="w-[120px] sm:w-[200px] md:w-[250px] lg:w-[275px] xl:w-[300px] xxxl:w-[350px]"
+          ref="rightHand"
           :src="handRight"
           alt="Hand pointing to the left"
         />

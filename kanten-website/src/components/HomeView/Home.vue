@@ -1,7 +1,41 @@
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+import gsap from 'gsap'
 import { RouterLink } from 'vue-router'
 
-const { statueK } = defineProps(['statueK'])
+const { statueK, loading } = defineProps(['statueK', 'loading'])
+
+//Coontent animation
+const title = ref(null)
+const image = ref(null)
+
+// Simulate a delay to show the preloader
+onMounted(() => {
+  const tl = gsap.timeline({
+    delay: loading ? 3.1 : 0
+  })
+
+  tl.from(image.value, {
+    y: window.innerWidth > 1060 ? 0 : -50,
+    x: window.innerWidth > 1060 ? 50 : 0,
+    opacity: 0,
+    duration: 0.75
+  }).from(
+    title.value,
+
+    {
+      y: window.innerWidth > 1060 ? 0 : -50,
+      x: window.innerWidth > 1060 ? -50 : 0,
+      opacity: 0,
+      duration: 0.75
+    },
+    window.innerWidth > 1060 ? 0 : 0.25
+  )
+
+  onUnmounted(() => {
+    tl.kill()
+  })
+})
 </script>
 
 <template>
@@ -11,11 +45,13 @@ const { statueK } = defineProps(['statueK'])
     <div class="lg:flex lg:flex-row-reverse lg:items-center lg:justify-center gap-[0rem]">
       <img
         class="h-[20rem] mx-auto xs:h-[25rem] sm:h-[30rem] xl:h-[36rem]"
+        ref="image"
         :src="statueK"
         alt="Statue blowing a bubble gum between Kanten's K letter"
       />
       <div
         class="mx-auto mt-[2rem] text-center text-[2.5rem] xs:text-[3rem] sm:text-[4rem] sm:mt-[3rem] xl:text-[5rem] xxxl:text-[6rem]"
+        ref="title"
       >
         <div class="flex flex-col items-center w-fit mx-auto sm:flex-row sm:gap-[1rem]">
           <p class="flex flex-col relative uppercase leading-none sm:leading-none">

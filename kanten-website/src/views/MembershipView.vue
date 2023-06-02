@@ -1,5 +1,6 @@
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import gsap from 'gsap'
 import Preloader from '../components/Preloader.vue'
 import Successful from '../components/Successful.vue'
 
@@ -72,12 +73,54 @@ const closeModal = () => {
 const loading = ref(true)
 document.body.style.overflow = 'hidden'
 
+//Coontent animation
+const title1 = ref(null)
+const title2 = ref(null)
+const title3 = ref(null)
+
 // Simulate a delay to show the preloader
 onMounted(() => {
   setTimeout(() => {
     loading.value = false
     document.body.style.overflow = 'visible'
   }, 3250)
+
+  const tl = gsap.timeline({
+    delay: loading ? 3 : 0
+  })
+
+  tl.from(title3.value, {
+    y: window.innerWidth > 1060 ? -40 : -20,
+    opacity: 0,
+    duration: 0.75,
+    ease: 'Power1'.easeInOut
+  })
+    .from(
+      title2.value,
+
+      {
+        y: window.innerWidth > 1060 ? -40 : -20,
+        opacity: 0,
+        duration: 0.75,
+        ease: 'Power1'.easeInOut
+      },
+      0.3
+    )
+    .from(
+      title1.value,
+
+      {
+        y: window.innerWidth > 1060 ? -40 : -20,
+        opacity: 0,
+        duration: 0.75,
+        ease: 'Power1'.easeInOut
+      },
+      0.6
+    )
+
+  onUnmounted(() => {
+    tl.kill()
+  })
 })
 </script>
 
@@ -88,11 +131,15 @@ onMounted(() => {
     class="relative overflow-hidden min-h-[100vh] flex flex-col justify-center pt-[6.875rem] pb-[4rem] px-[1rem] xs:pt-[7.875rem] md:px-[4rem] md:pt-[9.875rem] md:pb-[5rem] xl:pt-[11rem] xl:pb-[6rem] xxl:px-[12.5rem]"
   >
     <div class="flex flex-col items-center justify-center w-[240px] mx-auto my-[1rem] md:w-[645px]">
-      <p class="text-[1.25rem] font-semibold mr-auto leading-tight md:text-[3rem] md:leading-none">
+      <p
+        class="text-[1.25rem] font-semibold mr-auto leading-tight md:text-[3rem] md:leading-none"
+        ref="title1"
+      >
         Become a
       </p>
       <h1
         class="flex flex-col relative text-[2rem] uppercase xs:text-[2.5rem] md:text-[5rem] leading-none"
+        ref="title2"
       >
         <span class="font-bold text-baseColor z-[1]">Member</span>
         <span
@@ -102,6 +149,7 @@ onMounted(() => {
       </h1>
       <p
         class="text-[1.25rem] font-semibold text-baseColor ml-auto leading-tight md:text-[3rem] md:leading-none"
+        ref="title3"
       >
         of Kanten
       </p>

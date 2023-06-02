@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import gsap from 'gsap'
 /* ---------- Importing Section Components ---------- */
 import Preloader from '../components/Preloader.vue'
 import Home from '../components/HomeView/Home.vue'
@@ -42,7 +43,7 @@ onMounted(() => {
 
 <template>
   <Preloader class="absolute top-0 left-0 right-0 z-[11]" :class="{ display: !loading }" />
-  <Home :statueK="statueK" />
+  <Home :statueK="statueK" :loading="loading" />
   <About :statue="statue" :wavyLines="wavyLinesBlack" :boldLines="boldLinesBlack" />
   <Events :storeEvents="storeEvents" />
   <Collaborators :collabs="collabs" :sculpture="sculpture" :loop="loop" />

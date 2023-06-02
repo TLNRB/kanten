@@ -134,7 +134,7 @@ onUnmounted(() => {
 <template>
   <Preloader class="absolute top-0 left-0 right-0 z-[11]" :class="{ display: !loading }" />
   <div class="relative">
-    <Event />
+    <Event :loading="loading" />
 
     <section class="pb-[4rem] px-[1rem] md:px-[4rem] lg:pb-[6rem] xxl:px-[12.5rem]">
       <div

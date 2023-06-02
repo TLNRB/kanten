@@ -1,5 +1,6 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+import gsap from 'gsap'
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'
 // Import Swiper styles
@@ -44,6 +45,10 @@ const timeOutClear = () => {
 const loading = ref(true)
 document.body.style.overflow = 'hidden'
 
+//Coontent animation
+const image = ref(null)
+const container = ref(null)
+
 // Simulate a delay to show the preloader
 onMounted(() => {
   storeGenres.getGenres()
@@ -60,6 +65,31 @@ onMounted(() => {
     loading.value = false
     document.body.style.overflow = 'visible'
   }, 3250)
+
+  const tl = gsap.timeline({
+    delay: loading ? 3.1 : 0
+  })
+
+  tl.from(container.value, {
+    y: window.innerWidth > 1060 ? 0 : -40,
+    x: window.innerWidth > 1060 ? 50 : 0,
+    opacity: 0,
+    duration: 0.75
+  }).from(
+    image.value,
+
+    {
+      y: window.innerWidth > 1060 ? 0 : -40,
+      x: window.innerWidth > 1060 ? -50 : 0,
+      opacity: 0,
+      duration: 0.75
+    },
+    window.innerWidth > 1060 ? 0 : 0.3
+  )
+
+  onUnmounted(() => {
+    tl.kill()
+  })
 })
 </script>
 
@@ -73,11 +103,13 @@ onMounted(() => {
     >
       <img
         class="xs:h-[375px] xs:mx-auto sm:h-[520px] md:h-[600px] lg:h-[500px] lg:translate-y-[-4rem] lg:brightness-[85%] xxl:h-[550px]"
+        ref="image"
         :src="genre.logo"
         :alt="`${genre.title} Logo`"
       />
       <div
         class="flex flex-col gap-[1rem] mb-[1rem] translate-y-[-1.5rem] sm:mb-[1.5rem] md:translate-y-[-2.5rem] md:mb-[.5rem] lg:translate-y-0 lg:ml-[-1rem]"
+        ref="container"
       >
         <h1
           class="text-[2.5rem] font-bold leading-tight uppercase xs:text-[3rem] sm:text-[4.5rem] md:text-[5rem] lg:translate-y-[1rem] lg:text-[4.5rem] lg:translate-x-[-5px]"

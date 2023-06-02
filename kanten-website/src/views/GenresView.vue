@@ -1,5 +1,6 @@
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import gsap from 'gsap'
 import Preloader from '../components/Preloader.vue'
 import allGenresData from '../data/genresData.js'
 import { RouterLink } from 'vue-router'
@@ -32,12 +33,41 @@ const handleGenreState = (id) => {
 const loading = ref(true)
 document.body.style.overflow = 'hidden'
 
+//Coontent animation
+const image = ref(null)
+const container = ref(null)
+
 // Simulate a delay to show the preloader
 onMounted(() => {
   setTimeout(() => {
     loading.value = false
     document.body.style.overflow = 'visible'
   }, 3250)
+
+  const tl = gsap.timeline({
+    delay: loading ? 3.1 : 0
+  })
+
+  tl.from(container.value, {
+    y: window.innerWidth > 1060 ? 0 : -20,
+    x: window.innerWidth > 1060 ? 50 : 0,
+    opacity: 0,
+    duration: 0.75
+  }).from(
+    image.value,
+
+    {
+      y: window.innerWidth > 1060 ? 0 : -20,
+      x: window.innerWidth > 1060 ? -50 : 0,
+      opacity: 0,
+      duration: 0.75
+    },
+    window.innerWidth > 1060 ? 0 : 0.3
+  )
+
+  onUnmounted(() => {
+    tl.kill()
+  })
 })
 </script>
 
@@ -73,12 +103,14 @@ onMounted(() => {
     >
       <img
         class="w-[275px] mx-auto px-[1rem] xs:w-[360px] sm:w-[560px] md:w-[768px] lg:w-[900px]"
+        ref="image"
         :src="genre.cover"
         :alt="`${genre.title} logo`"
       />
       <div :class="`background-${activeFilter}`">
         <div
           class="flex flex-col gap-[2.5rem] text-darkText leading-snug mt-[-3.5rem] pt-[6rem] pb-[2rem] px-[1rem] xs:mt-[-4.5rem] xs:pt-[7rem] sm:mt-[-7.5rem] sm:pt-[10.5rem] sm:pb-[3rem] md:px-[4rem] md:w-[700px] md:mx-auto md:mt-[-9rem] md:pt-[12rem] md:pb-[4rem] lg:mt-[-11rem] lg:pt-[2rem]"
+          ref="container"
           :class="[
             genre.category == 'manaClub' || genre.category == 'deft'
               ? 'lg:translate-x-[35%] lg:w-[590px] '

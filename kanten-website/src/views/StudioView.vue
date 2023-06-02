@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import gsap from 'gsap'
 import Preloader from '../components/Preloader.vue'
 
 /* ---------- Importing Images ---------- */
@@ -30,6 +31,10 @@ function handleResize() {
 const loading = ref(true)
 document.body.style.overflow = 'hidden'
 
+//Coontent animation
+const title = ref(null)
+const image = ref(null)
+
 // Simulate a delay to show the preloader
 onMounted(() => {
   window.addEventListener('resize', handleResize)
@@ -38,6 +43,31 @@ onMounted(() => {
     loading.value = false
     document.body.style.overflow = 'visible'
   }, 3250)
+
+  const tl = gsap.timeline({
+    delay: loading ? 3.1 : 0
+  })
+
+  tl.from(title.value, {
+    x: window.innerWidth > 1060 ? 0 : -30,
+    y: window.innerWidth > 1060 ? -50 : 0,
+    opacity: 0,
+    duration: 0.75
+  }).from(
+    image.value,
+
+    {
+      x: window.innerWidth > 1060 ? 0 : 30,
+      y: window.innerWidth > 1060 ? -50 : 0,
+      opacity: 0,
+      duration: 0.75
+    },
+    window.innerWidth > 1060 ? 0.25 : 0
+  )
+
+  onUnmounted(() => {
+    tl.kill()
+  })
 })
 
 /*---------- Remove resize event listener when component is mounted ---------- */
@@ -56,6 +86,7 @@ onUnmounted(() => {
     >
       <div
         class="flex flex-col items-center justify-center gap-[1rem] sm:w-[340px] sm:mb-[-2rem] md:mb-0 lg:w-[410px]"
+        ref="title"
       >
         <div class="flex flex-col w-[100%]">
           <p
@@ -73,7 +104,12 @@ onUnmounted(() => {
         <img :src="screenWidth < 560 ? wavyLines : wavyLinesLong" alt="Wavy lines" />
       </div>
       <div>
-        <img class="h-[12rem] sm:h-[16rem] md:hidden" :src="sculpture" alt="Sculpture" />
+        <img
+          class="h-[12rem] sm:h-[16rem] md:hidden"
+          ref="image"
+          :src="sculpture"
+          alt="Sculpture"
+        />
       </div>
     </div>
     <div

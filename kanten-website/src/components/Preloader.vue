@@ -25,6 +25,8 @@ onMounted(() => {
       class="xs:w-[350px] sm:w-[450px] md:w-[500px] lg:w-[550px] xl:w-[600px]"
       :src="logoAnimation"
       autoplay
+      playsinline
+      webkit-playsinline
       muted
       type="video/mp4"
     ></video>
