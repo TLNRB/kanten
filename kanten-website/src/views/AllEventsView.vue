@@ -166,7 +166,11 @@ onUnmounted(() => {
           :key="event.id"
           class="h-[416px] w-[248px] flex flex-col items-center p-[.5rem] bg-darkBG border-solid border-[1px] z-[1] border-baseColor xs:h-[434px] xs:w-[320px] sm:h-[580px] sm:w-[445px]"
         >
-          <img class="object-cover h-[260px] w-[100%] sm:h-[348px]" :src="event.coverImg" />
+          <img
+            class="object-cover h-[260px] w-[100%] sm:h-[348px]"
+            :src="event.coverImg"
+            :alt="`Promo Image for ${event.title}`"
+          />
           <div class="ml-[.25rem] w-[100%] flex flex-col justify-center">
             <h1
               class="font-bold leading-none text-[1.25rem] z-[1] relative top-[-.5rem] drop-shadow-xl xs:text-[1.75rem] xs:top-[-.75rem] sm:text-[2.25rem] sm:top-[-1rem]"

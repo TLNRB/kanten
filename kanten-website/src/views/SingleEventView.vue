@@ -90,6 +90,7 @@ onMounted(() => {
     <img
       class="w-[100%] object-cover h-[300px] md:h-[400px] lg:h-[500px] xxl:h-[600px]"
       :src="event.coverImg"
+      :alt="`Promo Image for ${event.title}`"
     />
     <div class="flex flex-col justify-center px-[1rem] md:px-[4rem] xxl:px-[12.5rem]">
       <h1
