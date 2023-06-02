@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import gsap from 'gsap'
 /* ---------- Importing Section Components ---------- */
 import Preloader from '../components/Preloader.vue'
 import Home from '../components/HomeView/Home.vue'

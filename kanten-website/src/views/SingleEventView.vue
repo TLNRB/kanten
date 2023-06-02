@@ -1,5 +1,6 @@
 <script setup>
 import { toRefs, ref, computed, onMounted } from 'vue'
+import Preloader from '../components/Preloader.vue'
 import { useRouter } from 'vue-router'
 
 /* ---------- Import Stores ---------- */
@@ -55,14 +56,24 @@ const dateFormatter = () => {
   formattedDate.value = `${values[2]}. ${values[1]}. ${values[0]}`
 }
 
+//Preloader
+const loading = ref(true)
+document.body.style.overflow = 'hidden'
+
 onMounted(() => {
   splitTextIntoParagraphs()
   dateFormatter()
   storeEvents.getEvents()
+
+  setTimeout(() => {
+    loading.value = false
+    document.body.style.overflow = 'visible'
+  }, 3250)
 })
 </script>
 
 <template>
+  <Preloader class="absolute top-0 left-0 right-0 z-[11]" :class="{ display: !loading }" />
   <main class="mt-[6.875rem] overflow-x-hidden relative lg:mt-[7.875rem] xl:mt-[8.375rem]">
     <div class="absolute top-[2rem] left-[1rem] md:left-[2rem] xl:left-[3rem] xl:top-[3rem]">
       <button
@@ -162,6 +173,10 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.display {
+  display: none;
+}
+
 h3.other {
   color: #1ecece;
 }
