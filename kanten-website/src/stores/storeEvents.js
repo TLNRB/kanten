@@ -98,10 +98,24 @@ export const useStoreEvents = defineStore('storeEvents', {
     closeEditing(id) {
       const filteredEvent = this.events.filter((event) => event.id === id)
 
-      if (filteredEvent[0].coverImgName !== this.coverImgName && this.coverImg != null) {
+      if (
+        filteredEvent[0].coverImgName !== this.coverImgName &&
+        this.coverImgName != null &&
+        this.coverImg != null
+      ) {
         // Create a reference to the image
         const imageRef = ref(getStorage(), this.coverImgName)
-        deleteObject(imageRef)
+        //Check if another event uses the same picture
+        let coverImageCondition = false
+        for (let i = 0; i < this.events.length; i++) {
+          if (this.events[i].coverImgName === this.coverImgName) {
+            coverImageCondition = true
+          }
+        }
+
+        if (!coverImageCondition) {
+          deleteObject(imageRef)
+        }
       }
       this.coverImg = null
       this.coverImgName = null
@@ -125,10 +139,27 @@ export const useStoreEvents = defineStore('storeEvents', {
     async updateImage(id) {
       const filteredEvent = this.events.filter((event) => event.id === id)
 
-      if (filteredEvent[0].coverImg !== this.coverImg && this.coverImg !== null) {
+      if (
+        filteredEvent[0].coverImg !== this.coverImg &&
+        this.coverImgName != null &&
+        this.coverImg != null
+      ) {
         // Create a reference to the image
         const imageRef = ref(getStorage(), filteredEvent[0].coverImgName)
-        deleteObject(imageRef)
+        //Check if another event uses the same picture
+        let coverImageCondition = false
+        for (let i = 0; i < this.events.length; i++) {
+          if (
+            this.events[i].coverImgName === filteredEvent[0].coverImgName &&
+            this.events[i].id !== filteredEvent[0].id
+          ) {
+            coverImageCondition = true
+          }
+        }
+
+        if (!coverImageCondition) {
+          deleteObject(imageRef)
+        }
 
         await updateDoc(doc(eventsCollectionRef, id), {
           coverImgName: this.coverImgName,

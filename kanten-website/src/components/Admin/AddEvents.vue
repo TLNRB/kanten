@@ -76,7 +76,13 @@ const addEvent = () => {
       </div>
       <!-- Detailed description input -->
       <div class="flex flex-col mb-[1rem] md:mb-[1.25rem]">
-        <label class="font-[500]">Detailed Description</label>
+        <label class="font-[500]"
+          >Detailed Description
+          <br />
+          <span class="text-darkerText text-[1rem] italic"
+            >(Use only dot in the end of sentences)</span
+          ></label
+        >
         <div class="relative">
           <textarea
             class="w-[99%] h-[400px] bg-darkBG border-[1px] py-[.5rem] px-[1rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
@@ -143,7 +149,7 @@ const addEvent = () => {
             <input
               class="w-[98%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
               type="text"
-              placeholder="e.g. 50,-"
+              placeholder="e.g. 50"
               v-model="newEvent.price"
             />
             <div
@@ -182,7 +188,7 @@ const addEvent = () => {
             <input
               class="w-[98%] bg-darkBG border-[1px] px-[1rem] py-[.5rem] outline-none sm:w-[100%] md:py-[.75rem] md:px-[1.25rem]"
               type="text"
-              placeholder="e.g. 16+"
+              placeholder="e.g. 16"
               v-model="newEvent.age"
             />
             <div

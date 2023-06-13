@@ -81,10 +81,24 @@ export const useStoreGenres = defineStore('storeGenres', {
     closeEditing(id) {
       const filteredGenre = this.genres.filter((genre) => genre.id === id)
 
-      if (filteredGenre[0].coverImgName !== this.coverImgName && this.coverImg != null) {
+      if (
+        filteredGenre[0].coverImgName !== this.coverImgName &&
+        this.coverImgName != null &&
+        this.coverImg != null
+      ) {
         // Create a reference to the image
         const imageRef = ref(getStorage(), this.coverImgName)
-        deleteObject(imageRef)
+        //Check if another event uses the same picture
+        let coverImageCondition = false
+        for (let i = 0; i < this.genres.length; i++) {
+          if (this.genres[i].coverImgName === this.coverImgName) {
+            coverImageCondition = true
+          }
+        }
+
+        if (!coverImageCondition) {
+          deleteObject(imageRef)
+        }
       }
       this.coverImg = null
       this.coverImgName = null
@@ -99,10 +113,27 @@ export const useStoreGenres = defineStore('storeGenres', {
     async updateImage(id) {
       const filteredGenre = this.genres.filter((genre) => genre.id === id)
 
-      if (filteredGenre[0].coverImg !== this.coverImg && this.coverImg !== null) {
+      if (
+        filteredGenre[0].coverImgName !== this.coverImgName &&
+        this.coverImgName !== null &&
+        this.coverImg !== null
+      ) {
         // Create a reference to the image
         const imageRef = ref(getStorage(), filteredGenre[0].coverImgName)
-        deleteObject(imageRef)
+        //Check if another event uses the same picture
+        let coverImageCondition = false
+        for (let i = 0; i < this.genres.length; i++) {
+          if (
+            this.genres[i].coverImgName === filteredGenre[0].coverImgName &&
+            this.genres[i].id !== filteredGenre[0].id
+          ) {
+            coverImageCondition = true
+          }
+        }
+
+        if (!coverImageCondition) {
+          deleteObject(imageRef)
+        }
 
         await updateDoc(doc(genresCollectionRef, id), {
           coverImgName: this.coverImgName,

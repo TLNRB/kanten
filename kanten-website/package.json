@@ -17,7 +17,10 @@
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "@mailchimp/mailchimp_marketing": "^3.0.80",
     "firebase": "^9.22.0",
+    "gsap": "^3.11.5",
+    "jquery": "^3.7.0",
     "pinia": "^2.0.36",
+    "swiper": "^9.3.2",
     "vue": "^3.3.2",
     "vue-concise-slider": "^4.2.5",
     "vue-router": "^4.2.0"

@@ -1,5 +1,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import gsap from 'gsap'
+import Preloader from '../components/Preloader.vue'
+
 /* ---------- Importing Images ---------- */
 import sculpture from '../images/sculpture.svg'
 import wavyLinesLong from '../images/wavyLinesThreeLong.svg'
@@ -10,14 +13,6 @@ import { useStoreStudio } from '../stores/storeStudio'
 
 /* ---------- Stores ---------- */
 const storeStudio = useStoreStudio()
-
-/* ---------- Assigning a column number between (1-3) to each image ---------- */
-/* const assignNumber = () => {
-  for (let i = 0; i < gallery.length; i++) {
-    gallery.value[i].cols = (i % 3) + 1
-    console.log(gallery.value)
-  }
-} */
 
 /* ---------- Filtering images based on column value ---------- */
 const filteredImages = (colNum) => {
@@ -32,10 +27,49 @@ function handleResize() {
 }
 
 /*---------- Add resize event listener when component is mounted ---------- */
+//Preloader
+const loading = ref(true)
+document.body.style.overflow = 'hidden'
+
+//Coontent animation
+const title = ref(null)
+const image = ref(null)
+
+// Simulate a delay to show the preloader
 onMounted(() => {
   window.addEventListener('resize', handleResize)
   storeStudio.getStudio()
+  setTimeout(() => {
+    loading.value = false
+    document.body.style.overflow = 'visible'
+  }, 3250)
+
+  const tl = gsap.timeline({
+    delay: loading ? 3.1 : 0
+  })
+
+  tl.from(title.value, {
+    x: window.innerWidth > 1060 ? 0 : -30,
+    y: window.innerWidth > 1060 ? -50 : 0,
+    opacity: 0,
+    duration: 0.75
+  }).from(
+    image.value,
+
+    {
+      x: window.innerWidth > 1060 ? 0 : 30,
+      y: window.innerWidth > 1060 ? -50 : 0,
+      opacity: 0,
+      duration: 0.75
+    },
+    window.innerWidth > 1060 ? 0.25 : 0
+  )
+
+  onUnmounted(() => {
+    tl.kill()
+  })
 })
+
 /*---------- Remove resize event listener when component is mounted ---------- */
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
@@ -43,6 +77,7 @@ onUnmounted(() => {
 </script>
 
 <template>
+  <Preloader class="absolute top-0 left-0 right-0 z-[11]" :class="{ display: !loading }" />
   <section
     class="bg-[url('../images/gridGray.svg')] overflow-x-hidden flex flex-col mt-[6.875rem] pt-[1rem] sm:pt-[2rem] md:mt-[7.875rem] lg:pt-[4rem] xl:mt-[8.375rem]"
   >
@@ -51,6 +86,7 @@ onUnmounted(() => {
     >
       <div
         class="flex flex-col items-center justify-center gap-[1rem] sm:w-[340px] sm:mb-[-2rem] md:mb-0 lg:w-[410px]"
+        ref="title"
       >
         <div class="flex flex-col w-[100%]">
           <p
@@ -68,7 +104,12 @@ onUnmounted(() => {
         <img :src="screenWidth < 560 ? wavyLines : wavyLinesLong" alt="Wavy lines" />
       </div>
       <div>
-        <img class="h-[12rem] sm:h-[16rem] md:hidden" :src="sculpture" alt="Sculpture" />
+        <img
+          class="h-[12rem] sm:h-[16rem] md:hidden"
+          ref="image"
+          :src="sculpture"
+          alt="Sculpture"
+        />
       </div>
     </div>
     <div
@@ -92,6 +133,7 @@ onUnmounted(() => {
             high-quality rehearsal room. By virtue of Kanten's vision to help the musical growth
             layer to create music, a sound engineer will be offered who, according to agreement, can
             teach sound studio technique - as needed.
+            <br /><br />
             <span class="hidden xs:block"
               >With Kraftværket's location in Østerbyen, we want to raise interest in music,
               especially among local young people. The power plant can be used by anyone who plays
@@ -112,8 +154,8 @@ onUnmounted(() => {
         <p
           class="flex flex-col leading-none text-[2.5rem] uppercase relative translate-x-[-3rem] sm:translate-x-[2.5rem] sm:text-[4rem] lg:text-[5rem]"
         >
-          <span class="font-bold z-[1]">Photo</span>
-          <span class="font-bold text-baseColor absolute top-[2px] left-[2px] z-[0]">Photo</span>
+          <span class="font-bold z-[1]">Photos</span>
+          <span class="font-bold text-baseColor absolute top-[2px] left-[2px] z-[0]">Photos</span>
         </p>
         <p
           class="ml-auto font-semibold text-baseColor text-[1.5rem] leading-none sm:text-[2.5rem] lg:text-[3rem]"
@@ -158,4 +200,8 @@ onUnmounted(() => {
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.display {
+  display: none;
+}
+</style>

@@ -71,8 +71,7 @@ const cancelChanges = () => {
           <option value="manaClub">Mana Club</option>
           <option value="vertex">Vertex</option>
           <option value="deft">Deft</option>
-          <option value="dub">DUB</option>
-          <option value="other">Other</option>
+          <option value="dub">Dub</option>
         </select>
 
         <div

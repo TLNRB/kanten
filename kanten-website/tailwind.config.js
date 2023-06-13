@@ -25,11 +25,10 @@ module.exports = {
         darkerText: '#606060',
         darkText: '#242424',
         baseColor: '#1ECECE',
-        hipHopColor: '#81F4D1',
-        raveColor: '#A809E5',
-        houseColor: '#FF0000',
-        deftColor: '#20E062',
-        dancehallColor: '#FEFE00'
+        manaClub: '#a809e5',
+        vertex: '#ea3397',
+        deft: '#20e062',
+        dub: '#ffd930'
       }
     }
   },

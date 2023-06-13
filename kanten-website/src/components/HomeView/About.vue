@@ -7,7 +7,7 @@ const { statue, wavyLines, boldLines } = defineProps(['statue', 'wavyLines', 'bo
 
 let initialWord = ref('rhythm')
 let i = 1
-let words = ['rhythm', 'passion', 'connection']
+let words = ['rhythm.', 'passion.', 'connection.']
 
 //Rotating words
 const wordRotate = () => {
@@ -73,7 +73,7 @@ onMounted(() => {
       </div>
       <div>
         <div
-          class="flex items-center justify-center gap-[1.5rem] mb-[2rem] md:mb-[2.5rem] lg:justify-start lg:ml-[1rem] lg:mb-[2rem]"
+          class="flex items-center justify-start gap-[1.5rem] mb-[2rem] sm:w-[440px] sm:mx-auto md:pl-[1rem] md:w-[600px] md:mb-[2.5rem] lg:w-auto lg:pl-0 lg:ml-[1rem] lg:mb-[2rem]"
         >
           <p
             class="text-[1.5rem] font-[500] xs:text-[2rem] md:text-[2.5rem] lg:text-[2rem] xl:text-[2.5rem]"
@@ -82,7 +82,7 @@ onMounted(() => {
             <span class="font-[500] text-lightText">{{ initialWord }}</span>
           </p>
           <img
-            class="hidden translate-y-[2px] sm:block sm:w-[142px] md:w-[220px] lg:hidden xl:block"
+            class="hidden translate-y-[2px] md:block md:w-[180px] xl:w-[210px] lg:hidden xl:block"
             :src="boldLines"
             alt="Bold indented lines"
           />
@@ -104,21 +104,8 @@ onMounted(() => {
             others.
           </p>
           <div
-            class="mt-[2.5rem] flex flex-wrap items-center justify-center gap-[1.25rem] px-[1rem] md:gap-[2rem] md:mt-[3rem] lg:mt-[2.5rem] xl:mt-[3rem]"
+            class="mt-[2.5rem] flex flex-wrap items-center justify-start gap-[1.25rem] pr-[1rem] md:gap-[2rem] md:pl-[1rem] md:mt-[3rem] lg:mt-[2.5rem] xl:mt-[3rem]"
           >
-            <RouterLink
-              to="volunteer"
-              class="flex flex-col text-center text-[1.25rem] relative group"
-            >
-              <span
-                class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] bg-baseColor border-darkBG z-[1] group-hover:text-darkBG group-hover:border-lightText ease-in duration-[.15s] delay-[.05s] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem]"
-                >Volunteer now</span
-              >
-              <span
-                class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem]"
-                >Volunteer now</span
-              >
-            </RouterLink>
             <RouterLink
               to="membership"
               class="flex flex-col text-center text-[1.25rem] relative group"
@@ -130,6 +117,19 @@ onMounted(() => {
               <span
                 class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem]"
                 >Be a member</span
+              >
+            </RouterLink>
+            <RouterLink
+              to="volunteer"
+              class="flex flex-col text-center text-[1.25rem] relative group"
+            >
+              <span
+                class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] bg-baseColor border-darkBG z-[1] group-hover:text-darkBG group-hover:border-lightText ease-in duration-[.15s] delay-[.05s] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem]"
+                >Volunteer now</span
+              >
+              <span
+                class="font-[600] py-[.375rem] px-[1.125rem] border-[1px] border-lightText absolute top-[4px] right-[-4px] group-hover:top-[0] group-hover:right-[0] ease-in duration-[.2s] md:py-[.5rem] md:px-[1.25rem] md:text-[1.5rem]"
+                >Volunteer now</span
               >
             </RouterLink>
           </div>

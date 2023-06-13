@@ -411,10 +411,9 @@ const handleOptionState = (id) => {
 /* ---------- Genres with filter ---------- */
 const genres = reactive([
   { id: 0, name: 'Mana Club', filter: 'manaClub', active: false },
-  { id: 1, name: 'DUB', filter: 'dub', active: false },
-  { id: 2, name: 'Vertex', filter: 'vertex', active: false },
-  { id: 3, name: 'Deft', filter: 'deft', active: false },
-  { id: 4, name: 'Other', filter: 'other', active: false }
+  { id: 1, name: 'Vertex', filter: 'vertex', active: false },
+  { id: 2, name: 'Deft', filter: 'deft', active: false },
+  { id: 3, name: 'Dub', filter: 'dub', active: false }
 ])
 
 const handleGenreState = (id) => {
@@ -714,13 +713,7 @@ onMounted(() => {
         />
       </div>
       <div
-        v-else-if="
-          !genres[0].active &&
-          !genres[1].active &&
-          !genres[2].active &&
-          !genres[3].active &&
-          !genres[4].active
-        "
+        v-else-if="!genres[0].active && !genres[1].active && !genres[2].active && !genres[3].active"
         class="mt-[2rem] text-[1rem] flex justify-center text-normalText italic md:text-[1.25rem]"
       >
         Choose a filter option
