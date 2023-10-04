@@ -71,7 +71,7 @@ const editModal = () => {
       <!-- Ticket -->
       <div class="flex flex-col mr-auto text-[1.25rem] px-[.5rem]">
         <p class="font-[500] text-baseColor">Ticket URL:</p>
-        <a class="font-[500]" :href="event.ticket" target="_blank">{{ event.ticket }}</a>
+        <a class="font-[500]" :href="event.ticket" target="_blank">billeto.dk</a>
       </div>
       <div class="flex gap-[1rem] mr-auto text-[1.25rem] px-[.5rem] mb-[1rem]">
         <!-- Edit -->
